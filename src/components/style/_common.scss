@@ -1,0 +1,60 @@
+@import "~@bpui/ui/var";
+
+//line1 
+.line1 {
+  display: inline-block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  // border-bottom: 1px solid #ddd;
+  margin: 0px 0;
+  @include ui-border-bottom(#eee);
+  height: 1px;
+}
+
+// cursor pointer
+.cur_P {
+  cursor: pointer;
+}
+
+.cur_P_b {
+  cursor: pointer;
+
+  transition: 0.5s color cubic-bezier(0.075, 0.82, 0.165, 1) !important;
+
+  &:hover {
+    color: #0077FF !important;
+  }
+}
+
+// text -row 
+.faas-text-row {
+  display: flex;
+  width: 100%;
+  justify-items: center;
+
+  .form-label {
+    // width: 120px;
+    padding-right: 20px;
+    padding-top: 2px;
+    // padding-bottom: 6px;
+    line-height: 32px;
+    color: #111;
+  }
+
+  .form-input {
+    flex: 1;
+    color: #888;
+  }
+
+  .form-inner-span {
+    padding-right: 20px;
+    padding-top: 6px;
+
+  }
+}
+
+// dialog.
+.inner-footer {
+  width: 100%;
+}

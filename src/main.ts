@@ -7,7 +7,7 @@ import Vue from "vue";
 import * as ui from "@bpui/ui";
 import '@/i18n';
 
-import App from "./app.vue";
+import App from "./App.vue";
 import routers from "./router/_tmpConfig";
 
 import '@/directives';

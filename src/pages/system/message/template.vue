@@ -16,15 +16,18 @@
   >
     <div class="flex_r_s" slot="titleRight">
       <!-- <div style="color: red">"%%%***" 为可替代文字</div> -->
-      <ui-button primary @click="handleSaveTest">
+      <!-- <ui-button primary @click="handleSaveTest">
         保存测试
-      </ui-button>
+      </ui-button> -->
       <div class="flex1"></div>
       <ui-button primary @click="handleSave">保存</ui-button>
     </div>
 
     <div>
-      <ui-input placeholder="模版标题" v-model="tmp_subject"></ui-input>
+      <ui-input prefix-label="Title" placeholder="模版标题" v-model="tmp_subject"></ui-input>
+    </div>
+    <div>
+      <ui-input prefix-label="Tag" placeholder="tag" v-model="tmp_type"></ui-input>
     </div>
 
     <div class="flex_l_t region" style="width: 100%">

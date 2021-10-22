@@ -19,7 +19,10 @@
     </div>
 
     <div>
-      <ui-input placeholder="模版标题" v-model="tmp_subject"></ui-input>
+      <ui-input prefix-label="Title" placeholder="模版标题" v-model="tmp_subject"></ui-input>
+    </div>
+    <div>
+      <ui-input prefix-label="Tag" placeholder="tag" v-model="tmp_type"></ui-input>
     </div>
 
     <div class="flex_l_t region" style="width: 100%">

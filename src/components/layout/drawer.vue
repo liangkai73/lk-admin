@@ -87,7 +87,7 @@ export default {
         },
         {
           title: $i18n('layouts.components.drawer.系统设置'),
-          path: "/system",
+          path: "/system/mail",
           icon: "faas",
         },
         {

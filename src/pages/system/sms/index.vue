@@ -25,34 +25,43 @@
       <ui-table>
         <ui-thead>
           <ui-tr>
-            <ui-th width="15%">
+            <ui-th width="140px">
               <span>Code</span>
             </ui-th>
-            <ui-th width="10%">
+            <ui-th width="100px">
+              <span>tag 
+                <ui-icon name="ui-warning" width="16px">
+                  <ui-popover trigger="hover">
+                    <span>系统使用tag标识发送对应的场景通知</span>
+                  </ui-popover>
+                </ui-icon>
+              </span>
+            </ui-th>
+            <ui-th width="80px">
               <span>类型</span>
             </ui-th>
-            <ui-th width="20%">
+            <ui-th width="100px">
               <span>名字</span>
             </ui-th>
-            <ui-th width="30%">
+            <ui-th width="150px">
               <span>内容</span>
             </ui-th>
-            <ui-th width="20%">
-              <span>说明</span>
-            </ui-th>
-            <ui-th width="10%">
+            <ui-th width="100px">
               <span>状态</span>
             </ui-th>
-            <ui-th width="20%">
+            <ui-th width="160px">
               <span>操作</span>
             </ui-th>
           </ui-tr>
         </ui-thead>
         <ui-tbody>
           <template v-if="list_templates.length > 0">
-            <ui-tr :key="item.id" v-for="item in list_templates" class="cur_P" @click="handleEdit(item)">
+            <ui-tr :key="item.id" v-for="item in list_templates">
               <ui-td>
                 <span>{{ item.templateCode }}</span>
+              </ui-td>
+              <ui-td>
+                <code>{{ item.type }}</code>
               </ui-td>
               <ui-td>
                 <span>{{ getType(item.templateType) }}</span>
@@ -64,13 +73,13 @@
                 <span>{{ item.templateContent }}</span>
               </ui-td>
               <ui-td>
-                <span>{{ item.remark }}</span>
-              </ui-td>
-              <ui-td>
                 <span>{{ getStatus(item.templateStatus) }}</span>
               </ui-td>
               <ui-td>
-                <ui-button small v-if="item.templateStatus == 2" @click.stop="handleEdit(item)">
+                <ui-button small @click.stop="handleEditTag(item)">
+                  修改Tag
+                </ui-button>
+                <ui-button small @click.stop="handleEdit(item)">
                   修改
                 </ui-button>
                 <ui-button small warning plain @click.stop="handleDel(item)">删除</ui-button>
@@ -90,6 +99,16 @@
       </template>
       <ui-no-records v-show="list_templates.length == 0" />
     </div>
+
+    <ui-dialog title="修改Tag" :visible.sync="visibleTagDialog">
+      <ui-input maxlength="30" v-model="editTag"></ui-input>
+      <!-- 底部按钮, 最多支持3个按钮 -->
+      <div slot="foot">
+        <ui-button @click="visibleTagDialog=false">取消</ui-button>
+        <ui-button primary @click="handleSaveTag">修改</ui-button>
+      </div>
+    </ui-dialog>
+
   </content-view>
 </template>
 
@@ -111,6 +130,9 @@ export default class extends Vue {
   page = 1;
   limit = 10;
   total = 0;
+  visibleTagDialog = false;
+  editTagItem = null;
+  editTag = null;
 
   list_templates = [];
 
@@ -136,7 +158,6 @@ export default class extends Vue {
     api.notification.sms_tmp
       .list(this.search, this.page - 1, this.limit)
       .then((data: any) => {
-        console.log(data);
         this.total = data.total;
         this.list_templates = data.list;
       })
@@ -148,6 +169,24 @@ export default class extends Vue {
     this.$navbar.push({
       path: url,
     });
+  }
+
+  handleEditTag(item: any) {
+    this.editTagItem = item;
+    this.editTag = item.type;
+    this.visibleTagDialog = true;
+  }
+
+  handleSaveTag() {
+    api.notification.sms_tmp
+      .updateTag({id: this.editTagItem.id, type: this.editTag})
+      .then((res)=>{
+        this.editTagItem.type = this.editTag;
+        this.visibleTagDialog = false;
+      })
+      .catch(e=>{
+        $UIAlert('修改失败');
+      });
   }
 
   handleEdit(item: any) {
@@ -191,4 +230,5 @@ export default class extends Vue {
 
 <style lang="scss" scoped>
 
+@import '~@/pages/system/commonStyle';
 </style>>

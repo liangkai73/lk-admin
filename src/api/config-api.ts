@@ -301,6 +301,7 @@ export default {
       delete: "/notification-service/api/smstmp/delete",      // 删除模版
       get: "/notification-service/api/smstmp/query",      // 获取模版
       update: "/notification-service/api/smstmp/modify",      // 获取模版
+      updateType: "/notification-service/api/smstmp/modifyType",      // 获取模版
     },
   },
 

@@ -31,6 +31,14 @@
 
     <div class="flex_r_s mt20">
       <div style="width: 20%"></div>
+      <div style="width: 10%">tag</div>
+      <div style="width: 50%">
+        <ui-input placeholder="请输入tag 不超过30个字符" v-model="templateTag"></ui-input>
+      </div>
+    </div>
+
+    <div class="flex_r_s mt20">
+      <div style="width: 20%"></div>
       <div style="width: 10%">模版名称</div>
       <div style="width: 50%">
         <ui-input placeholder="请输入名称 不超过30个字符" v-model="templateName"></ui-input>
@@ -102,7 +110,9 @@ export default class extends Vue {
   // @Provide() demo:number = 1;
   tmp = {} as any;
 
+  templateStatus = 0;
   templateType = 0;
+  templateTag = "";
   templateName = "";
   templateContent = "";
   remark = "";
@@ -136,6 +146,8 @@ export default class extends Vue {
 
         this.templateType = this.tmp.templateType;
         this.templateName = this.tmp.templateName;
+        this.templateTag = this.tmp.type;
+        this.templateStatus = this.tmp.templateStatus;
         this.templateContent = this.tmp.templateContent;
         this.remark = this.tmp.remark;
       })
@@ -143,6 +155,11 @@ export default class extends Vue {
   }
 
   handleSave() {
+    if (this.templateStatus != 2) {
+      $UIToast('当前状态无法编辑, 如需编辑请重新创建!');
+      return;
+    }
+
     if (this.templateName.length == 0) {
       $UIToast({
         type: "error",
@@ -174,6 +191,7 @@ export default class extends Vue {
           templateCode: this.tmp.templateCode,
           templateType: this.templateType,
           templateName: this.templateName,
+          type: this.templateTag,
           templateContent: this.templateContent,
           remark: this.remark,
         })
@@ -195,6 +213,7 @@ export default class extends Vue {
           templateType: this.templateType,
           templateName: this.templateName,
           templateContent: this.templateContent,
+          type: this.templateTag,
           remark: this.remark,
         })
         .then((data: any) => {

@@ -23,27 +23,29 @@
       <ui-table>
         <ui-thead>
           <ui-tr>
-            <ui-th width="30%">
-              <span>id</span>
+            <ui-th width="25%">id</ui-th>
+            <ui-th width="10%">Tag
+              <ui-icon name="ui-warning" width="16px">
+                <ui-popover trigger="hover">
+                  <span>系统使用tag标识发送对应的场景通知</span>
+                </ui-popover>
+              </ui-icon>
             </ui-th>
-            <ui-th width="30%">
-              <span>模板名称</span>
-            </ui-th>
-            <ui-th width="40%">
-              <span>模版</span>
-            </ui-th>
-            <ui-th width="30%">
-              <span>操作</span>
-            </ui-th>
+            <ui-th width="30%">模板名称</ui-th>
+            <ui-th width="40%">模版</ui-th>
+            <ui-th width="20%">操作</ui-th>
           </ui-tr>
         </ui-thead>
         <ui-tbody>
           <template v-if="list_templates.length > 0">
-            <ui-tr :key="item.id" v-for="item in list_templates" class="cur_P">
-              <ui-td>
+            <ui-tr :key="item.id" v-for="item in list_templates">
+              <ui-td class="f12">
                 {{ item.id }}
               </ui-td>
-              <ui-td @click="handleEdit(item)" style=" cursor: pointer;">
+              <ui-td>
+                <code>{{ item.type }}</code>
+              </ui-td>
+              <ui-td>
                 {{ item.subject }}
               </ui-td>
               <ui-td>
@@ -155,4 +157,5 @@ export default class extends Vue {
 
 <style lang="scss" scoped>
 
+@import '~@/pages/system/commonStyle';
 </style>>

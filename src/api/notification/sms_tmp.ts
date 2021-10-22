@@ -16,12 +16,14 @@ export default {
   del,
   get,
   update,
+  updateTag,
 };
 
 function add(item: {
   templateType: number,
   templateName: string,
   templateContent: string,
+  type: string,
   remark: string,
 }) {
   return $UINetwork
@@ -73,6 +75,7 @@ function update(item: {
   templateType: number,
   templateName: string,
   templateContent: string,
+  type: string,
   remark: string,
 }) {
   return $UINetwork
@@ -84,3 +87,18 @@ function update(item: {
       throw err;
     });
 }
+
+function updateTag(item: {
+  id: string
+  type: string,
+}) {
+  return $UINetwork
+    .post(api.notification.sms_tmp.updateType, item)
+    .then((res: any) => {
+      return Promise.resolve(res);
+    })
+    .catch((err: any) => {
+      throw err;
+    });
+}
+

@@ -6,6 +6,8 @@ import uiNoRecords from "./ui/uiNoRecords.vue";
 // import contentViewComponent from "../layout/contentView.vue";
 import uiCloudIconComponent from "./ui/uiCloudIcon.vue";
 
+import { UILayoutComment } from './ui-agent/layout/comment.jsx';
+
 
 function install() {
   if ((install as any).installed) {
@@ -17,5 +19,8 @@ function install() {
   Vue.component("uiNote", uiNoteComponent);
   Vue.component("uiCloudIcon", uiCloudIconComponent);
   Vue.component("uiNoRecords", uiNoRecords);
+
+  Vue.component("uiLayoutComment", UILayoutComment);
+  
 }
 install();

@@ -21,6 +21,34 @@
       </ui-button>
     </div>
 
+    <uiLayoutComment>
+      <ui-icon name="ui-warning"/>目前系统内置的tag: 
+      <span class="f-italic t-underline ml10">
+        SMS_忘记密码_CN
+        <ui-popover trigger="hover">
+          <span>中文语言状态下用户忘记密码时发送的短信</span>
+        </ui-popover>
+      </span>
+      <span class="f-italic t-underline ml10">
+        SMS_忘记密码_EN
+        <ui-popover trigger="hover">
+          <span>英文语言状态下用户忘记密码时发送的短信</span>
+        </ui-popover>
+      </span>
+      <span class="f-italic t-underline ml10">
+        SMS_注册账号_CN
+        <ui-popover trigger="hover">
+          <span>中文语言状态下用户注册账号时发送的短信</span>
+        </ui-popover>
+      </span>
+      <span class="f-italic t-underline ml10">
+        SMS_注册账号_EN
+        <ui-popover trigger="hover">
+          <span>英文语言状态下用户注册账号时发送的短信</span>
+        </ui-popover>
+      </span>
+    </uiLayoutComment>
+
     <div>
       <ui-table>
         <ui-thead>
@@ -29,28 +57,27 @@
               <span>Code</span>
             </ui-th>
             <ui-th width="100px">
-              <span>tag 
-                <ui-icon name="ui-warning" width="16px">
-                  <ui-popover trigger="hover">
-                    <span>系统使用tag标识发送对应的场景通知</span>
-                  </ui-popover>
-                </ui-icon>
-              </span>
+              tag 
+              <ui-icon name="ui-warning" width="16px">
+                <ui-popover trigger="hover">
+                  <span>系统使用tag标识发送对应的场景通知</span>
+                </ui-popover>
+              </ui-icon>
             </ui-th>
             <ui-th width="80px">
-              <span>类型</span>
+              <span>Type</span>
             </ui-th>
             <ui-th width="100px">
-              <span>名字</span>
+              <span>Name</span>
             </ui-th>
             <ui-th width="150px">
-              <span>内容</span>
+              <span>Content</span>
             </ui-th>
             <ui-th width="100px">
-              <span>状态</span>
+              <span>Status</span>
             </ui-th>
             <ui-th width="160px">
-              <span>操作</span>
+              <span></span>
             </ui-th>
           </ui-tr>
         </ui-thead>

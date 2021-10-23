@@ -19,6 +19,34 @@
       </ui-button>
     </div>
 
+    <uiLayoutComment>
+      <ui-icon name="ui-warning"/>目前系统内置的tag: 
+      <span class="f-italic t-underline ml10">
+        EMAIL_忘记密码_CN
+        <ui-popover trigger="hover">
+          <span>中文语言状态下用户忘记密码时发送的短信</span>
+        </ui-popover>
+      </span>
+      <span class="f-italic t-underline ml10">
+        EMAIL_忘记密码_EN
+        <ui-popover trigger="hover">
+          <span>英文语言状态下用户忘记密码时发送的短信</span>
+        </ui-popover>
+      </span>
+      <span class="f-italic t-underline ml10">
+        EMAIL_注册账号_CN
+        <ui-popover trigger="hover">
+          <span>中文语言状态下用户注册账号时发送的短信</span>
+        </ui-popover>
+      </span>
+      <span class="f-italic t-underline ml10">
+        EMAIL_注册账号_EN
+        <ui-popover trigger="hover">
+          <span>英文语言状态下用户注册账号时发送的短信</span>
+        </ui-popover>
+      </span>
+    </uiLayoutComment>
+
     <div>
       <ui-table>
         <ui-thead>
@@ -31,9 +59,9 @@
                 </ui-popover>
               </ui-icon>
             </ui-th>
-            <ui-th width="30%">模板名称</ui-th>
-            <ui-th width="40%">模版</ui-th>
-            <ui-th width="20%">操作</ui-th>
+            <ui-th width="30%">Name</ui-th>
+            <ui-th width="40%">Content</ui-th>
+            <ui-th width="20%"></ui-th>
           </ui-tr>
         </ui-thead>
         <ui-tbody>

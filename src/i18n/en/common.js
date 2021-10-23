@@ -1,4 +1,9 @@
 export default {
+  "查看": "View",
+  "新增": "Add",
+  "保存": "Save",
+  "编辑": "Edit",
+  "删除": "Del",
   "加载中": "loading",
   "暂无数据": "No data",
   "隐藏菜单": "Hide menu",

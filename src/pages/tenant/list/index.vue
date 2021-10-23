@@ -8,10 +8,10 @@
  -->
 
 <template>
-  <content-view :gutter="false" class="flex1" :title="'租户列表'">
+  <content-view :gutter="false" class="flex1" :title="$i18n('layouts.tenant.租户列表')">
     
     <div class="flex_r_s" slot="titleRight">
-      <ui-button primary @click="handleAdd">新增</ui-button>
+      <ui-button primary @click="handleAdd">{{$i18n('新增')}}</ui-button>
     </div>
 
     <dialogAdd v-model="visibleDialogAdd" />
@@ -21,12 +21,12 @@
         <ui-thead>
           <ui-tr>
             <ui-th width="250px">id</ui-th>
-            <ui-th width="200px">公司名称</ui-th>
-            <ui-th width="140px">用户名</ui-th>
-            <ui-th>电话号码</ui-th>
-            <ui-th width="60px">状态</ui-th>
-            <ui-th width="140px">创建时间</ui-th>
-            <ui-th width="60px">操作</ui-th>
+            <ui-th width="200px">Company</ui-th>
+            <ui-th width="140px">Account</ui-th>
+            <ui-th>Telephone</ui-th>
+            <ui-th width="60px">Status</ui-th>
+            <ui-th width="140px">Create DateTime</ui-th>
+            <ui-th width="60px"></ui-th>
           </ui-tr>
         </ui-thead>
         <template v-if="list_templates.length > 0">
@@ -50,7 +50,7 @@
               {{ item.createTime }}
             </ui-td>
             <ui-td>
-              <ui-button small @click.stop="handleView(item)">查看</ui-button>
+              <ui-button small @click.stop="handleView(item)">{{$i18n('查看')}}</ui-button>
               <!-- <ui-button small warning plain @click.stop="handleDel(item)">删除</ui-button> -->
             </ui-td>
           </ui-tr>

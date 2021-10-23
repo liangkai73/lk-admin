@@ -11,12 +11,12 @@
   <content-view
     :gutter="false"
     class="flex1"
-    title="站内信模版"
+    :title="$i18n('layouts.system.siderbar.站内信模板管理')"
   >
     <div class="flex_r_s" slot="titleRight">
       <div class="flex1"></div>
       <ui-button primary @click="handleAdd">
-        新增
+        {{$i18n('新增')}}
       </ui-button>
     </div>
     <div>
@@ -31,9 +31,9 @@
                   </ui-popover>
                 </ui-icon>
             </ui-th>
-            <ui-th width="30%">标题</ui-th>
-            <ui-th width="40%">模版</ui-th>
-            <ui-th width="30%">操作</ui-th>
+            <ui-th width="30%">Name</ui-th>
+            <ui-th width="40%">Content</ui-th>
+            <ui-th width="30%"></ui-th>
           </ui-tr>
         </ui-thead>
         <ui-tbody>

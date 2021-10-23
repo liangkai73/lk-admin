@@ -16,7 +16,7 @@
   >
     <div class="flex_r_s" slot="titleRight">
       <!-- <div style="color: red">"%%%***" 为可替代文字</div> -->
-      <ui-button primary @click="handleSave">保存</ui-button>
+      <ui-button primary @click="handleSave">{{$i18n('保存')}}</ui-button>
     </div>
 
     <div class="flex_r_s">

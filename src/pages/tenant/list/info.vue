@@ -9,9 +9,9 @@
 
 <template>
   <content-view :gutter="false" :showBack="true" class="flex1 content-view-tenant-info"
-    title="租户信息">
+    :title="$i18n('layouts.tenant.租户信息')">
     <div class="flex_r_s" slot="titleRight">
-      <ui-button primary @click="handleSave">{{isEdit?'保存':'编辑'}}</ui-button>
+      <ui-button primary @click="handleSave">{{isEdit?$i18n('保存'):$i18n('编辑')}}</ui-button>
     </div>
 
     <div class="flex_r_s">

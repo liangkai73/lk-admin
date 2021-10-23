@@ -11,13 +11,13 @@
   <content-view
     :gutter="false"
     class="flex1 cl-sms-tmp"
-    title="短信模版"
+    :title="$i18n('layouts.system.siderbar.短信模板管理')"
   >
     <!-- <button @click="handleAdd">新增模版</button> -->
 
     <div class="flex_r_s" slot="titleRight">
       <ui-button primary @click="handleAdd">
-        新增
+        {{$i18n('新增')}}
       </ui-button>
     </div>
 
@@ -104,12 +104,12 @@
               </ui-td>
               <ui-td>
                 <ui-button small @click.stop="handleEditTag(item)">
-                  修改Tag
+                  {{$i18n('编辑')}} Tag
                 </ui-button>
                 <ui-button small @click.stop="handleEdit(item)">
-                  修改
+                  {{$i18n('编辑')}}
                 </ui-button>
-                <ui-button small warning plain @click.stop="handleDel(item)">删除</ui-button>
+                <ui-button small warning plain @click.stop="handleDel(item)">{{$i18n('删除')}}</ui-button>
               </ui-td>
             </ui-tr>
           </template>

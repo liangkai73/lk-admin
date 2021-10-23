@@ -154,6 +154,10 @@ export default {
         "站内信模板管理": "Site Message Template",
       }
     },
+    "tenant": {
+      "租户列表": "Tenant List",
+      "租户信息": "Tenant Information",
+    },
     "config": {
       "siderbar": {
         "服务配置": "Service configuration",

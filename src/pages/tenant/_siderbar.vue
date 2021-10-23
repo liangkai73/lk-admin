@@ -9,7 +9,7 @@
 
 <template>
   <div class="siderbar-container">
-    <h2>{{ '租户管理' }}</h2>
+    <h2>{{ $i18n('layouts.components.drawer.租户管理') }}</h2>
     <siderBar :moudleName="moudleName" :menuList="menuList"></siderBar>
   </div>
 </template>
@@ -37,7 +37,7 @@ export default class extends Mixins(siderBarMixin) {
     //   icon: "",
     // },
     {
-      title: '租户列表',
+      title: $i18n('layouts.tenant.租户列表'),
       path: "/tenant/list",
       icon: "",
     },

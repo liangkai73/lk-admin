@@ -110,7 +110,7 @@ export default class extends Vue {
   // @Provide() demo:number = 1;
   tmp = {} as any;
 
-  templateStatus = 0;
+  templateStatus = -1;
   templateType = 0;
   templateTag = "";
   templateName = "";
@@ -155,7 +155,7 @@ export default class extends Vue {
   }
 
   handleSave() {
-    if (this.templateStatus != 2) {
+    if (this.templateStatus != 2 && this.templateStatus != -1) {
       $UIToast('当前状态无法编辑, 如需编辑请重新创建!');
       return;
     }

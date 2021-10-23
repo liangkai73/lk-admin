@@ -16,13 +16,13 @@
   >
     <div class="flex_r_s" slot="titleRight">
       <!-- <div style="color: red">"%%%***" 为可替代文字</div> -->
-      <ui-button primary @click="handleSave">{{$i18n('保存')}}</ui-button>
+      <ui-button v-if="canEdit" primary @click="handleSave">{{$i18n('保存')}}</ui-button>
     </div>
 
     <div class="flex_r_s">
       <div style="width: 20%"></div>
       <div style="width: 10%">模版类型</div>
-      <ui-radio-group v-model="templateType">
+      <ui-radio-group v-model="templateType" :disabled="!canEdit">
         <ui-radio :value="key" v-for="(value, key) in list_types" :key="key">{{
           value
         }}</ui-radio>
@@ -33,7 +33,7 @@
       <div style="width: 20%"></div>
       <div style="width: 10%">tag</div>
       <div style="width: 50%">
-        <ui-input placeholder="请输入tag 不超过30个字符" v-model="templateTag"></ui-input>
+        <ui-input :readonly="!canEdit" placeholder="请输入tag 不超过30个字符" v-model="templateTag"></ui-input>
       </div>
     </div>
 
@@ -41,7 +41,7 @@
       <div style="width: 20%"></div>
       <div style="width: 10%">模版名称</div>
       <div style="width: 50%">
-        <ui-input placeholder="请输入名称 不超过30个字符" v-model="templateName"></ui-input>
+        <ui-input :readonly="!canEdit" placeholder="请输入名称 不超过30个字符" v-model="templateName"></ui-input>
       </div>
     </div>
 
@@ -49,7 +49,7 @@
       <div style="width: 20%"></div>
       <div style="width: 10%">模版内容</div>
       <div style="width: 50%">
-        <ui-input
+        <ui-input :readonly="!canEdit"
           placeholder="变量格式：${name}；
  示例：尊敬的${name}，您的快递已在飞奔的路上，将在今天${time}送达您的手里，请留意查收。"
           v-model="templateContent"
@@ -71,7 +71,7 @@
       <div style="width: 20%"></div>
       <div style="width: 10%">申请说明</div>
       <div style="width: 50%">
-        <ui-input
+        <ui-input :readonly="!canEdit"
           placeholder="请提供您已上线业务的对应链接（必填）、使用场景说明
 对应链接：如官网、应用市场下载页等，内网环境链接可提交测试账号及密码。
 使用场景：如场景、事例等详细说明"
@@ -120,6 +120,15 @@ export default class extends Vue {
   list_status = [] as any;
   list_types = [] as any;
 
+  get canEdit() {
+    if (this.templateStatus != 2 && this.templateStatus != -1) {
+      return false;
+    }
+    else {
+      return true;
+    }
+  }
+
   //
   // lifecycle hook.
   constructor() {
@@ -155,7 +164,7 @@ export default class extends Vue {
   }
 
   handleSave() {
-    if (this.templateStatus != 2 && this.templateStatus != -1) {
+    if (!this.canEdit) {
       $UIToast('当前状态无法编辑, 如需编辑请重新创建!');
       return;
     }

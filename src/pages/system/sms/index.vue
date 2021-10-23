@@ -217,9 +217,6 @@ export default class extends Vue {
   }
 
   handleEdit(item: any) {
-    if (item.templateStatus == 0 || item.templateStatus == 1) {
-      return;
-    }
     let url = "./template?id=" + item.id;
     this.$navbar.push({
       path: url,

@@ -27,12 +27,6 @@
             </ui-col>
           </ui-row>
           <ui-row class="inner-row mt5">
-            <!-- <ui-col :span="24">
-              <div class="inputTitle span2 mt20">
-                <span>密码</span>
-                <span class="pswd_forget cur_P" @click="linkTo('/resetPassWord')">忘记密码？</span>
-              </div>
-            </ui-col> -->
             <ui-col :span="24">
               <ui-input large placeholder="密码" :type="eyeOpen ? 'text' : 'password'"
                 :suffixIcon="eyeOpen ? 'openEye' : 'closeEye'" @click-icon="eyeOpen = !eyeOpen"
@@ -42,6 +36,11 @@
               <div class="errTxt span2 mt10">
                 <span>{{ errorTxt }}</span>
                 <span></span>
+              </div>
+            </ui-col>
+            <ui-col :span="24">
+              <div class="inputTitle span2 mt20">
+                <span class="pswd_forget cur_P" @click="linkTo('/resetPassWord')">忘记密码？</span>
               </div>
             </ui-col>
           </ui-row>

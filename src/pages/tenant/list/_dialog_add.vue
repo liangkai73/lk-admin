@@ -13,7 +13,7 @@
     <div class="flex_r_s">
       <div style="width: 20%"></div>
       <div style="width: 15%">用户名</div>
-      <ui-input maxlength="32" required placeholder="必填" v-model="valueUsername" :pattern="regex.alphaOrDigit" />
+      <ui-input maxlength="32" required placeholder="必填; 仅支持数字和英文组合" v-model="valueUsername" :pattern="regex.alphaOrDigit" />
     </div>
     <div class="flex_r_s">
       <div style="width: 20%"></div>

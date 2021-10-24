@@ -10,7 +10,7 @@
     "dev": "bpui-build router2 && vue-cli-service serve"
   },
   "dependencies": {
-    "@bpui/ui": "0.0.52",
+    "@bpui/ui": "0.0.54",
     "core-js": "^3.6.4",
     "monaco-editor": "^0.29.1",
     "register-service-worker": "^1.7.2",

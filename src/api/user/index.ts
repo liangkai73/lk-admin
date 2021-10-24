@@ -18,6 +18,7 @@ export default {
   PutUserInfoNow,
   editUserInfo,
   getRequestCode,
+  getVerifyCode,
   postResetPwd,
   postVerifyCode,
   getUserInfo,
@@ -105,8 +106,23 @@ function editUserInfo(userId: any, params: any) {
 // }
 
 // 获取手机验证码
-function getRequestCode(params: any) {
-  return $UINetwork.get(api.user.getRequestCode, params);
+function getRequestCode(params: {
+  sendType: 'EMAIL' | 'PHONE',
+  sendScene: 'REGISTER_CN' | 'REGISTER_EN' | 'RESET_PWD_CN' | 'RESET_PWD_EN',
+  target: string,
+  code: string, // 图形验证码.
+}) {
+  return $UINetwork.get(api.user.getRequestCode, {
+    sendType: params.sendType,
+    sendScene: params.sendScene,
+    target: params.target,
+    code: params.code,
+  });
+}
+
+// 获取图形验证码
+function getVerifyCode() {
+  return $UINetwork.get(api.user.getVerifyCode, {});
 }
 
 interface verifyCode {

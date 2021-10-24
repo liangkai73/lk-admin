@@ -108,6 +108,13 @@
         font-size: 50px;
       }
 
+      .image_code {
+        width: 100%;
+        height: 40px;
+        cursor: pointer;
+        box-sizing: border-box;
+      }
+
       .phone_code {
         width: 100%;
         height: 40px;
@@ -176,20 +183,35 @@
               <div class="inputTitle">手机号</div>
             </ui-col> -->
             <ui-col :span="24">
-              <ui-input large placeholder="手机号" type="tel" v-model="resetParams.target"></ui-input>
+              <ui-input ref="inputTarget" style="width:100%" large placeholder="手机号" type="tel" v-model="resetParams.target"></ui-input>
             </ui-col>
           </ui-row>
-          <ui-row class="inner-row mt10">
+
+          <ui-row class="inner-row">
             <!-- <ui-col :span="24">
               <div class="inputTitle">短信验证码</div>
             </ui-col> -->
-            <ui-col :span="15">
+            <ui-col :span="16">
+              <ui-input ref="inputVerifyCode" large placeholder="图形验证码" type="text" v-model="resetParams.code"></ui-input>
+            </ui-col>
+            <ui-col :offset="0.5" :span="7.5">
+              <ui-button large info @click="getImageCode" class="image_code" style="padding: 0">
+                <img style="width: 100%;height: 100%;" :src="verifyCode">
+              </ui-button>
+            </ui-col>
+          </ui-row>
+
+          <ui-row class="inner-row">
+            <!-- <ui-col :span="24">
+              <div class="inputTitle">短信验证码</div>
+            </ui-col> -->
+            <ui-col :span="16">
               <ui-input large placeholder="短信验证码" type="text" v-model="resetParams.checkCode"></ui-input>
             </ui-col>
-            <ui-col :offset="1" :span="8">
-              <ui-button large info @click="getCode" class="phone_code" style="padding: 0">
+            <ui-col :offset="0.5" :span="7.5">
+              <ui-button large info @click="getPhoneCode" class="phone_code" style="padding: 0" :disabled="codeHide">
                 <template v-if="!codeHide">获取验证码</template>
-                <template v-else>{{ limitTime }}</template>
+                <template v-else>{{ limitTime + ' s' }}</template>
               </ui-button>
             </ui-col>
             <ui-col :span="24" v-show="errorTxt">
@@ -292,15 +314,19 @@
     name: 'resetPwd'
   })
   export default class extends Vue {
+    verifyCode = "";
     viewType = 1;
     eyeOpen: boolean = false
     errorTxt: string = ''
     resetParams = {
       target: "",
+      sendType: 'PHONE', // 'EMAIL' | 'PHONE',
+      sendScene: $UILibs.lang.indexOf('zh') == 0 ? 'RESET_PWD_CN' : 'RESET_PWD_EN',
+      
+      code: "",
       checkCode: "",
       password: "",
       password2: "",
-      sendType: "",
     };
 
     codeHide = false;
@@ -313,15 +339,37 @@
     constructor() {
       super();
     }
-    getCode() {
-      api.user.getRequestCode(this.resetParams).then((result: any) => {
-        this.codeHide = true;
-        this.limitTime = 10;
-        this._getTime(this.limitTime);
+
+    mounted() {
+      this.getImageCode();
+    }
+
+    getImageCode() {
+      api.user.getVerifyCode().then((result: any) => {
+        if (!result) {
+          $UIToast('请稍后重试');
+          return;
+        }
+        this.verifyCode = result;
       });
     }
 
-    mounted() {}
+    getPhoneCode() {
+      if (!$Febs.string.isPhoneMobile(this.resetParams.target)) {
+        (this.$refs.inputTarget as any).markError();
+        return;
+      }
+      api.user.getRequestCode(this.resetParams as any).then((result: any) => {
+        if (!result) {
+          $UIToast('发送失败');
+          return;
+        }
+
+        this.codeHide = true;
+        this.limitTime = 60;
+        this._getTime(this.limitTime);
+      });
+    }
 
     stepTo(str: string) {
       // this.$timer.clearAll();

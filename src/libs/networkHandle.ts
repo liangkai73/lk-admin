@@ -30,18 +30,31 @@ export default class NetworkHandler implements ui.network.INetworkHandler {
     const headers: any = {
       "Content-Type": "application/json",
       "X-HTTP-AUTHENTICATE": "1",
+      // "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, Authorization, x-http-authenticate",
     };
     if (accessToken && accessToken.accessToken) {
       headers['Authorization'] = `Bearer ${accessToken.accessToken}`;
     }
     return {
       timeout: 20 * 1000,
-      credentials: null,
+      credentials: 'include',
       mode: 'cors',
       headers
     }
   }
-
+  
+  /**
+   * @desc 接收到服务器反馈消息后, 先进行一次原始数据的处理并将处理后的结果返回.
+   */
+  onRawHandler(serverData: Response, url: string): void {
+    switch (serverData.status) {
+      case 404:
+        $UIToast({ type: "error", content: $i18n('服务暂时不可用') });
+        throw new Error('status: ' + serverData.status + "; url: " + url);
+        break;
+    }
+  }
+  
   /**
    * @desc: 处理api错误.
    * @param data: 服务器返回的消息.
@@ -49,6 +62,7 @@ export default class NetworkHandler implements ui.network.INetworkHandler {
    * @return: 如果正确将返回data, 否则返回null.
    */
   onErrorHandler(data: any, url: string): any {
+    
     // common
     switch (data.err_code) {
       case 401: {
@@ -64,6 +78,20 @@ export default class NetworkHandler implements ui.network.INetworkHandler {
         $UIToast("找不到资源");
         throw new Error('404');
       }
+      case 500: {
+        const prefix = 'com.netflix.client.ClientException: Load balancer does not have available server for client: ';
+        if (data.err_msg) {
+          if (data.err_msg.indexOf(prefix) == 0) {
+            $UIToast({ type: "error", content: $i18n('服务暂时不可用') + ': ' + data.err_msg.substr(prefix.length) });
+            throw data;
+          }
+          else if (data.err_msg.indexOf('failed: connect timed out executing') >= 0) {
+            $UIToast({ type: "error", content: $i18n('服务暂时不可用') });
+            throw data;
+          }
+        }
+      }
+        
     }
 
     if (data.desc) {
@@ -80,7 +108,7 @@ export default class NetworkHandler implements ui.network.INetworkHandler {
       ) {
         throw data;
       } else {
-        $UIToast({ type: "error", content: data.err_msg || data.err_subcode });
+        $UIToast({ type: "error", content: $i18n(data.err_msg || data.err_subcode) });
       }
 
       throw data;

@@ -21,6 +21,8 @@ export default {
 
     getRequestCode: "/user-service/api/v1/users/requestCode", // 获取手机验证码
     postVerifyCode: "/user-service/api/v1/users/verifyCode", // 校验验证码
+    getVerifyCode: "/user-service/api/v1/users/requestCodeImage", // 获得图形验证码.
+
     postResetPwd: "/user-service/api/v1/users/resetPwd", // 重置密码
     getUserList: "/user-service/api/v1/users", // 获取用户列表
     getUserInfo: (id: string | number) => `/user-service/api/v1/users/${id}`, // 获取用户信息

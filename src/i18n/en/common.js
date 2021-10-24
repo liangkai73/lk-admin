@@ -1,4 +1,4 @@
-export default {
+export default {  
   "查看": "View",
   "新增": "Add",
   "保存": "Save",

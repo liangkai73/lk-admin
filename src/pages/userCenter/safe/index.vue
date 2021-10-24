@@ -267,7 +267,11 @@
       this.limitTime = 60;
       this._getTime(this.limitTime);
 
-      api.user.getRequestCode({sendType: 'PHONE', target: params.username}).then((result: any) => {
+      api.user.getRequestCode({
+        sendScene: $UILibs.lang.indexOf('zh') == 0 ? 'RESET_PWD_CN' : 'RESET_PWD_EN',
+        sendType: 'PHONE', target: params.username,
+        // code: 
+      }).then((result: any) => {
         if (this.changeTelView == 1) {
           this.checkCodeParams.username = params.username;
           // this.checkCodeParams.checkCode = "test";

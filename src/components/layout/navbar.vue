@@ -82,7 +82,7 @@
                 :id="userInfo.userId" :size="32"></uiAvatar>
               <div class="flex1 flex_c_c ueser-info-name">
                 <span>{{ userInfo.username }}</span>
-                <span>{{ $i18n('layouts.components.navbar.(未实名)') }}</span>
+                <!-- <span>{{ $i18n('layouts.components.navbar.(未实名)') }}</span> -->
               </div>
             </div>
           </ui-popover-cell>

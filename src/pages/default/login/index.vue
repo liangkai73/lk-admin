@@ -364,7 +364,6 @@
     }
 
     mounted() {
-      this.$bpEventMgr.on(window, "keydown", this.keyDownToLogin);
     }
 
     stepTo(str: string) {
@@ -390,22 +389,6 @@
         this.$navbar.push({
           path: url,
         });
-      }
-    }
-    // 回车登录
-    keyDownToLogin(e: any) {
-      if (e.keyCode == 13) {
-        if (
-          this.viewType == 1 &&
-          (this.$refs.btn1 as any).getAttribute("disabled") != "disabled"
-        ) {
-          this.handleLogin("pre");
-        } else if (
-          this.viewType == 3 &&
-          (this.$refs.btn2 as any).getAttribute("disabled") != "disabled"
-        ) {
-          this.handleLogin("pre");
-        }
       }
     }
     // 校验密码
@@ -520,6 +503,7 @@
 
     .faas-login-content {
       // @include background_color("bg_color2");
+      background-color: #fff;
       min-height: 100vh;
     }
 
@@ -527,13 +511,25 @@
       width: 400px;
       height: 540px;
 
+      .bp-input {
+        border-color: #f4f4f4;
+        background-color: #f4f4f4;
+        &.bp-input__focus {
+          border-color: #07f;
+        }
+        /deep/ .bp-input__inner {
+          background-color: #f4f4f4;
+        }
+      }
+
       &.noPassClass {
         .bp-input {
           border: solid 1px #ff3b30;
+          background-color: rgb(250, 212, 211);
 
           /deep/ .el-input__inner,
           /deep/ .bp-input__inner {
-            background-color: rgba(255, 59, 48, 0.2);
+            background-color: rgb(250, 212, 211);
           }
         }
       }

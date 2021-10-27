@@ -24,15 +24,15 @@
         <ui-thead>
           <ui-tr>
             <ui-th width="30%">id</ui-th>
-            <ui-th>Tag
+            <ui-th width="20%">Tag
                 <ui-icon name="ui-warning" width="16px">
                   <ui-popover trigger="hover">
                     <span>系统使用tag标识发送对应的场景通知</span>
                   </ui-popover>
                 </ui-icon>
             </ui-th>
-            <ui-th width="30%">Name</ui-th>
-            <ui-th width="40%">Content</ui-th>
+            <ui-th width="20%">Name</ui-th>
+            <ui-th width="30%">Content</ui-th>
             <ui-th width="30%"></ui-th>
           </ui-tr>
         </ui-thead>
@@ -42,8 +42,8 @@
               <ui-td class="f12">
                 <span>{{ item.id }}</span>
               </ui-td>
-              <ui-td>
-                <code>{{ item.type }}</code>
+              <ui-td class="f12">
+                <code v-if="item.type">{{ item.type }}</code>
               </ui-td>
               <ui-td>
                 <span>{{ item.subject }}</span>

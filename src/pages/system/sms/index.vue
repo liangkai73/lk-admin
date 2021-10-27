@@ -57,7 +57,7 @@
               <span>Code</span>
             </ui-th>
             <ui-th width="100px">
-              tag 
+              Tag 
               <ui-icon name="ui-warning" width="16px">
                 <ui-popover trigger="hover">
                   <span>系统使用tag标识发送对应的场景通知</span>
@@ -87,8 +87,8 @@
               <ui-td>
                 <span>{{ item.templateCode }}</span>
               </ui-td>
-              <ui-td>
-                <code>{{ item.type }}</code>
+              <ui-td class="f12">
+                <code v-if="item.type">{{ item.type }}</code>
               </ui-td>
               <ui-td>
                 <span>{{ getType(item.templateType) }}</span>

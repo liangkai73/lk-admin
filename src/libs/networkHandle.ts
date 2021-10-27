@@ -10,6 +10,7 @@
 import bpui from '@bpui/dialog';
 import token from '@/api/_token';
 import api from "@/api/config-api";
+import _token from '@/api/_token';
 
 
 export default class NetworkHandler implements ui.network.INetworkHandler {
@@ -40,6 +41,19 @@ export default class NetworkHandler implements ui.network.INetworkHandler {
       credentials: 'include',
       mode: 'cors',
       headers
+    }
+  }
+
+  /**
+   * @desc 默认的查询参数.
+   */
+  get defaultQueryParam(): bp.Directory<any> {
+    const tmpToken = _token.getTempToken();
+    if (!$Febs.string.isEmpty(tmpToken)) {
+      return { _ofst_: tmpToken };
+    }
+    else {
+      return null;
     }
   }
   

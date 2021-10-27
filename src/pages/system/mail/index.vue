@@ -15,7 +15,7 @@
   >
     <div class="flex_r_s" slot="titleRight">
       <ui-button primary @click="handleAdd">
-        新增
+        {{$i18n('新增')}}
       </ui-button>
     </div>
 
@@ -52,15 +52,15 @@
         <ui-thead>
           <ui-tr>
             <ui-th width="25%">id</ui-th>
-            <ui-th width="10%">Tag
+            <ui-th width="20%">Tag
               <ui-icon name="ui-warning" width="16px">
                 <ui-popover trigger="hover">
                   <span>系统使用tag标识发送对应的场景通知</span>
                 </ui-popover>
               </ui-icon>
             </ui-th>
-            <ui-th width="30%">Name</ui-th>
-            <ui-th width="40%">Content</ui-th>
+            <ui-th width="20%">Name</ui-th>
+            <ui-th width="30%">Content</ui-th>
             <ui-th width="20%"></ui-th>
           </ui-tr>
         </ui-thead>
@@ -70,8 +70,8 @@
               <ui-td class="f12">
                 {{ item.id }}
               </ui-td>
-              <ui-td>
-                <code>{{ item.type }}</code>
+              <ui-td class="f12">
+                <code v-if="item.type">{{ item.type }}</code>
               </ui-td>
               <ui-td>
                 {{ item.subject }}

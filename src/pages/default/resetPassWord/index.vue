@@ -50,33 +50,27 @@
           // margin-top: 20px;
         }
 
-        .ui-input {
-          border-color: transparent;
-
-          &.ui-input__focus {
+        .bp-input {
+          border-color: #f4f4f4;
+          background-color: #f4f4f4;
+          &.bp-input__focus {
             border-color: #07f;
           }
-
-          /deep/ .ui-input__suffixIcon {
-            line-height: 20px;
-            padding-left: 5px;
-            position: absolute;
-            right: 0;
-            bottom: 12px;
-          }
-
-          /deep/ .el-input__inner,
-          /deep/ .ui-input__inner {
+          /deep/ .bp-input__inner {
             background-color: #f4f4f4;
-            border: 0;
-            height: 38px;
-            width: 100%;
-            box-sizing: border-box;
           }
+        }
 
-          height: 40px;
-          margin: 0;
-          background-color: #f4f4f4;
+        &.noPassClass {
+          .bp-input {
+            border: solid 1px #ff3b30;
+            background-color: rgb(250, 212, 211);
+
+            /deep/ .el-input__inner,
+            /deep/ .bp-input__inner {
+              background-color: rgb(250, 212, 211);
+            }
+          }
         }
 
         .inputTitle {
@@ -131,7 +125,6 @@
         width: 100%;
         height: 40px;
         font-size: 16px;
-        margin-top: 20px;
       }
 
       .back_login {
@@ -275,7 +268,7 @@
               <div class="splitLine"></div>
             </ui-col>
           </ui-row>
-          <ui-button info class="mt20" @click="linkToLogin">返回登录</ui-button>
+          <ui-button info class="mt10" @click="linkToLogin">返回登录</ui-button>
         </template>
       </div>
       <!-- step3 -->
@@ -307,6 +300,7 @@
     Vue,
   } from "vue-property-decorator";
   import api from "@/api";
+import _token from '@/api/_token';
 
   @Component({
     components: {
@@ -314,6 +308,7 @@
     name: 'resetPwd'
   })
   export default class extends Vue {
+
     verifyCode = "";
     viewType = 1;
     eyeOpen: boolean = false
@@ -341,7 +336,16 @@
     }
 
     mounted() {
-      this.getImageCode();
+      this.getTempToken();
+    }
+
+    getTempToken() {
+      api.login.tmpToken().then(res=>{
+        _token.setTempToken(res);
+      })
+      .then(res=>{
+        this.getImageCode();
+      })
     }
 
     getImageCode() {

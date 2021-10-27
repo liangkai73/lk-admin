@@ -79,8 +79,8 @@
           <ui-popover-cell @click.native="linkTo('/userCenter/info')"  v-if="userInfo.username">
             <div class="user-info-head cur_P flex_r_c">
               <uiAvatar class="ueser-info-img flex_c_c" :name="userInfo.username"
-                :id="userInfo.userId" :size="32"></uiAvatar>
-              <div class="flex1 flex_c_c ueser-info-name">
+                :id="userInfo.userId" :size="32" style="margin-left:-5px;"></uiAvatar>
+              <div class="flex1 flex_c_c ueser-info-name" style="margin-left:5px;">
                 <span>{{ userInfo.username }}</span>
                 <!-- <span>{{ $i18n('layouts.components.navbar.(未实名)') }}</span> -->
               </div>

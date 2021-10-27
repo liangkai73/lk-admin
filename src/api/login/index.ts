@@ -9,6 +9,17 @@ import api from "@/api/config-api";
 import _token from "../_token";
 import user from "../user";
 
+function tmpToken() {
+  return $UINetwork
+    .get(api.login.token, {})
+    .then((res: any) => {
+      return res;
+    })
+    .catch((err: any) => {
+      throw err;
+    });
+}
+
 function postLogin(params: login.loginParams) {
   return $UINetwork
     .post(api.login.postLogin, params, { contentType: "formData" })
@@ -56,6 +67,7 @@ function postLogout() {
 }
 
 export default {
+  tmpToken,
   postLogin,
   register,
   isLogin,

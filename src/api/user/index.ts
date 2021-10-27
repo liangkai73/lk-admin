@@ -105,12 +105,15 @@ function editUserInfo(userId: any, params: any) {
 //   return $UINetwork.get(api.user.getUserPermission(id), {});
 // }
 
-// 获取手机验证码
+/**
+ * 不传递, target与code时, 则发送短信至自身手机
+ * @returns 
+ */
 function getRequestCode(params: {
   sendType: 'EMAIL' | 'PHONE',
   sendScene: 'REGISTER_CN' | 'REGISTER_EN' | 'RESET_PWD_CN' | 'RESET_PWD_EN',
-  target: string,
-  code: string, // 图形验证码.
+  target?: string,
+  code?: string, // 图形验证码.
 }) {
   return $UINetwork.get(api.user.getRequestCode, {
     sendType: params.sendType,

@@ -24,6 +24,10 @@ export const STORE_TOKEN = {
   name: "APP_TOKEN",
   key: "Json",
 };
+export const STORE_TEMP_TOKEN = {
+  name: "APP_TEMP_TOKEN",
+  key: "Json",
+};
 // userInfo
 
 export const STORE_USERINFO = {

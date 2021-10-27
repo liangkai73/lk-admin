@@ -13,14 +13,13 @@ export const messages = {
     '_lang': '简体中文',
     ...ZHCN,
   },
-  'en-us': {
+  'en': {
     '_lang': 'English',
     ...EN,
   },
 }
 
 $UILibs.setI18nMessage({
-  defaultLocale: 'en-us',
+  defaultLocale: 'en',
   messages
 })
-

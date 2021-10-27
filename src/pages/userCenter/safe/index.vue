@@ -66,7 +66,7 @@
               <button :disabled="codeHide || getCodeParams.username.length == 0"
                 @click="handleGetCode(getCodeParams)" class="bp-btn faas-btn-black getCodeBtn">
                 <template v-if="!codeHide">{{ $i18n('userCenter.safe.index.获取验证码') }}</template>
-                <template v-else>{{ limitTime }}</template>
+                <template v-else>{{ limitTime + ' s' }}</template>
               </button>
             </ui-col>
           </ui-row>
@@ -269,7 +269,8 @@
 
       api.user.getRequestCode({
         sendScene: $UILibs.lang.indexOf('zh') == 0 ? 'RESET_PWD_CN' : 'RESET_PWD_EN',
-        sendType: 'PHONE', target: params.username,
+        sendType: 'PHONE', 
+        // target: params.username,
         // code: 
       }).then((result: any) => {
         if (this.changeTelView == 1) {

@@ -7,9 +7,9 @@
  */
 
 export default {
+  token: '/api/v1/services/ephemeralSessionId',
   // login
   login: {
-    token: '/user-service/api/v1/users/ephemeralToken',
     postLogin: "/user-service/api/v1/users/login", // 登录主账号
     postRegister: "/user-service/api/v1/users/register", // 注册
     postLogout: "/user-service/api/v1/users/logout", // 登出

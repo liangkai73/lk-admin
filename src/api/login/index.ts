@@ -11,7 +11,7 @@ import user from "../user";
 
 function tmpToken() {
   return $UINetwork
-    .get(api.login.token, {})
+    .get(api.token, {})
     .then((res: any) => {
       return res;
     })
@@ -25,6 +25,7 @@ function postLogin(params: login.loginParams) {
     .post(api.login.postLogin, params, { contentType: "formData" })
     .then((res: any) => {
       _token._setToken(res);
+      _token.clearTempToken();
       return Promise.resolve(res);
     })
     .catch((err: any) => {

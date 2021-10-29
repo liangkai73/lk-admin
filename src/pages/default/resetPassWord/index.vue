@@ -59,6 +59,9 @@
           /deep/ .bp-input__inner {
             background-color: #f4f4f4;
           }
+          &.bp-input__warn {
+            border-color: #FA5151;
+          }
         }
 
         &.noPassClass {
@@ -363,7 +366,16 @@ import _token from '@/api/_token';
         (this.$refs.inputTarget as any).markError();
         return;
       }
-      api.user.getRequestCode(this.resetParams as any).then((result: any) => {
+      if ($Febs.string.isEmpty(this.resetParams.code)) {
+        (this.$refs.inputVerifyCode as any).markError();
+        return;
+      }
+
+      let params = $Febs.utils.mergeMap(this.resetParams);
+      // TODO: 默认为中国.
+      params.target = '086' + params.target;
+
+      api.user.getRequestCode(params).then((result: any) => {
         if (!result) {
           $UIToast('发送失败');
           return;

@@ -50,7 +50,7 @@ export default class NetworkHandler implements ui.network.INetworkHandler {
   get defaultQueryParam(): bp.Directory<any> {
     const tmpToken = _token.getTempToken();
     if (!$Febs.string.isEmpty(tmpToken)) {
-      return { _ofst_: tmpToken };
+      return { _ofsid_: tmpToken };
     }
     else {
       return null;

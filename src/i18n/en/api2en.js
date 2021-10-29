@@ -1,4 +1,6 @@
 export default {
+  "验证码不正确": "The verification code is incorrect",
+  "验证码为空": "The verification code is empty",
   "稍后再试": "Try again later",
   "验证码图片生成失败": "Failed to generate captcha",
   "无法生成验证码": "Unable to generate captcha",

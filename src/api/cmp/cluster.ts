@@ -1,11 +1,12 @@
 "use strict";
 
 /**
- * Copyright (c) 2018 Copyright of All Rights Reserved.
+ * Copyright (c) 2018 Copyright originforest All Rights Reserved.
  * Author: cli
  * Date: 2018-07-27 16:02
  * Desc:
  */
+
 
 
 import api from "@/api/config-api";

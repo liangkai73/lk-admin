@@ -1,11 +1,12 @@
 "use strict";
 
 /**
- * Copyright (c) 2018 Copyright of All Rights Reserved.
+ * Copyright (c) 2018 Copyright originforest All Rights Reserved.
  * Author: cli
  * Date: 2018-07-27 16:02
  * Desc:
  */
+
 
 import api from "@/api/config-api";
 
@@ -13,6 +14,7 @@ export default {
   getAcct,
   delAcct,
   postAcct,
+  updateAcct,
   listAcct,
   getAllCloud,
 };
@@ -42,6 +44,16 @@ function delAcct(params: any) {
 function postAcct(params: any) {
   return $UINetwork
     .post(api.cmp.acct.postAcct, params)
+    .then((res: any) => {
+      return Promise.resolve(res);
+    })
+    .catch((err: any) => {
+      throw err;
+    });
+}
+function updateAcct(params: any) {
+  return $UINetwork
+    .post(api.cmp.acct.updateAcct, params)
     .then((res: any) => {
       return Promise.resolve(res);
     })

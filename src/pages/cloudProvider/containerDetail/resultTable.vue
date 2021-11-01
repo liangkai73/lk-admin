@@ -58,9 +58,9 @@ import {
 } from "vue-property-decorator";
 import backHeader from './components/backHeader.vue';
 import api from "@/api";
+import bpui from '@bpui/dialog';
 
 import filter from "@/libs/filter";
-import { Loading } from 'element-ui';
 @Component({
   components: {
     backHeader,
@@ -124,7 +124,7 @@ export default class extends Vue {
         this.eventData = data
         if (this.eventData.list[0].data.reason !== 'Started') {
           clearInterval(this.timeer)
-          this.loadingInstance.close()
+          bpui.apiWidget.hideLoadingTarget(document.getElementsByClassName('tableLoading')[0])
         }
       }).catch((err: any) => {
         throw err;
@@ -148,13 +148,14 @@ export default class extends Vue {
     this.activeName === 'first' ? this.queryResult() : this.queryLog()
   }
   mounted() {
-    this.loadingInstance = Loading.service({
+    /* this.loadingInstance = Loading.service({
       target: '.tableLoading',
       fullscreen: false,
       spinner: 'el-icon-loading',
       customClass: 'loadingCicle',
       background: 'transparent',
-    });
+    }); */
+    bpui.apiWidget.showLoadingTarget(document.getElementsByClassName('tableLoading')[0]);
     this.temStore = $UIStorage.namespace('CLUSTER_OPS');
     this.timeer = setInterval(this.judgeReq.bind(this), 10000)
     this.judgeReq()

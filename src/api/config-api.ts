@@ -5,7 +5,6 @@
  * @Last Modified by: lanck.xie
  * @Last Modified time: 2021-10-09 14:56:12
  */
-
 export default {
   token: '/api/v1/services/ephemeralSessionId',
   // login
@@ -158,6 +157,7 @@ export default {
     acct: {
       getAcct: "/ce-service/cmp/acct", // 获取账户信息
       postAcct: "/ce-service/cmp/acct", // 导入账号信息
+      updateAcct: "/ce-service/cmp/acct/update", // 导入账号信息
       listAcct: "/ce-service/cmp/acct/list", // 列出托管的账户
     },
     // 费用
@@ -191,8 +191,25 @@ export default {
       getAllacct: "/cfm-service/acct/list/qry", // 获取所有云商账号
       getEcsList: "/cfm-service/acct/resource/ecs", // 获取ecs列表
     },
-    // 成本优化
-
+    // 成本优化 base & deep
+    cost: {
+      getCloudScores: "/cfm-service/cost/optimization/cloudScores", // 获取成本优化云商预评分
+      getComputeScore: "/cfm-service/cost/optimization/computeScore", // 计算成本优化预评分
+      getStrategies: "/cfm-service/cost/optimization/strategies", // 获取优化策略集合
+      postSubmitTask: "/cfm-service/cost/optimization/submitTask", // 提交优化策略任务
+      getReports: "/cfm-service/cost/optimization/report", // 获取优化策略报告列表
+      getReport: (id) => `/cfm-service/cost/optimization/report/${id}`, // 获取优化策略报告
+      getReportStatus: (id) =>
+        `/cfm-service/cost/optimization/report/${id}/status`, // 获取优化策略报告状态
+      postCancelReport: (id) =>
+        `/cfm-service/cost/optimization/report/${id}/cancel`, // 取消正在执行的优化
+      deleteReport: (id) => `/cfm-service/cost/optimization/report/${id}`, // 删除指定的优化策略报告
+      postReportcb: (id) =>
+        `/cfm-service/cost/optimization/report/${id}/file_callback`, // 优化报告文件生成回调
+      getReportDetail: (id) =>
+        `/cfm-service/cost/optimization/report/${id}/detail`, // 获取优化策略报告详情
+      getReportNode: (id) => `/cfm-service/cost/optimization/reportNode/${id}`, // 获取优化策略报告节点结果
+    },
     // 比价
     constOp: {
       getRegin: "/service-cloud-meta/api/region/list", // 获取地域

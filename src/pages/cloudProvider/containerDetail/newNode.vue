@@ -140,9 +140,6 @@ import api from "@/api";
 
 import bpui from "bpui.js";
 import {
-  MessageBox,
-} from "element-ui";
-import {
   Component,
   Vue,
   Mixins,
@@ -281,16 +278,18 @@ export default class extends Vue {
     });
   }
   showPop() {
-    MessageBox.prompt($i18n('cloudProvider.containerDetail.newNode.请输入密钥名'), $i18n('cloudProvider.containerDetail.newNode.提示'), {
-      confirmButtonText: $i18n('cloudProvider.containerDetail.newNode.确定'),
-      cancelButtonText: $i18n('cloudProvider.containerDetail.newNode.取消'),
-    }).then(({ value }: any) => {
-      this.newKeyPair(value)
-    }).catch(() => {
-      this.$message({
-        type: 'info',
-        message: $i18n('cloudProvider.containerDetail.newNode.取消输入')
-      });
+    this.$UIConfirm({
+      title: $i18n('cloudProvider.containerDetail.newNode.提示'),
+      content: $i18n('cloudProvider.containerDetail.newNode.请输入密钥名'),
+      okText: "ok", // 默认的多语言key为: 'common.确认'
+      cancelText: "cancel", // 默认的多语言key为: 'common.取消'
+      confirm: ({ value }: any) => { this.newKeyPair(value) },
+      cancel: () => {
+        this.$UIToast({
+          type: 'info',
+          content: $i18n('cloudProvider.containerDetail.newNode.取消输入')
+        });
+      }
     });
   }
   calcPrice(): void {

@@ -44,7 +44,7 @@
         <ui-popover trigger="hover">
           <span>
             <p>中文语言状态下用户注册账号时发送的邮件</p>
-            <p>邮件参数: <code>code</code>, <code>username</code></p>
+            <p>邮件参数: <code>code</code>, <code>username</code>, <code>email</code></p>
           </span>
         </ui-popover>
       </span>
@@ -53,7 +53,7 @@
         <ui-popover trigger="hover">
           <span>
             <p>英文语言状态下用户注册账号时发送的邮件</p>
-            <p>邮件参数: <code>code</code>, <code>username</code></p>
+            <p>邮件参数: <code>code</code>, <code>username</code>, <code>email</code></p>
           </span>
         </ui-popover>
       </span>

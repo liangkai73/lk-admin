@@ -30,10 +30,18 @@
       <div style="width: 20%"></div>
       <div style="width: 15%">状态</div>
       <div style="width: 50%">
-        <ui-radio-group :disabled="!isEdit || id=='1'" v-model="item.status">
+        <ui-radio-group :disabled="!isEdit || id=='1'" v-model="item.status" @change="handleStatusChange">
           <ui-radio :value="v.value" v-for="(v, key) in list_status" :key="key">{{v.label}}
           </ui-radio>
         </ui-radio-group>
+      </div>
+    </div>
+
+    <div class="flex_r_s mt10" v-if="item.status == api.platformUser.TenantStatus.审批拒绝">
+      <div style="width: 20%"></div>
+      <div style="width: 15%">拒绝理由</div>
+      <div style="width: 50%">
+        <ui-input type="textarea" maxlength="1000" rows="5" placeholder="拒绝理由将通过邮件发送给用户" v-model="rejectReason"></ui-input>
       </div>
     </div>
 
@@ -106,9 +114,6 @@
       </div>
     </div>
 
-    <ui-dialog title="输入禁用理由">
-      
-    </ui-dialog>
 
   </content-view>
 </template>
@@ -134,10 +139,18 @@
   export default class extends Vue {
 
     //#region 数据
+    api = api;
     isEdit: boolean = false;
     id: string;
+    oldStatus: number = null; // 原状态.
     item: any = {};
-    list_status = [{
+    rejectReason: string = null;
+    list_status = [
+      {
+        label: '审批拒绝',
+        value: api.platformUser.TenantStatus.审批拒绝
+      },
+      {
         label: '待审批',
         value: api.platformUser.TenantStatus.待审批
       },
@@ -185,6 +198,7 @@
           this.item = data.list[0];
           if (this.item) {
             this.item.status = api.platformUser.TenantStatus[this.item.status];
+            this.oldStatus = this.item.status;
           }
         })
         .catch((err: any) => {});
@@ -197,6 +211,16 @@
       if (!this.isEdit) {
         this.isEdit = true;
       } else {
+
+        // 拒绝状态.
+        if (this.item.status !== this.oldStatus && this.item.status == api.platformUser.TenantStatus.审批拒绝) {
+          if (!this.rejectReason) {
+            $UIAlert("未设置拒绝通过审核理由").then(()=>{
+            });
+            return;
+          }
+        }
+
         api.platformUser.updateTenant(this.id, this.item).then(()=>{
           $UIAlert('修改成功');
           this.isEdit = false;
@@ -204,6 +228,16 @@
           $UIAlert('修改失败');
         });
       }
+    }
+
+    /**
+     * @desc 状态选择改变
+     */
+    handleStatusChange() {
+      // if (this.item.status !== this.oldStatus) {
+      //   if (this.item.status == api.platformUser.TenantStatus.审批拒绝) {
+      //   }
+      // } // if.
     }
   }
 </script>

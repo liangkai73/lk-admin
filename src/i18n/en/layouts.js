@@ -155,6 +155,7 @@ export default {
       }
     },
     "tenant": {
+      "待验证": "Wait for valid",
       "新申请": "Wait for review",
       "租户列表": "Tenant List",
       "租户信息": "Tenant Information",

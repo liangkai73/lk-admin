@@ -106,6 +106,10 @@
       </div>
     </div>
 
+    <ui-dialog title="输入禁用理由">
+      
+    </ui-dialog>
+
   </content-view>
 </template>
 

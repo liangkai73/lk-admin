@@ -8,13 +8,10 @@
  -->
 
 <template>
-  <content-view :gutter="false" class="flex1" :title="$i18n('layouts.tenant.租户列表')">
+  <content-view :gutter="false" class="flex1" :title="$i18n('layouts.tenant.新申请')">
     
     <div class="flex_r_s" slot="titleRight">
-      <ui-button primary @click="handleAdd">{{$i18n('新增')}}</ui-button>
     </div>
-
-    <dialogAdd v-model="visibleDialogAdd" />
 
     <div>
       <ui-table>
@@ -22,8 +19,10 @@
           <ui-tr>
             <ui-th width="250px">id</ui-th>
             <ui-th width="200px">Company</ui-th>
-            <ui-th width="140px">Account</ui-th>
-            <ui-th>Telephone</ui-th>
+            <ui-th width="140px">Email</ui-th>
+            <ui-th width="140px">Country/Area</ui-th>
+            <ui-th width="140px">Contact People</ui-th>
+            <ui-th>Contact Tel</ui-th>
             <ui-th width="60px">Status</ui-th>
             <ui-th width="140px">Create DateTime</ui-th>
             <ui-th width="60px"></ui-th>
@@ -37,11 +36,17 @@
             <ui-td style="white-space: break-spaces;">
               {{ item.companyName }}
             </ui-td>
-            <ui-td>
-              {{ item.userName }}
+            <ui-td class="f12">
+              {{ item.email }}
             </ui-td>
             <ui-td>
-              {{ item.telephone }}
+              {{ item.countryId }}
+            </ui-td>
+            <ui-td>
+              {{ item.contactName }}
+            </ui-td>
+            <ui-td>
+              {{ item.contactPhone }}
             </ui-td>
             <ui-td class="f12">
               <code v-if="item.status">{{ item.status }}</code>
@@ -50,7 +55,7 @@
               {{ item.createTime }}
             </ui-td>
             <ui-td>
-              <ui-button small @click.stop="handleView(item)">{{$i18n('查看')}}</ui-button>
+              <!-- <ui-button small @click.stop="handleView(item)">{{$i18n('查看')}}</ui-button> -->
               <!-- <ui-button small warning plain @click.stop="handleDel(item)">删除</ui-button> -->
             </ui-td>
           </ui-tr>
@@ -70,7 +75,6 @@
 
   import contentView from "@/components/layout/contentView.vue";
   import uiPagination from "@/components/ui/uiPagination.vue";
-  import dialogAdd from './_dialog_add.vue';
 
   import {
     Component,
@@ -81,11 +85,9 @@
     components: {
       contentView,
       uiPagination,
-      dialogAdd
     },
   })
   export default class extends Vue {
-    visibleDialogAdd = false;
     search = "";
     page = 1;
     limit = 10;
@@ -112,11 +114,7 @@
           userName: this.search,
           email: this.search,
           telephone: this.search,
-          status: [
-            api.platformUser.TenantStatus.启用,
-            api.platformUser.TenantStatus.禁用,
-            api.platformUser.TenantStatus.删除,
-          ]
+          status: [api.platformUser.TenantStatus.待验证邮箱],
         })
         .then((data: any) => {
           this.total = data.total;
@@ -126,17 +124,10 @@
     }
 
     /**
-    * @desc: 新增
-    */
-    handleAdd() {
-      this.visibleDialogAdd = true;
-    }
-
-    /**
     * @desc: 查看
     */
     handleView(item: any) {
-      let url = "/tenant/info?id=" + item.userId;
+      let url = "./info?id=" + item.userId;
       this.$navbar.push({
         path: url,
       });

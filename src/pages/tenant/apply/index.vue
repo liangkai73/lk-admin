@@ -19,8 +19,10 @@
           <ui-tr>
             <ui-th width="250px">id</ui-th>
             <ui-th width="200px">Company</ui-th>
-            <ui-th width="140px">Account</ui-th>
-            <ui-th>Telephone</ui-th>
+            <ui-th width="140px">Email</ui-th>
+            <ui-th width="140px">Country/Area</ui-th>
+            <ui-th width="140px">Contact People</ui-th>
+            <ui-th>Contact Tel</ui-th>
             <ui-th width="60px">Status</ui-th>
             <ui-th width="140px">Create DateTime</ui-th>
             <ui-th width="60px"></ui-th>
@@ -34,11 +36,17 @@
             <ui-td style="white-space: break-spaces;">
               {{ item.companyName }}
             </ui-td>
-            <ui-td>
-              {{ item.userName }}
+            <ui-td class="f12">
+              {{ item.email }}
             </ui-td>
             <ui-td>
-              {{ item.telephone }}
+              {{ item.countryId }}
+            </ui-td>
+            <ui-td>
+              {{ item.contactName }}
+            </ui-td>
+            <ui-td>
+              {{ item.contactPhone }}
             </ui-td>
             <ui-td class="f12">
               <code v-if="item.status">{{ item.status }}</code>
@@ -106,7 +114,7 @@
           userName: this.search,
           email: this.search,
           telephone: this.search,
-          status: api.platformUser.TenantStatus.待验证邮箱,
+          status: [api.platformUser.TenantStatus.待审批],
         })
         .then((data: any) => {
           this.total = data.total;
@@ -119,7 +127,7 @@
     * @desc: 查看
     */
     handleView(item: any) {
-      let url = "./info?id=" + item.userId;
+      let url = "/tenant/info?id=" + item.userId;
       this.$navbar.push({
         path: url,
       });

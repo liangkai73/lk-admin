@@ -32,6 +32,11 @@ export default class extends Mixins(siderBarMixin) {
 
   menuList = [
     {
+      title: $i18n('layouts.tenant.待验证'),
+      path: "/tenant/wait_valid",
+      icon: "",
+    },
+    {
       title: $i18n('layouts.tenant.新申请'),
       path: "/tenant/apply",
       icon: "",

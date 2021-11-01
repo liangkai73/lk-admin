@@ -42,7 +42,7 @@
       </div>
     </div>
     <!--navbar menu -->
-    <ui-icon :name="arrowNavName" :title="$i18n(arrowNavName==='quzuoce'?'隐藏菜单':'显示菜单')"
+    <ui-icon :name="arrowNavName" :title="$i18n(arrowNavName==='quzuoce'?'隐藏菜单':'显示菜单') + ' (Ctrl+Enter)'"
       class="arrowNav" @click="triggerSideBar"></ui-icon>
     <div class="flex1"></div>
 

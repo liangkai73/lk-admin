@@ -36,7 +36,7 @@ function listTenant(
     userName?: string; // 用户名
     telephone?: string;
     email?: string;
-    status?: TenantStatus;
+    status?: TenantStatus[];
   }
 ): Promise<
   ApiPageResponse<{

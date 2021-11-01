@@ -31,6 +31,9 @@
 </template>
 
 <script>
+
+import mainMenu from './mainMenu';
+
 export default {
   props: {
     // // 是否打开
@@ -78,52 +81,7 @@ export default {
     return {
       display: false,
       activeMune: NaN,
-      list_menu: [
-        {
-          title: $i18n('layouts.components.drawer.首页'),
-          path: "/console/overview",
-          icon: "home",
-          account: "overview"
-        },
-        {
-          title: $i18n('layouts.components.drawer.系统设置'),
-          path: "/system/mail",
-          icon: "faas",
-        },
-        {
-          title: $i18n('layouts.components.drawer.租户管理'),
-          path: "/tenant/list",
-          icon: "feiyong",
-          account: "expenses"
-        },
-        // {
-        //   title: $i18n('layouts.components.drawer.成本优化'),
-        //   path: "/costOptimization/overview",
-        //   icon: "costOptimization",
-        //   account: "costOptimization"
-        // },
-        // {
-        //   title: $i18n('layouts.components.drawer.性能优化'),
-        //   path: "/console/performance",
-        //   icon: "performance",
-        // },
-        // {
-        //   title: $i18n('layouts.components.drawer.云安全'),
-        //   path: "/console/yun1",
-        //   icon: "yunanquan",
-        // },
-        // {
-        //   title: $i18n('layouts.components.drawer.智能运维'),
-        //   path: "/console/yun3",
-
-        //   icon: "zhinengyunwei",
-        // },
-        // {
-        //   title: $i18n('layouts.components.drawer.容器服务'),
-        //   path: "/cloudProvider/container",
-        //   icon: "rongqifuwu",
-        // },
-      ],
+      list_menu: mainMenu,
       activePatch: ""
     };
   },

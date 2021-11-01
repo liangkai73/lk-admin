@@ -93,19 +93,23 @@ export default class NetworkHandler implements ui.network.INetworkHandler {
         throw new Error('404');
       }
       case 500: {
-        const prefix = 'com.netflix.client.ClientException: Load balancer does not have available server for client: ';
+        const prefixs = [
+          'com.netflix.client.ClientException: Load balancer does not have available server for client: ',
+          '[500 Internal Server Error] during',
+          'failed: connect timed out executing'
+        ];
+        
         if (data.err_msg) {
-          if (data.err_msg.indexOf(prefix) == 0) {
-            $UIToast({ type: "error", content: $i18n('服务暂时不可用') + ': ' + data.err_msg.substr(prefix.length) });
-            throw data;
-          }
-          else if (data.err_msg.indexOf('failed: connect timed out executing') >= 0) {
-            $UIToast({ type: "error", content: $i18n('服务暂时不可用') });
-            throw data;
+
+          for (const key in prefixs) {
+            if (data.err_msg.indexOf(prefixs[key]) >= 0) {
+              $UIToast({ type: "error", content: $i18n('服务暂时不可用') });
+              throw data;
+            }
           }
         }
+        break;
       }
-        
     }
 
     if (data.desc) {

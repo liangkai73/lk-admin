@@ -26,6 +26,7 @@
   } from "vue-property-decorator";
   import siderBarMixin from "@/components/layout/siderbarMixin";
   import siderBar from "@/components/layout/siderbar.vue";
+  import mainMenu from '@/components/layout/mainMenu';
 
   @Component({
     components: {
@@ -34,57 +35,7 @@
   })
   export default class extends Mixins(siderBarMixin) {
 
-    menuList = [{
-        title: $i18n('layouts.console.siderbar.首页'),
-        path: "/console/overview",
-        icon: "home",
-        account: "overview",
-      },
-      {
-        title: $i18n('layouts.components.drawer.系统设置'),
-        path: "/system/mail",
-        icon: "faas",
-      },
-      {
-        title: $i18n('layouts.console.siderbar.租户管理'),
-        path: "/tenant/list",
-        icon: "feiyong",
-        account: "expenses",
-      },
-      // {
-      //   title: $i18n('layouts.console.siderbar.成本优化'),
-      //   path: "/costOptimization/overview",
-      //   icon: "costOptimization",
-      //   account: "costOptimization",
-      // },
-      // {
-      //   title: $i18n('layouts.console.siderbar.性能优化'),
-      //   path: "/console/performance",
-      //   icon: "performance",
-      // },
-      // {
-      //   title: $i18n('layouts.console.siderbar.云安全'),
-      //   path: "/console/yun1",
-      //   icon: "yunanquan",
-      // },
-      // {
-      //   title: $i18n('layouts.console.siderbar.智能运维'),
-      //   path: "/console/yun3",
-
-      //   icon: "zhinengyunwei",
-      // },
-      // {
-      //   title: $i18n('layouts.console.siderbar.容器服务'),
-      //   path: "/cloudProvider/container",
-
-      //   icon: "rongqifuwu",
-      // },
-      // {
-      //   title: $i18n('layouts.console.siderbar.应用管理'),
-      //   path: "/productCenter",
-      //   icon: "faas",
-      // },
-    ];
+    menuList = mainMenu;
     moudleName = "console";
 
     //

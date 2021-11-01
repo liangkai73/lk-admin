@@ -31,11 +31,11 @@ import siderBar from '@/components/layout/siderbar.vue';
 export default class extends Mixins(siderBarMixin) {
 
   menuList = [
-    // {
-    //   title: '新申请',
-    //   path: "/tenant/apply",
-    //   icon: "",
-    // },
+    {
+      title: $i18n('layouts.tenant.新申请'),
+      path: "/tenant/apply",
+      icon: "",
+    },
     {
       title: $i18n('layouts.tenant.租户列表'),
       path: "/tenant/list",

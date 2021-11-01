@@ -14,6 +14,8 @@ import user from "../user";
  * @desc: 租户状态.
  */
 enum TenantStatus {
+  审批拒绝 = 4,
+  待验证邮箱 = 3,
   待审批 = 2,
   启用 = 1,
   禁用 = 0,

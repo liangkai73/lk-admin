@@ -28,10 +28,10 @@ interface tokenObj {
 }
 
 //  存储token到本地空间
-function _setToken(obj: any) {
+function _setToken(token: string) {
   const temStore = $UIStorage.namespace(STORE_TOKEN.name);
   // let outTime = new Date().getTime() + (obj.expiresIn * 60 * 1000);
-  temStore.set(STORE_TOKEN.key, obj);
+  temStore.set(STORE_TOKEN.key, { accessToken: token });
   return temStore;
 }
 function _clearToken() {
@@ -45,7 +45,7 @@ function _clearToken() {
 function _getToken(): tokenObj {
   const temStore = $UIStorage.namespace(STORE_TOKEN.name);
   const tokenObj:any = temStore.get(STORE_TOKEN.key);
-  return tokenObj ? {accessToken: tokenObj} : { accessToken: '' };
+  return tokenObj ? tokenObj : { accessToken: '' };
 }
 
 

@@ -58,6 +58,26 @@ export default class NetworkHandler implements ui.network.INetworkHandler {
   }
   
   /**
+   * @desc 用于构造请求url; 如果返回null, 则使用内部默认的方法进行构造.
+   */
+  onGetEncodeURIComponent(url: string, body: any): string {
+    if (body) {
+      let i = 0;
+      for (const key in body) {
+        if (i == 0) {
+          if (url.indexOf("?") < 0) url += "?";
+          else url += "&";
+        } else {
+          url += "&";
+        }
+        i++;
+        url += key + "=" + encodeURIComponent(body[key]);
+      }
+    }
+    return url;
+  }
+  
+  /**
    * @desc 接收到服务器反馈消息后, 先进行一次原始数据的处理并将处理后的结果返回.
    */
   onRawHandler(serverData: Response, url: string): void {

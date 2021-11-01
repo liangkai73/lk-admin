@@ -43,8 +43,8 @@
             <ui-td>
               {{ item.telephone }}
             </ui-td>
-            <ui-td>
-              {{ item.status }}
+            <ui-td class="f12">
+              <code v-if="item.status">{{ item.status }}</code>
             </ui-td>
             <ui-td class="f12">
               {{ item.createTime }}
@@ -138,3 +138,7 @@
     }
   }
 </script>
+
+<style scoped lang="scss">
+@import '../commonStyle';
+</style>

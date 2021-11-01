@@ -8,11 +8,8 @@
  -->
 
 <template>
-  <content-view
-    :gutter="false"
-    class="flex1"
-    :title="'新申请'"
-  >
+  <content-view :gutter="false" class="flex1" :title="$i18n('layouts.tenant.新申请')">
+    
     <div class="flex_r_s" slot="titleRight">
     </div>
 
@@ -20,46 +17,45 @@
       <ui-table>
         <ui-thead>
           <ui-tr>
-            <ui-th width="30%">
-              <span>id</span>
-            </ui-th>
-            <ui-th width="30%">
-              <span>公司名</span>
-            </ui-th>
-            <ui-th width="40%">
-              <span>申请日期</span>
-            </ui-th>
-            <ui-th width="30%">
-              <span>操作</span>
-            </ui-th>
+            <ui-th width="250px">id</ui-th>
+            <ui-th width="200px">Company</ui-th>
+            <ui-th width="140px">Account</ui-th>
+            <ui-th>Telephone</ui-th>
+            <ui-th width="60px">Status</ui-th>
+            <ui-th width="140px">Create DateTime</ui-th>
+            <ui-th width="60px"></ui-th>
           </ui-tr>
         </ui-thead>
         <template v-if="list_templates.length > 0">
-          <ui-tr :key="item.id" v-for="item in list_templates" class="cur_P">
-            <ui-td>
-              {{ item.id }}
+          <ui-tr :key="item.userId" v-for="item in list_templates">
+            <ui-td class="f12">
+              {{ item.userId }}
             </ui-td>
-            <ui-td @click="handleEdit(item)" style=" cursor: pointer;">
-              {{ item.subject }}
-            </ui-td>
-            <ui-td>
-              {{ item.template }}
+            <ui-td style="white-space: break-spaces;">
+              {{ item.companyName }}
             </ui-td>
             <ui-td>
-              <ui-button small @click="handleEdit(item)">修改</ui-button>
-              <ui-button small warning plain @click="handleDel(item)">删除</ui-button>
+              {{ item.userName }}
+            </ui-td>
+            <ui-td>
+              {{ item.telephone }}
+            </ui-td>
+            <ui-td class="f12">
+              <code v-if="item.status">{{ item.status }}</code>
+            </ui-td>
+            <ui-td class="f12">
+              {{ item.createTime }}
+            </ui-td>
+            <ui-td>
+              <ui-button small @click.stop="handleView(item)">{{$i18n('查看')}}</ui-button>
+              <!-- <ui-button small warning plain @click.stop="handleDel(item)">删除</ui-button> -->
             </ui-td>
           </ui-tr>
         </template>
       </ui-table>
       <template v-if="list_templates.length > 0">
-        <uiPagination
-          :pageSize.sync="limit"
-          :total="total"
-          @current-change="getList"
-          style="padding: 15px 10px"
-          v-model="page"
-        ></uiPagination>
+        <uiPagination :pageSize.sync="limit" :total="total" @current-change="getList"
+          style="padding: 15px 10px" v-model="page"></uiPagination>
       </template>
       <ui-no-records v-show="list_templates.length == 0" />
     </div>
@@ -67,87 +63,70 @@
 </template>
 
 <script lang="ts">
-import api from "@/api";
+  import api from "@/api";
 
-import contentView from "@/components/layout/contentView.vue";
-import uiPagination from "@/components/ui/uiPagination.vue";
+  import contentView from "@/components/layout/contentView.vue";
+  import uiPagination from "@/components/ui/uiPagination.vue";
 
-import { Component, Vue } from "vue-property-decorator";
+  import {
+    Component,
+    Vue
+  } from "vue-property-decorator";
 
-@Component({
-  components: { contentView, uiPagination },
-})
-export default class extends Vue {
-  search = "";
-  page = 1;
-  limit = 10;
-  total = 0;
+  @Component({
+    components: {
+      contentView,
+      uiPagination,
+    },
+  })
+  export default class extends Vue {
+    search = "";
+    page = 1;
+    limit = 10;
+    total = 0;
 
-  list_templates = [];
+    list_templates = [];
 
-  constructor() {
-    super();
+    constructor() {
+      super();
+    }
+
+    created() {
+      this.getList();
+    }
+
+    mounted() {}
+
+    getList() {
+      api.platformUser
+        .listTenant({
+          pageNum: this.page,
+          pageSize: this.limit,
+          userId: this.search,
+          userName: this.search,
+          email: this.search,
+          telephone: this.search,
+          status: api.platformUser.TenantStatus.待验证邮箱,
+        })
+        .then((data: any) => {
+          this.total = data.total;
+          this.list_templates = data.list;
+        })
+        .catch((err: any) => {});
+    }
+
+    /**
+    * @desc: 查看
+    */
+    handleView(item: any) {
+      let url = "./info?id=" + item.userId;
+      this.$navbar.push({
+        path: url,
+      });
+    }
   }
-
-  created() {
-    this.getList();
-  }
-
-  mounted() {}
-
-  getList() {
-    api.notification.mail
-      .list(this.search, this.page - 1, this.limit)
-      .then((data: any) => {
-        console.log(data);
-        this.total = data.total;
-        this.list_templates = data.list;
-      })
-      .catch((err: any) => {});
-  }
-
-  handleAdd() {
-    let url = "./template";
-    this.$navbar.push({
-      path: url,
-    });
-  }
-
-  handleEdit(item: any) {
-    let url = "./template?id=" + item.id;
-    this.$navbar.push({
-      path: url,
-    });
-  }
-
-  handleDel(item: any) {
-    $UIConfirm({
-      title: "邮件模版管理",
-      content: "确认要删除?",
-    }).then((e) => {
-        api.notification.mail
-          .del(item.id)
-          .then((data: any) => {
-            this.getList();
-
-            $UIToast({
-              type: "success",
-              content: "删除成功",
-            });
-          })
-          .catch((err: any) => {
-            $UIToast({
-              type: "error",
-              content: "删除失败，请重试",
-            });
-          });
-        this.$UIConfirmHide();
-      })
-      .catch(() => {});
-  }
-}
 </script>
 
-<style lang="scss" scoped>
-
-</style>>
+<style scoped lang="scss">
+@import '../commonStyle';
+</style>

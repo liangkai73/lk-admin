@@ -26,25 +26,37 @@
       <span class="f-italic t-underline ml10">
         SMS_忘记密码_CN
         <ui-popover trigger="hover">
-          <span>中文语言状态下用户忘记密码时发送的短信</span>
+          <span>
+            <p>中文语言状态下用户忘记密码时发送的短信</p>
+            <p>邮件参数: <code>code</code></p>
+          </span>
         </ui-popover>
       </span>
       <span class="f-italic t-underline ml10">
         SMS_忘记密码_EN
         <ui-popover trigger="hover">
-          <span>英文语言状态下用户忘记密码时发送的短信</span>
+          <span>
+            <p>英文语言状态下用户忘记密码时发送的短信</p>
+            <p>邮件参数: <code>code</code></p>
+          </span>
         </ui-popover>
       </span>
       <span class="f-italic t-underline ml10">
         SMS_注册账号_CN
         <ui-popover trigger="hover">
-          <span>中文语言状态下用户注册账号时发送的短信</span>
+          <span>
+            <p>中文语言状态下用户注册账号时发送的短信</p>
+            <p>邮件参数: <code>code</code></p>
+          </span>
         </ui-popover>
       </span>
       <span class="f-italic t-underline ml10">
         SMS_注册账号_EN
         <ui-popover trigger="hover">
-          <span>英文语言状态下用户注册账号时发送的短信</span>
+          <span>
+            <p>英文语言状态下用户注册账号时发送的短信</p>
+            <p>邮件参数: <code>code</code></p>
+          </span>
         </ui-popover>
       </span>
     </uiLayoutComment>

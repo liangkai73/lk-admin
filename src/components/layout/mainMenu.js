@@ -24,5 +24,16 @@ export default [
     path: "/tenant/apply",
     icon: "feiyong",
     account: "expenses"
-  }
+  },
+  {
+    title: $i18n('layouts.console.siderbar.容器服务'),
+    path: "/cloudProvider/container",
+
+    icon: "rongqifuwu",
+  },
+  {
+    title: $i18n('layouts.console.siderbar.应用管理'),
+    path: "/productCenter",
+    icon: "faas",
+  },
 ];

@@ -1,0 +1,6 @@
+@import './theme';
+@import './handle';
+
+.theme_container {
+  @include background_color('bg_color2');
+}

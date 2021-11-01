@@ -1,0 +1,31 @@
+// 主题变量 color
+$themes:(light:(
+    font_color1:#000,
+    font_color2:#000,
+    font_color3:#747576,
+    font_color4:#909399,
+    font_color_warn:#f03131,
+    bg_color1:#fff,
+    bg_color2:#fff,
+    bg_color3:#f5f5f5,
+    bg_color4:#ededed,
+    bg_color5:#fcfcfc,
+    hover1: #dadada,
+    hover2:#dee8f0,
+    border1:#e8e8e8, //narvar boder-bottom
+  ),
+  dark:(
+    font_color1:#fff,
+    font_color2:#fff,
+    font_color3:rgba(255, 255, 255, 0.45),
+    font_color4:#909399,
+    font_color_warn:#f03131,
+    bg_color1:#171718,
+    bg_color2:#212121,
+    bg_color3:#3e3e3e,
+    bg_color4:#1e1e1f,
+    bg_color5: #1e1e1f,
+    hover1:#dadada,
+    hover2:#1c1c1e,
+    border1:#1e1d1d, //narvar boder-bottom
+  ))

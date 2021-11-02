@@ -23,7 +23,7 @@
             <ui-th width="140px">Country/Area</ui-th>
             <ui-th width="140px">Contact People</ui-th>
             <ui-th>Contact Tel</ui-th>
-            <ui-th width="60px">Status</ui-th>
+            <ui-th width="120px">Status</ui-th>
             <ui-th width="140px">Create DateTime</ui-th>
             <ui-th width="60px"></ui-th>
           </ui-tr>

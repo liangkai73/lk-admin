@@ -24,7 +24,7 @@
             <ui-th width="200px">Company</ui-th>
             <ui-th width="140px">Account</ui-th>
             <ui-th>Telephone</ui-th>
-            <ui-th width="60px">Status</ui-th>
+            <ui-th width="120px">Status</ui-th>
             <ui-th width="140px">Create DateTime</ui-th>
             <ui-th width="60px"></ui-th>
           </ui-tr>

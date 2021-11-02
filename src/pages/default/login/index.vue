@@ -435,7 +435,7 @@
           this.loginChildParams.username +
           "@" +
           this.loginChildParams.preUsername;
-        params.password = this.loginChildParams.password;
+        params.password = $Febs.crypt.sha1(this.loginChildParams.password);
         let {
           password,
           username

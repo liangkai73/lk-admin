@@ -415,7 +415,11 @@ import _token from '@/api/_token';
           return;
         } else {
           this.errorTxt = ''
-          api.user.postResetPwd(this.resetParams).then((result: any) => {
+          let param = {
+            checkCode: this.resetParams.checkCode,
+            password: $Febs.crypt.sha1(this.resetParams.password),
+          }
+          api.user.postResetPwd(param).then((result: any) => {
             this.viewType = 3;
             this.limitTime2 = 3;
             this._getTime2(this.limitTime2);

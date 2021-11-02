@@ -40,7 +40,7 @@
               {{ item.email }}
             </ui-td>
             <ui-td>
-              {{ item.countryId }}
+              {{ item.countryId | filterContries}}
             </ui-td>
             <ui-td>
               {{ item.contactName }}

@@ -73,6 +73,16 @@
 
     <div class="flex_r_s mt10">
       <div style="width: 20%"></div>
+      <div style="width: 15%">国家/地区</div>
+      <div style="width: 50%">
+        <ui-select
+          v-model="item.countryId"
+          style="width:100%;margin:0"
+          :datasource="contriesArr"></ui-select>
+      </div>
+    </div>
+    <div class="flex_r_s mt10">
+      <div style="width: 20%"></div>
       <div style="width: 15%">公司名称</div>
       <div style="width: 50%">
         <ui-input :readonly="!isEdit" v-model="item.companyName"></ui-input>
@@ -114,139 +124,143 @@
       </div>
     </div>
 
-
   </content-view>
 </template>
 
 <script lang="ts">
-  import api from "@/api";
-  import contentView from "@/components/layout/contentView.vue";
+import api from "@/api";
+import contentView from "@/components/layout/contentView.vue";
+import contries from "@/filters/contries.js"
+import {
+  Component,
+  Vue,
+  // Prop,
+  // Watch,
+  // Provide,
+  // Emit,
+} from "vue-property-decorator";
 
-  import {
-    Component,
-    Vue,
-    // Prop,
-    // Watch,
-    // Provide,
-    // Emit,
-  } from "vue-property-decorator";
-
-  @Component({
-    components: {
-      contentView,
+@Component({
+  components: {
+    contentView,
+  },
+})
+export default class extends Vue {
+  //#region 数据
+  api = api;
+  isEdit: boolean = false;
+  id: string;
+  oldStatus: number = null; // 原状态.
+  item: any = {};
+  rejectReason: string = null;
+  list_status = [
+    {
+      label: '审批拒绝',
+      value: api.platformUser.TenantStatus.审批拒绝
     },
-  })
-  export default class extends Vue {
+    {
+      label: '待审批',
+      value: api.platformUser.TenantStatus.待审批
+    },
+    {
+      label: '启用',
+      value: api.platformUser.TenantStatus.启用
+    },
+    {
+      label: '禁用',
+      value: api.platformUser.TenantStatus.禁用
+    },
+    {
+      label: '删除',
+      value: api.platformUser.TenantStatus.删除
+    },
+  ];
+  //#endregion
+  get contriesArr() {
+    let lang = $UILibs.lang.includes('en') ? 'en' : 'zhcn'
+    return contries.map((item: any) => {
+      item.label = item[lang]
+      return item
+    })
+  }
+  //
+  // lifecycle hook.
+  constructor() {
+    super();
+  }
+  mounted() { }
 
-    //#region 数据
-    api = api;
-    isEdit: boolean = false;
-    id: string;
-    oldStatus: number = null; // 原状态.
-    item: any = {};
-    rejectReason: string = null;
-    list_status = [
-      {
-        label: '审批拒绝',
-        value: api.platformUser.TenantStatus.审批拒绝
-      },
-      {
-        label: '待审批',
-        value: api.platformUser.TenantStatus.待审批
-      },
-      {
-        label: '启用',
-        value: api.platformUser.TenantStatus.启用
-      },
-      {
-        label: '禁用',
-        value: api.platformUser.TenantStatus.禁用
-      },
-      {
-        label: '删除',
-        value: api.platformUser.TenantStatus.删除
-      },
-    ];
-    //#endregion
+  created() {
+    let query = this.$route.query;
+    this.id = query.id;
 
-    //
-    // lifecycle hook.
-    constructor() {
-      super();
-    }
-    mounted() {}
+    if (query.id && query.id.length > 0) this.getInfo(query.id);
+  }
 
-    created() {
-      let query = this.$route.query;
-      this.id = query.id;
+  beforeDestroy() { }
 
-      if (query.id && query.id.length > 0) this.getInfo(query.id);
-    }
-
-    beforeDestroy() {}
-
-    /**
-    * @desc: 获取信息
-    */
-    getInfo(id: string) {
-      api.platformUser
-        .listTenant({
-          pageSize: 1,
-          userId: id,
-        })
-        .then((data) => {
-          this.item = data.list[0];
-          if (this.item) {
-            this.item.status = api.platformUser.TenantStatus[this.item.status];
-            this.oldStatus = this.item.status;
-          }
-        })
-        .catch((err: any) => {});
-    }
-
-    /**
-    * @desc: 保存编辑按钮.
-    */
-    handleSave() {
-      if (!this.isEdit) {
-        this.isEdit = true;
-      } else {
-
-        // 拒绝状态.
-        if (this.item.status !== this.oldStatus && this.item.status == api.platformUser.TenantStatus.审批拒绝) {
-          if (!this.rejectReason) {
-            $UIAlert("未设置拒绝通过审核理由").then(()=>{
-            });
-            return;
-          }
+  /**
+  * @desc: 获取信息
+  */
+  getInfo(id: string) {
+    api.platformUser
+      .listTenant({
+        pageSize: 1,
+        userId: id,
+      })
+      .then((data) => {
+        this.item = data.list[0];
+        if (this.item) {
+          this.item.status = api.platformUser.TenantStatus[this.item.status];
+          this.oldStatus = this.item.status;
         }
+      })
+      .catch((err: any) => { });
+  }
 
-        api.platformUser.updateTenant(this.id, this.item).then(()=>{
-          $UIAlert('修改成功');
-          this.isEdit = false;
-        }).catch(e=>{
-          $UIAlert('修改失败');
-        });
+  /**
+  * @desc: 保存编辑按钮.
+  */
+  handleSave() {
+    if (!this.isEdit) {
+      this.isEdit = true;
+    } else {
+
+      // 拒绝状态.
+      if (this.item.status !== this.oldStatus && this.item.status == api.platformUser.TenantStatus.审批拒绝) {
+        if (!this.rejectReason) {
+          $UIAlert("未设置拒绝通过审核理由").then(() => {
+          });
+          return;
+        }
       }
-    }
 
-    /**
-     * @desc 状态选择改变
-     */
-    handleStatusChange() {
-      // if (this.item.status !== this.oldStatus) {
-      //   if (this.item.status == api.platformUser.TenantStatus.审批拒绝) {
-      //   }
-      // } // if.
+      api.platformUser.updateTenant(this.id, this.item).then(() => {
+        $UIAlert('修改成功');
+        this.isEdit = false;
+      }).catch(e => {
+        $UIAlert('修改失败');
+      });
     }
   }
+
+  /**
+   * @desc 状态选择改变
+   */
+  handleStatusChange() {
+    // if (this.item.status !== this.oldStatus) {
+    //   if (this.item.status == api.platformUser.TenantStatus.审批拒绝) {
+    //   }
+    // } // if.
+  }
+}
 </script>
 
 <style lang="scss" scoped>
-  .content-view-tenant-info {
-    /deep/ .content-body-inner {
-      padding: 20px;
-      background: #fff;
-    }
+.content-view-tenant-info {
+  /deep/ .content-body-inner {
+    padding: 20px;
+    background: #fff;
   }
+}
 </style>>

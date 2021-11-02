@@ -7,7 +7,7 @@
  */
 
 import Vue from 'vue'
-
+import contriesArr from './contries.js'
 const filters = {
   computedDate,
   getDateStr,
@@ -19,7 +19,8 @@ const filters = {
   amountShow,
   filterName,
   dateToISOString,
-  filterMoney
+  filterMoney,
+  filterContries,
 };
 
 export default filters;
@@ -38,6 +39,11 @@ function install() {
 }
 install();
 
+
+function filterContries(val) {
+  const obj = contriesArr.find((item: any) => item.value === val)
+  return '(' + obj.code + ')' + obj.zhcn
+}
 
 // 根据传入的毫秒计算出过了过久时间
 function haolongago(time: number | string) {

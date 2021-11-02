@@ -6,12 +6,12 @@
  * @Last Modified time: 2021-10-09 14:56:12
  */
 export default {
-  token: '/api/v1/services/ephemeralSessionId',
+  token: "/api/v1/services/ephemeralSessionId",
   // login
   login: {
     postLogin: "/user-service/api/v1/users/login", // 登录主账号
     postRegister: "/user-service/api/v1/users/register", // 注册
-    postLogout: "/user-service/api/v1/users/logout", // 登出
+    postLogout: "/user-service/api/v1/users/logout" // 登出
   },
   // user模块
   user: {
@@ -29,14 +29,10 @@ export default {
     postUser: "/user-service/api/v1/users", // 添加用户
     deleteUser: "/user-service/api/v1/users", // 批量删除用户
     putUserInfo: (id: string | number) => `/user-service/api/v1/users/${id}`, // 修改用户信息
-    getUserPermission: (id: string | number) =>
-      `/user-service/api/v1/users/${id}/permissions`, // 获取用户权限列表
-    getUserRoles: (id: string | number) =>
-      `/user-service/api/v1/users/${id}/roles`, // 获取用户所有的组
-    postUserRoles: (id: string | number) =>
-      `/user-service/api/v1/users/${id}/roles`, // 添加用户所有的组
-    deleteUserRoles: (id: string | number) =>
-      `/user-service/api/v1/users/${id}/roles`, // 移除用户所有的组
+    getUserPermission: (id: string | number) => `/user-service/api/v1/users/${id}/permissions`, // 获取用户权限列表
+    getUserRoles: (id: string | number) => `/user-service/api/v1/users/${id}/roles`, // 获取用户所有的组
+    postUserRoles: (id: string | number) => `/user-service/api/v1/users/${id}/roles`, // 添加用户所有的组
+    deleteUserRoles: (id: string | number) => `/user-service/api/v1/users/${id}/roles`, // 移除用户所有的组
 
     getUserGroup: "/user-service/api/v1/roles", //  获取用户组/角色列表
     postUserGroup: "/user-service/api/v1/roles", //  添加用户组/角色
@@ -44,30 +40,23 @@ export default {
     getGroupInfo: (id: string | number) => `/user-service/api/v1/roles/${id}`, // 获取用户组信息
     putGroupInfo: (id: string | number) => `/user-service/api/v1/roles/${id}`, // 修改用户组信息
     deleteGroup: (id: string | number) => `/user-service/api/v1/roles/${id}`, // 删除用户组
-    getGroup_Users: (id: string | number) =>
-      `/user-service/api/v1/roles/${id}/users`, // 获取用户组列表
-    postGroup_Users: (id: string | number) =>
-      `/user-service/api/v1/roles/${id}/users`, // 添加用户组中的用户
-    deleteGroup_Users: (id: string | number) =>
-      `/user-service/api/v1/roles/${id}/users`, // 移除用户组中的用户
-    getGroup_permissions: (id: string | number) =>
-      `/user-service/api/v1/roles/${id}/permissions`, // 获取用户组的权限策略列表
-    postGroup_permissions: (id: string | number) =>
-      `/user-service/api/v1/roles/${id}/permissions`, // 添加用户组权限策略
+    getGroup_Users: (id: string | number) => `/user-service/api/v1/roles/${id}/users`, // 获取用户组列表
+    postGroup_Users: (id: string | number) => `/user-service/api/v1/roles/${id}/users`, // 添加用户组中的用户
+    deleteGroup_Users: (id: string | number) => `/user-service/api/v1/roles/${id}/users`, // 移除用户组中的用户
+    getGroup_permissions: (id: string | number) => `/user-service/api/v1/roles/${id}/permissions`, // 获取用户组的权限策略列表
+    postGroup_permissions: (id: string | number) => `/user-service/api/v1/roles/${id}/permissions`, // 添加用户组权限策略
     deleteGroup_permissions: (id: string | number) =>
       `/user-service/api/v1/roles/${id}/permissions`, // 移除用户组权限策略
     postNetStore: "/user-service/api/v1/users/uiLayout", // 保存用户界面布局
-    getNetStore: "/user-service/api/v1/users/uiLayout", // 获取用户界面布局
+    getNetStore: "/user-service/api/v1/users/uiLayout" // 获取用户界面布局
   },
   // 策略
   policy: {
     getPolicyList: `/user-service/api/v1/policies`, // 查询策略列表,
     postPolicy: "/user-service/api/v1/policies", // 新增策略,
-    getPolicy: (id: string | number) =>
-      `/user-service/api/v1/policies/id/${id}`, // 查询策略,
-    putPolicy: (code: string | number) =>
-      `/user-service/api/v1/policies/code/${code}`, // 修改策略,
-    deletePolicy: `/user-service/api/v1/policies`, // 删除策略,
+    getPolicy: (id: string | number) => `/user-service/api/v1/policies/id/${id}`, // 查询策略,
+    putPolicy: (code: string | number) => `/user-service/api/v1/policies/code/${code}`, // 修改策略,
+    deletePolicy: `/user-service/api/v1/policies` // 删除策略,
   },
   // 应用管理
   app: {
@@ -90,29 +79,27 @@ export default {
 
     eventDisplays: `/eb-service/api/v1/events/displays`, // 事件列表
     getEventsTypes: `/eb-service/api/v1/events/types`, // 事件列表
-    getEventsServices: `/eb-service/api/v1/events/services`, // 事件列表
+    getEventsServices: `/eb-service/api/v1/events/services` // 事件列表
   },
   // 角色 废弃
   role: {
     postRamRole: "/user-service/api/ram/role", // 新增角色
     getRamRole: "/user-service/api/ram/role", // 查询角色
     putRamRole: (id: string | number) => `/user-service/api/ram/role/${id}`, // 修改策略,
-    deleteRamRole: (id: string | number) => `/user-service/api/ram/role/${id}`, // 删除策略,
+    deleteRamRole: (id: string | number) => `/user-service/api/ram/role/${id}` // 删除策略,
   },
   // 文件
   file: {
     getFileDownload: (id: string | number) => `/file-service/api/v1/file/${id}`, // 下载文件
-    getFileInfo: (id: string | number) =>
-      `/file-service/api/v1/file/info/${id}`, // 获取文件信息
+    getFileInfo: (id: string | number) => `/file-service/api/v1/file/info/${id}` // 获取文件信息
   },
   // 群组 废弃
   group: {
     postRamGroup: "/user-service/api/ram/group", // 新增群组
     getRamGroup: "/user-service/api/ram/group", // 新增群组
     putRamGroup: (id?: string | number) => `/user-service/api/ram/group/${id}`, // 修改策略,
-    deleteRamGroup: (id?: string | number) =>
-      `/user-service/api/ram/group/${id}`, // 删除策略,
-    postAddToGroup: "/user-service/api/ram/group/addToGroup", // 添加用户到群组
+    deleteRamGroup: (id?: string | number) => `/user-service/api/ram/group/${id}`, // 删除策略,
+    postAddToGroup: "/user-service/api/ram/group/addToGroup" // 添加用户到群组
   },
   // func函数管理 废弃
   scf: {
@@ -126,11 +113,9 @@ export default {
     getFunToken: "/func-mgt/func/token", //  获取秘钥列表
     getDeployment: (funcid?: string | number) => `/func-mgt/log/${funcid}`, // 获取函数详情
     postDeploymentFunc: "/func-mgt/deployment/func", // 部署函数
-    getInvocations: (funcid?: string | number) =>
-      `/func-mgt/v1/${funcid}/invocations`, // 函数调用
-    PostInvocations: (funcid?: string | number) =>
-      `/func-mgt/v1/${funcid}/invocations`, // 函数调用
-    getHistoryCode: (funcid?: string | number) => `/func-mgt/func/code`, // 查询历史函数代码版本
+    getInvocations: (funcid?: string | number) => `/func-mgt/v1/${funcid}/invocations`, // 函数调用
+    PostInvocations: (funcid?: string | number) => `/func-mgt/v1/${funcid}/invocations`, // 函数调用
+    getHistoryCode: (funcid?: string | number) => `/func-mgt/func/code` // 查询历史函数代码版本
   },
 
   // 应用状态模块
@@ -141,7 +126,7 @@ export default {
     app_mem: "/ae-mnt/api/v1/ars/app_mem", // 获取应用内存
     conn: "/ae-mnt/api/v1/ars/conn", // 获取连接数
     app_conn: "/ae-mnt/api/v1/ars/app_conn", // 获取应用连接数
-    getAppLog: `/ae-mnt/api/v1/ars/app_log`, // 获取应用运行日志
+    getAppLog: `/ae-mnt/api/v1/ars/app_log` // 获取应用运行日志
   },
 
   cmp: {
@@ -149,8 +134,7 @@ export default {
     base: {
       list: "/ce-service/base/list", // 列出所有云商
       region: "/ce-service/base/region", // 查询产品可用区(分页)
-      regionByProduct: (productCode?: string | number) =>
-        `/ce-service/base/${productCode}/region`, // 查询产品可用区
+      regionByProduct: (productCode?: string | number) => `/ce-service/base/${productCode}/region` // 查询产品可用区
     },
 
     // 账户
@@ -158,7 +142,7 @@ export default {
       getAcct: "/ce-service/cmp/acct", // 获取账户信息
       postAcct: "/ce-service/cmp/acct", // 导入账号信息
       updateAcct: "/ce-service/cmp/acct/update", // 导入账号信息
-      listAcct: "/ce-service/cmp/acct/list", // 列出托管的账户
+      listAcct: "/ce-service/cmp/acct/list" // 列出托管的账户
     },
     // 费用
     expenses: {
@@ -189,7 +173,7 @@ export default {
 
       // 产品优化
       getAllacct: "/cfm-service/acct/list/qry", // 获取所有云商账号
-      getEcsList: "/cfm-service/acct/resource/ecs", // 获取ecs列表
+      getEcsList: "/cfm-service/acct/resource/ecs" // 获取ecs列表
     },
     // 成本优化 base & deep
     cost: {
@@ -198,17 +182,13 @@ export default {
       getStrategies: "/cfm-service/cost/optimization/strategies", // 获取优化策略集合
       postSubmitTask: "/cfm-service/cost/optimization/submitTask", // 提交优化策略任务
       getReports: "/cfm-service/cost/optimization/report", // 获取优化策略报告列表
-      getReport: (id) => `/cfm-service/cost/optimization/report/${id}`, // 获取优化策略报告
-      getReportStatus: (id) =>
-        `/cfm-service/cost/optimization/report/${id}/status`, // 获取优化策略报告状态
-      postCancelReport: (id) =>
-        `/cfm-service/cost/optimization/report/${id}/cancel`, // 取消正在执行的优化
-      deleteReport: (id) => `/cfm-service/cost/optimization/report/${id}`, // 删除指定的优化策略报告
-      postReportcb: (id) =>
-        `/cfm-service/cost/optimization/report/${id}/file_callback`, // 优化报告文件生成回调
-      getReportDetail: (id) =>
-        `/cfm-service/cost/optimization/report/${id}/detail`, // 获取优化策略报告详情
-      getReportNode: (id) => `/cfm-service/cost/optimization/reportNode/${id}`, // 获取优化策略报告节点结果
+      getReport: id => `/cfm-service/cost/optimization/report/${id}`, // 获取优化策略报告
+      getReportStatus: id => `/cfm-service/cost/optimization/report/${id}/status`, // 获取优化策略报告状态
+      postCancelReport: id => `/cfm-service/cost/optimization/report/${id}/cancel`, // 取消正在执行的优化
+      deleteReport: id => `/cfm-service/cost/optimization/report/${id}`, // 删除指定的优化策略报告
+      postReportcb: id => `/cfm-service/cost/optimization/report/${id}/file_callback`, // 优化报告文件生成回调
+      getReportDetail: id => `/cfm-service/cost/optimization/report/${id}/detail`, // 获取优化策略报告详情
+      getReportNode: id => `/cfm-service/cost/optimization/reportNode/${id}` // 获取优化策略报告节点结果
     },
     // 比价
     constOp: {
@@ -228,7 +208,7 @@ export default {
       getBaseGradeComputed: "/cfm-service/cost/optimization/computeScore", // 计算分数
       // 优化概览
 
-      getCostByCloud: "/cfm-service/expense/bill/monthly/cost/stat", // 根据云商查询费用汇总 /
+      getCostByCloud: "/cfm-service/expense/bill/monthly/cost/stat" // 根据云商查询费用汇总 /
     },
     // 集群
     cluster: {
@@ -260,15 +240,14 @@ export default {
         clusters: "/ce-service/cmp/cluster/platform/clusters", // 查询平台维护的集群信息
         userClusters: "/ce-service/cmp/cluster/mgt/list", // 查询用户集群列表
         clusters_info: "/ce-service/cmp/cluster/platform/clusters/info", // 查询云商集群信息
-        clusters_kubeconfig:
-          "/ce-service/cmp/cluster/platform/clusters/kubeconfig", // 查询集群信息kubeconfig
-        clusters_logs: "/ce-service/cmp/cluster/platform/clusters/logs", // 查询云商集群日志
-      },
+        clusters_kubeconfig: "/ce-service/cmp/cluster/platform/clusters/kubeconfig", // 查询集群信息kubeconfig
+        clusters_logs: "/ce-service/cmp/cluster/platform/clusters/logs" // 查询云商集群日志
+      }
     },
 
     // 场景
     scene: {
-      list: "/ce-service/cmp/scene/list", // 场景列表
+      list: "/ce-service/cmp/scene/list" // 场景列表
     },
 
     // 镜像
@@ -276,7 +255,7 @@ export default {
       instance: "/ce-service/cmp/acr/instance", // 获取镜像实例
       instance_list: "/ce-service/cmp/acr/instance/list", // 获取镜像实例列表
       repo: "/ce-service/cmp/acr/repo", // 仓库操作
-      repos_list: "/ce-service/cmp/acr/repos/list", // 获取镜像实例仓库列表
+      repos_list: "/ce-service/cmp/acr/repos/list" // 获取镜像实例仓库列表
     },
 
     // dns
@@ -285,8 +264,8 @@ export default {
       delRR: "/ce-service/cmp/dns/rr", // 删除RR记录
       listDns: "/ce-service/cmp/dns/list", // 查询用户DNS
       listRR: "/ce-service/cmp/dns/rr/list", // 查询用户DNS
-      sync: "/ce-service/cmp/dns/sync", // 同步
-    },
+      sync: "/ce-service/cmp/dns/sync" // 同步
+    }
   },
 
   // 通知管理
@@ -296,14 +275,14 @@ export default {
       delete: "/notification-service/api/message/delete", // 删除消息
       get: "/notification-service/api/message/getByID", // 获取消息
       update: "/notification-service/api/message/update", // 获取消息
-      total: "/notification-service/api/message/total", // 获取消息
+      total: "/notification-service/api/message/total" // 获取消息
     },
     mail_tmp: {
       add: "/notification-service/api/mailtmp/add", // 添加模版
       list: "/notification-service/api/mailtmp/list", // 获取模版列表
       delete: "/notification-service/api/mailtmp/delete", // 删除模版
       get: "/notification-service/api/mailtmp/get", // 获取模版
-      update: "/notification-service/api/mailtmp/update", // 获取模版
+      update: "/notification-service/api/mailtmp/update" // 获取模版
     },
 
     message_tmp: {
@@ -312,24 +291,25 @@ export default {
       list: "/notification-service/api/messagetmp/list", // 获取模版列表
       delete: "/notification-service/api/messagetmp/delete", // 删除模版
       get: "/notification-service/api/messagetmp/get", // 获取模版
-      update: "/notification-service/api/messagetmp/update", // 获取模版
+      update: "/notification-service/api/messagetmp/update" // 获取模版
     },
 
     sms_tmp: {
-      add: "/notification-service/api/smstmp/add",        // 添加模版
-      list: "/notification-service/api/smstmp/list",      // 获取模版列表
-      delete: "/notification-service/api/smstmp/delete",      // 删除模版
-      get: "/notification-service/api/smstmp/query",      // 获取模版
-      update: "/notification-service/api/smstmp/modify",      // 获取模版
-      updateType: "/notification-service/api/smstmp/modifyType",      // 获取模版
-    },
+      add: "/notification-service/api/smstmp/add", // 添加模版
+      list: "/notification-service/api/smstmp/list", // 获取模版列表
+      delete: "/notification-service/api/smstmp/delete", // 删除模版
+      get: "/notification-service/api/smstmp/query", // 获取模版
+      update: "/notification-service/api/smstmp/modify", // 获取模版
+      updateType: "/notification-service/api/smstmp/modifyType" // 获取模版
+    }
   },
-
 
   // platform user模块
   platformUser: {
-    list: "/user-service/api/manage/platform/user",  // 获取租户列表
-    update: "/user-service/api/manage/platform/user",  // 更新租户
+    list: "/user-service/api/manage/platform/user", // 获取租户列表
+    update: "/user-service/api/manage/platform/user", // 更新租户
     add: "/user-service/api/manage/platform/user", // 新增租户
-  },
+    acceptRegister: "/user-service/api/manage/platform/user/acceptRegister", // 接收租户注册
+    rejectRegister: "/user-service/api/manage/platform/user/rejectRegister" // 拒绝租户注册
+  }
 };

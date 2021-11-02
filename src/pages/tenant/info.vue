@@ -37,14 +37,6 @@
       </div>
     </div>
 
-    <div class="flex_r_s mt10" v-if="item.status == api.platformUser.TenantStatus.审批拒绝">
-      <div style="width: 20%"></div>
-      <div style="width: 15%">拒绝理由</div>
-      <div style="width: 50%">
-        <ui-input type="textarea" maxlength="1000" rows="5" placeholder="拒绝理由将通过邮件发送给用户" v-model="rejectReason"></ui-input>
-      </div>
-    </div>
-
     <div class="line1" />
 
     <div class="flex_r_s mt10">
@@ -154,14 +146,14 @@ export default class extends Vue {
   item: any = {};
   rejectReason: string = null;
   list_status = [
-    {
-      label: '审批拒绝',
-      value: api.platformUser.TenantStatus.审批拒绝
-    },
-    {
-      label: '待审批',
-      value: api.platformUser.TenantStatus.待审批
-    },
+    // {
+    //   label: '审批拒绝',
+    //   value: api.platformUser.TenantStatus.审批拒绝
+    // },
+    // {
+    //   label: '待审批',
+    //   value: api.platformUser.TenantStatus.待审批
+    // },
     {
       label: '启用',
       value: api.platformUser.TenantStatus.启用
@@ -225,16 +217,6 @@ export default class extends Vue {
     if (!this.isEdit) {
       this.isEdit = true;
     } else {
-
-      // 拒绝状态.
-      if (this.item.status !== this.oldStatus && this.item.status == api.platformUser.TenantStatus.审批拒绝) {
-        if (!this.rejectReason) {
-          $UIAlert("未设置拒绝通过审核理由").then(() => {
-          });
-          return;
-        }
-      }
-
       api.platformUser.updateTenant(this.id, this.item).then(() => {
         $UIAlert('修改成功');
         this.isEdit = false;

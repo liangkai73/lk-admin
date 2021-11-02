@@ -21,11 +21,11 @@
             <ui-th width="200px">Company</ui-th>
             <ui-th width="140px">Email</ui-th>
             <ui-th width="140px">Country/Area</ui-th>
-            <ui-th width="140px">Contact People</ui-th>
             <ui-th>Contact Tel</ui-th>
+            <ui-th width="140px">Contact People</ui-th>
             <ui-th width="120px">Status</ui-th>
             <ui-th width="140px">Create DateTime</ui-th>
-            <ui-th width="60px"></ui-th>
+            <ui-th width="150px"></ui-th>
           </ui-tr>
         </ui-thead>
         <template v-if="list_templates.length > 0">
@@ -43,10 +43,10 @@
               {{ item.countryId | filterContries}}
             </ui-td>
             <ui-td>
-              {{ item.contactName }}
+              {{ item.contactPhone }}
             </ui-td>
             <ui-td>
-              {{ item.contactPhone }}
+              {{ item.contactName }}
             </ui-td>
             <ui-td class="f12">
               <code v-if="item.status">{{ item.status }}</code>
@@ -55,7 +55,8 @@
               {{ item.createTime }}
             </ui-td>
             <ui-td>
-              <ui-button small @click.stop="handleView(item)">{{$i18n('查看')}}</ui-button>
+              <ui-button plain warning small @click.stop="handleRejectDialog(item)">{{$i18n('拒绝注册')}}</ui-button>
+              <ui-button small @click.stop="handleAcceptDialog(item)">{{$i18n('通过注册')}}</ui-button>
               <!-- <ui-button small warning plain @click.stop="handleDel(item)">删除</ui-button> -->
             </ui-td>
           </ui-tr>
@@ -67,6 +68,16 @@
       </template>
       <ui-no-records v-show="list_templates.length == 0" />
     </div>
+
+    <!-- 拒绝 -->
+    <ui-dialog title="拒绝用户申请" :visible.sync="visibleReject">
+      <p class="mb10 flex_r_s">拒绝通过 ({{rejectItem?rejectItem.companyName:''}}) 注册申请</p>
+      <ui-input type="textarea" maxlength="1000" rows="5" placeholder="拒绝理由将通过邮件发送给用户" v-model="rejectReason"></ui-input>
+      <div slot="foot">
+        <ui-button primary @click="handleReject(rejectItem)">Ok</ui-button>
+      </div>
+    </ui-dialog>
+
   </content-view>
 </template>
 
@@ -88,6 +99,9 @@
     },
   })
   export default class extends Vue {
+    visibleReject = false;
+    rejectReason = null;
+    rejectItem = null;
     search = "";
     page = 1;
     limit = 10;
@@ -124,12 +138,51 @@
     }
 
     /**
+     * @desc 拒绝通过
+     */
+    handleReject(item: any) {
+      if ($Febs.string.isEmpty(this.rejectReason)) {
+        $UIToast("拒绝理由不能空");
+        return;
+      }
+
+      $UIConfirm("确认发送拒绝通知给用户?")
+      .then(()=>{
+        $UIConfirmHide();
+        api.platformUser.rejectRegister({
+          userId: item.userId,
+          reason: this.rejectReason,
+        })
+        .then(()=>{
+          $UIAlert('已发送拒绝邮件给用户');
+          this.visibleReject = false;
+          this.getList();
+        });
+      });
+    }
+
+    /**
+     * @desc 拒绝通过
+     */
+    handleRejectDialog(item: any) {
+      this.rejectItem = item;
+      this.visibleReject = true;
+    }
+
+    /**
     * @desc: 查看
     */
-    handleView(item: any) {
-      let url = "/tenant/info?id=" + item.userId;
-      this.$navbar.push({
-        path: url,
+    handleAcceptDialog(item: any) {
+      $UIConfirm("确认通过用户注册? 将会发送注册激活邮件给用户")
+      .then(()=>{
+        $UIConfirmHide();
+        api.platformUser.acceptRegister({
+          userId: item.userId,
+        })
+        .then(()=>{
+          $UIAlert('已发送激活邮件给用户');
+          this.getList();
+        });
       });
     }
   }

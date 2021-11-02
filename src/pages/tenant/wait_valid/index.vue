@@ -21,8 +21,8 @@
             <ui-th width="200px">Company</ui-th>
             <ui-th width="140px">Email</ui-th>
             <ui-th width="140px">Country/Area</ui-th>
-            <ui-th width="140px">Contact People</ui-th>
             <ui-th>Contact Tel</ui-th>
+            <ui-th width="140px">Contact People</ui-th>
             <ui-th width="120px">Status</ui-th>
             <ui-th width="140px">Create DateTime</ui-th>
             <ui-th width="60px"></ui-th>
@@ -43,10 +43,10 @@
               {{ item.countryId | filterContries}}
             </ui-td>
             <ui-td>
-              {{ item.contactName }}
+              {{ item.contactPhone }}
             </ui-td>
             <ui-td>
-              {{ item.contactPhone }}
+              {{ item.contactName }}
             </ui-td>
             <ui-td class="f12">
               <code v-if="item.status">{{ item.status }}</code>

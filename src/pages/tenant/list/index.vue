@@ -23,6 +23,7 @@
             <ui-th width="250px">id</ui-th>
             <ui-th width="200px">Company</ui-th>
             <ui-th width="140px">Account</ui-th>
+            <ui-th width="140px">Country/Area</ui-th>
             <ui-th>Telephone</ui-th>
             <ui-th width="120px">Status</ui-th>
             <ui-th width="140px">Create DateTime</ui-th>
@@ -39,6 +40,9 @@
             </ui-td>
             <ui-td>
               {{ item.userName }}
+            </ui-td>
+            <ui-td>
+              {{ item.countryId | filterContries}}
             </ui-td>
             <ui-td>
               {{ item.telephone }}

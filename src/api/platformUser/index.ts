@@ -19,7 +19,7 @@ enum TenantStatus {
   待审批 = 2,
   启用 = 1,
   禁用 = 0,
-  删除 = -1,
+  删除 = -1
 }
 
 export default {
@@ -27,6 +27,8 @@ export default {
   listTenant,
   updateTenant,
   addTenant,
+  acceptRegister,
+  rejectRegister
 };
 
 // 获取租户列表
@@ -70,23 +72,21 @@ function updateTenant(
     business: string; // 业务
     status: TenantStatus;
   }
-): Promise<
-  {
-    userId: string;
-    userName: string;
-    telephone: string;
-    email: string;
-    companyName: string;
-    companyEmail: string;
-    contactName: string;
-    contactPhone: string;
-    industry: string; // 行业
-    business: string; // 业务
-    status: string;
-    createBy: string;
-    createTime: string;
-  }
-  > {
+): Promise<{
+  userId: string;
+  userName: string;
+  telephone: string;
+  email: string;
+  companyName: string;
+  companyEmail: string;
+  contactName: string;
+  contactPhone: string;
+  industry: string; // 行业
+  business: string; // 业务
+  status: string;
+  createBy: string;
+  createTime: string;
+}> {
   const p = {
     userId: userId,
     companyName: params.companyName,
@@ -95,26 +95,40 @@ function updateTenant(
     contactPhone: params.contactPhone,
     industry: params.industry,
     business: params.business,
-    status: params.status,
+    status: params.status
   };
-  return $UINetwork.put(api.platformUser.update + '/' + userId, p);
+  return $UINetwork.put(api.platformUser.update + "/" + userId, p);
 }
 
-
 // 添加租户信息
-function addTenant(
-  params: {
-    userName: string;
-    telephone?: string;
-    email?: string;
-    password: string;
-  }
-): Promise<boolean> {
+function addTenant(params: {
+  userName: string;
+  telephone?: string;
+  email?: string;
+  password: string;
+}): Promise<boolean> {
   const p = {
     userName: params.userName,
     telephone: params.telephone,
     email: params.email,
-    password: params.password,
+    password: params.password
   };
   return $UINetwork.post(api.platformUser.add, p);
+}
+
+// 接受租户注册信息
+function acceptRegister(params: { userId: string }): Promise<boolean> {
+  const p = {
+    userId: params.userId
+  };
+  return $UINetwork.post(api.platformUser.acceptRegister, p);
+}
+
+// 拒绝租户注册信息
+function rejectRegister(params: { userId: string; reason: string }): Promise<boolean> {
+  const p = {
+    userId: params.userId,
+    reason: params.reason
+  };
+  return $UINetwork.post(api.platformUser.rejectRegister, p);
 }

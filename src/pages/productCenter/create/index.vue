@@ -618,6 +618,10 @@ export default class extends Vue {
 </script>
 
 <style lang='scss'>
+.faas-content{
+  max-height: calc(100vh - 50px);
+  min-height: 0px !important
+}
 .app-create {
   // input reset
   .el-input__inner {

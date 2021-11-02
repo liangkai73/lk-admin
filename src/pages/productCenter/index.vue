@@ -491,7 +491,7 @@ export default class extends Vue {
   // 过滤关键字
   // 过滤list
   filterResource(obj: any) {
-    if (obj.name.indexOf(this.filterStr) >= 0) {
+    if (obj.name?.indexOf(this.filterStr) >= 0) {
       return true;
     }
     return false;

@@ -11,7 +11,7 @@ import user from "../user";
 
 function tmpToken() {
   return $UINetwork
-    .get(api.token, {})
+    .get(api.token, { maxAge: 60 * 60 })
     .then((res: any) => {
       return res;
     })
@@ -72,5 +72,5 @@ export default {
   postLogin,
   register,
   isLogin,
-  postLogout,
+  postLogout
 };

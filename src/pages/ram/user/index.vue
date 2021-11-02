@@ -44,7 +44,7 @@
                       <!-- <div class="userItem-head-img">
                         <img :src="avatarImg" alt="" />
                       </div> -->
-                      <uiAvatar :id="item.userId" :name="item.username"></uiAvatar>
+                      <uiAvatar :id="item.userId" :name="item.username || item.email"></uiAvatar>
                       <span class="userItem-head-name"
                         style="padding-left: 20px">{{ item.username }}</span>
                       <!-- <span class="user-tip flex_r_c">子账号</span> -->

@@ -74,14 +74,14 @@
       <li v-show="false" class="navbar-account-li">{{ $i18n('layouts.components.navbar.费用') }}</li>
       <!-- userinfo -->
       <li class="navbar-account-li">
-        <uiAvatar v-show="userInfo.username" :name="userInfo.username" :id="userInfo.userId" :size="32"></uiAvatar>
+        <uiAvatar v-show="userInfo.username || userInfo.email" :name="userInfo.username || userInfo.email" :id="userInfo.userId" :size="32"></uiAvatar>
         <ui-popover trigger="hover">
-          <ui-popover-cell @click.native="linkTo('/userCenter/info')"  v-if="userInfo.username">
+          <ui-popover-cell @click.native="linkTo('/userCenter/info')"  v-if="userInfo.username || userInfo.email">
             <div class="user-info-head cur_P flex_r_c">
-              <uiAvatar class="ueser-info-img flex_c_c" :name="userInfo.username"
+              <uiAvatar class="ueser-info-img flex_c_c" :name="userInfo.username || userInfo.email"
                 :id="userInfo.userId" :size="32" style="margin-left:-5px;"></uiAvatar>
               <div class="flex1 flex_c_c ueser-info-name" style="margin-left:5px;">
-                <span>{{ userInfo.username }}</span>
+                <span>{{ userInfo.username || userInfo.email }}</span>
                 <!-- <span>{{ $i18n('layouts.components.navbar.(未实名)') }}</span> -->
               </div>
             </div>
@@ -539,6 +539,7 @@
           height: 40px;
           width: 40px;
           margin-right: 10px;
+          flex-shrink: 0;
 
           img {
             width: 100%;

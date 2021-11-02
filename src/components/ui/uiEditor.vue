@@ -23,7 +23,7 @@
 <script lang="ts">
 import * as monaco from "monaco-editor/esm/vs/editor/editor.api.js";
 import "monaco-editor/esm/vs/basic-languages/javascript/javascript.contribution";
-// import "monaco-editor/esm/vs/language/json/monaco.contribution.js";
+import "monaco-editor/esm/vs/language/html/monaco.contribution.js";
 import "monaco-editor/esm/vs/editor/editor.main.js";
 import {
   Component,
@@ -54,11 +54,11 @@ export default class extends Vue {
   monacoInstance: any = null;
   style = {};
 
-  language = "javascript";
   //
   // Prop
   @Prop({ type: Boolean, default: false }) async!: boolean;
   @Prop({ type: String, default: "hello world!" }) value!: string;
+  @Prop({ type: String, default: "javascript" }) language: string;
 
   //
   // data.
@@ -94,7 +94,8 @@ export default class extends Vue {
     let el: any = this.$el;
     this.monacoInstance = monaco.editor.create(el, {
       value: this.value,
-      language: "json",
+      language: this.language,
+      automaticLayout: false
     });
     return Promise.resolve(this.monacoInstance);
   }
@@ -118,10 +119,21 @@ export default class extends Vue {
   }
 
   mounted() {
-    console.log(this.$props);
     // window.temVm = this;
     // this.initData({});
+
     this.createInstance().then((result: any) => {
+      this.monacoInstance.updateOptions({
+      wordWrap: 'on',
+      // wordWrap: 'wordWrapColumn',
+      // wordWrapColumn: 80,
+      wrappingIndent: 'indent',
+      scrollbar: {
+        horizontalHasArrows: false,
+        horizontal: 'hidden',
+      },
+      // mouseWheelZoom: true,
+    });
       this.monacoInstance.onDidChangeModelContent((event: any) => {
         this.relVal = this.getValue();
       });

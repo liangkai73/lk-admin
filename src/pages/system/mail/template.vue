@@ -16,6 +16,7 @@
   >
     <div class="bar flex_r_s" slot="titleRight">
       <ui-button primary @click="handleSave">保存</ui-button>
+      <ui-button primary @click="showOrigin=!showOrigin">显示源码</ui-button>
     </div>
 
     <div>
@@ -26,7 +27,8 @@
     </div>
 
     <div class="flex_l_t region" style="width: 100%">
-      <div style="width: 100%" class="card">
+      <uiEditor v-model="tmp_content" v-if="showOrigin" language="html"></uiEditor>
+      <div style="width: 100%" class="card" v-show="!showOrigin">
         <div id="editor_menu"></div>
         <div id="editor" class="edit"></div>
       </div>
@@ -52,10 +54,11 @@ import {
   // Provide,
   // Emit,
 } from "vue-property-decorator";
+import uiEditor from "@/components/ui/uiEditor.vue";
 
 import Editor from "wangeditor";
 @Component({
-  components: { contentView },
+  components: { contentView, uiEditor },
 })
 export default class extends Vue {
   //
@@ -66,7 +69,7 @@ export default class extends Vue {
   tmp_content = "";
   tmp_subject = "";
   tmp_type = "";
-
+  showOrigin:boolean = false
   //
   // lifecycle hook.
   constructor() {

@@ -2,11 +2,13 @@
  * @Author: lanck.xie
  * @Date: 2020-09-14 14:50:18
  * @Last Modified by: lanck.xie
- * @Last Modified time: 2021-06-13 18:09:00
+ * @Last Modified time: 2021-10-25 02:14:28
  * desc:api for cam/user & cam/userGroup
  */
 
 import api from "@/api/config-api";
+import config from "@/api/config";
+import func from "../func";
 
 export default {
   getRamUser,
@@ -18,9 +20,9 @@ export default {
   PutUserInfoNow,
   editUserInfo,
   getRequestCode,
-  getVerifyCode,
   postResetPwd,
   postVerifyCode,
+  getVerifyCode,
   getUserInfo,
   getUserList,
   postUser,
@@ -40,8 +42,14 @@ export default {
   removeGroup_users,
   getGroup_permissions,
   postGroup_permissions,
-  removeGroup_permissions,
+  removeGroup_permissions
 };
+
+// 获取图形验证码
+function getVerifyCode() {
+  return $UINetwork.get(api.user.getVerifyCode, {});
+}
+
 // 查询ram用户
 function getRamUser(limitParams?: Ram.limit) {
   const Params = limitParams || {};
@@ -61,7 +69,7 @@ function putRamUser(userId: number | string, params: Ram.ramUserItem) {
 
 function deleteRamUser(arr: any[]) {
   const params = {
-    userIdArray: arr,
+    userIdArray: arr
   };
   // return $UINetwork.delete(api.user.deleteRamUser, params);
 }
@@ -107,25 +115,20 @@ function editUserInfo(userId: any, params: any) {
 
 /**
  * 不传递, target与code时, 则发送短信至自身手机
- * @returns 
+ * @returns
  */
 function getRequestCode(params: {
-  sendType: 'EMAIL' | 'PHONE',
-  sendScene: 'REGISTER_CN' | 'REGISTER_EN' | 'RESET_PWD_CN' | 'RESET_PWD_EN',
-  target?: string,
-  code?: string, // 图形验证码.
+  sendType: "EMAIL" | "PHONE";
+  sendScene: "REGISTER_CN" | "REGISTER_EN" | "RESET_PWD_CN" | "RESET_PWD_EN";
+  target?: string;
+  code?: string; // 图形验证码.
 }) {
   return $UINetwork.get(api.user.getRequestCode, {
     sendType: params.sendType,
     sendScene: params.sendScene,
     target: params.target,
-    code: params.code,
+    code: params.code
   });
-}
-
-// 获取图形验证码
-function getVerifyCode() {
-  return $UINetwork.get(api.user.getVerifyCode, {});
 }
 
 interface verifyCode {
@@ -162,7 +165,7 @@ function postUser(params: any) {
 function deleteUser(arr: any[]) {
   const str = arr.join();
   const params = {
-    ids: str,
+    ids: str
   };
 
   return $UINetwork.delete(api.user.deleteUser, params);
@@ -185,7 +188,7 @@ function addUserGroup(params: any) {
 function removeUserGroup(arr: any[]) {
   const str = arr.join();
   const params = {
-    ids: str,
+    ids: str
   };
   return $UINetwork.delete(api.user.deleteUserGroup, params);
 }

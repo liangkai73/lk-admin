@@ -91,7 +91,7 @@
           :key="'k1' + index"
           :id="item.userId"
           class="cur_P"
-          :name="item.username"
+          :name="item.username || item.email"
           @click.native="linkTo('detail', { id: item.userId })"
         ></uiAvatar>
         <span class="flex1" :key="'k2' + index"></span>

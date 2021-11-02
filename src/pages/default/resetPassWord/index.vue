@@ -51,16 +51,13 @@
         }
 
         .bp-input {
-          border-color: #f4f4f4;
+          // border-color: #f4f4f4;
           background-color: #f4f4f4;
           &.bp-input__focus {
             border-color: #07f;
           }
           /deep/ .bp-input__inner {
             background-color: #f4f4f4;
-          }
-          &.bp-input__warn {
-            border-color: #FA5151;
           }
         }
 
@@ -172,14 +169,14 @@
         <div class="mt20 flex_r_c">
           <img src="../../../assets/logo@3x.png" style="width: 240px;" />
         </div>
-        <p class="resetpw-title mt20">重置密码</p>
+        <p class="resetpw-title mt20">{{$i18n('resetPassWord.index.重置密码')}}</p>
         <div v-show="viewType == 1">
           <ui-row class="inner-row mt40">
             <!-- <ui-col :span="24">
               <div class="inputTitle">手机号</div>
             </ui-col> -->
             <ui-col :span="24">
-              <ui-input ref="inputTarget" style="width:100%" large placeholder="手机号" type="tel" v-model="resetParams.target"></ui-input>
+              <ui-input ref="inputTarget" style="width:100%" large :placeholder="$i18n('resetPassWord.index.手机号/邮箱')" v-model="resetParams.target"></ui-input>
             </ui-col>
           </ui-row>
 
@@ -188,7 +185,7 @@
               <div class="inputTitle">短信验证码</div>
             </ui-col> -->
             <ui-col :span="16">
-              <ui-input ref="inputVerifyCode" large placeholder="图形验证码" type="text" v-model="resetParams.code"></ui-input>
+              <ui-input ref="inputVerifyCode" large :placeholder="$i18n('resetPassWord.index.图形验证码')" type="text" v-model="resetParams.code"></ui-input>
             </ui-col>
             <ui-col :offset="0.5" :span="7.5">
               <ui-button large info @click="getImageCode" class="image_code" style="padding: 0">
@@ -202,11 +199,11 @@
               <div class="inputTitle">短信验证码</div>
             </ui-col> -->
             <ui-col :span="16">
-              <ui-input large placeholder="短信验证码" type="text" v-model="resetParams.checkCode"></ui-input>
+              <ui-input large :placeholder="$i18n('resetPassWord.index.验证码')" type="text" v-model="resetParams.checkCode"></ui-input>
             </ui-col>
             <ui-col :offset="0.5" :span="7.5">
               <ui-button large info @click="getPhoneCode" class="phone_code" style="padding: 0" :disabled="codeHide">
-                <template v-if="!codeHide">获取验证码</template>
+                <template v-if="!codeHide">{{$i18n('resetPassWord.index.获取验证码')}}</template>
                 <template v-else>{{ limitTime + ' s' }}</template>
               </ui-button>
             </ui-col>
@@ -220,7 +217,7 @@
           <ui-row class="inner-row mt20">
             <ui-col :span="24">
               <ui-button large primary ref="btn1" class="next-btn" @click="stepTo('setpw')">
-                下一步
+                {{$i18n('resetPassWord.index.下一步')}}
               </ui-button>
             </ui-col>
           </ui-row>
@@ -229,7 +226,7 @@
               <div class="splitLine"></div>
             </ui-col>
           </ui-row>
-          <ui-button info class="mt10 next-btn" @click="linkToLogin">返回登录</ui-button>
+          <ui-button info class="mt10 next-btn" @click="linkToLogin">{{$i18n('resetPassWord.index.返回登录')}}</ui-button>
         </div>
         <template v-if="viewType == 2">
           <ui-row class="inner-row mt40">
@@ -237,17 +234,17 @@
               <div class="inputTitle">新密码</div>
             </ui-col> -->
             <ui-col :span="24">
-              <ui-input placeholder="新密码" :type="eyeOpen?'text':'password'"
+              <ui-input large :placeholder="$i18n('resetPassWord.index.新密码')" :type="eyeOpen?'text':'password'"
                 :suffixIcon="eyeOpen?'openEye':'closeEye'" @click-icon="eyeOpen=!eyeOpen"
                 v-model="resetParams.password"></ui-input>
             </ui-col>
           </ui-row>
-          <ui-row class="inner-row mt20">
+          <ui-row class="inner-row mt5">
             <!-- <ui-col :span="24">
               <div class="inputTitle">确认密码</div>
             </ui-col> -->
             <ui-col :span="24">
-              <ui-input placeholder="确认密码" :type="eyeOpen?'text':'password'"
+              <ui-input large :placeholder="$i18n('resetPassWord.index.确认密码')" :type="eyeOpen?'text':'password'"
                 :suffixIcon="eyeOpen?'openEye':'closeEye'" @click-icon="eyeOpen=!eyeOpen"
                 v-model="resetParams.password2"></ui-input>
             </ui-col>
@@ -263,7 +260,7 @@
               <ui-button primary ref="btn1" class="next-btn" @click="stepTo('success')"
                 :disabled="
                 resetParams.password.length == 0 ||
-                resetParams.password2.length == 0">完成</ui-button>
+                resetParams.password2.length == 0">{{$i18n('resetPassWord.index.完成')}}</ui-button>
             </ui-col>
           </ui-row>
           <ui-row class="inner-row mt5">
@@ -271,7 +268,7 @@
               <div class="splitLine"></div>
             </ui-col>
           </ui-row>
-          <ui-button info class="mt10" @click="linkToLogin">返回登录</ui-button>
+          <ui-button info class="mt10 next-btn" @click="linkToLogin">{{$i18n('resetPassWord.index.返回登录')}}</ui-button>
         </template>
       </div>
       <!-- step3 -->
@@ -279,16 +276,16 @@
         <p class="mt40"></p>
         <ui-icon class="icon_bg mt40" name="checked"></ui-icon>
 
-        <p class="success_p mt20">重置成功！</p>
+        <p class="success_p mt20">{{$i18n('resetPassWord.index.重置成功！')}}</p>
         <p class="tip_p mt20">
           <span style="color: #0077ff">{{ limitTime2 }} </span>
-          后自动跳转登录页
+          {{$i18n('resetPassWord.index.后自动跳转登录页')}}
         </p>
         <p class="mt40"></p>
         <ui-row class="inner-row mt40">
           <ui-col :span="24">
             <ui-button primary ref="btn1" class="next-btn" @click="linkToLogin">
-              立即登录
+              {{$i18n('resetPassWord.index.立即登录')}}
             </ui-button>
           </ui-col>
         </ui-row>
@@ -303,7 +300,8 @@
     Vue,
   } from "vue-property-decorator";
   import api from "@/api";
-import _token from '@/api/_token';
+  import _token from '@/api/_token';
+  import {regex} from '@/libs/regex';
 
   @Component({
     components: {
@@ -311,7 +309,6 @@ import _token from '@/api/_token';
     name: 'resetPwd'
   })
   export default class extends Vue {
-
     verifyCode = "";
     viewType = 1;
     eyeOpen: boolean = false
@@ -343,10 +340,10 @@ import _token from '@/api/_token';
     }
 
     getTempToken() {
-      api.login.tmpToken().then(res=>{
+      api.login.tmpToken().then(res => {
         _token.setTempToken(res);
       })
-      .then(res=>{
+      .then(res => {
         this.getImageCode();
       })
     }
@@ -354,7 +351,7 @@ import _token from '@/api/_token';
     getImageCode() {
       api.user.getVerifyCode().then((result: any) => {
         if (!result) {
-          $UIToast('请稍后重试');
+          $UIToast($i18n('resetPassWord.index.请稍后重试'));
           return;
         }
         this.verifyCode = result;
@@ -362,22 +359,26 @@ import _token from '@/api/_token';
     }
 
     getPhoneCode() {
-      if (!$Febs.string.isPhoneMobile(this.resetParams.target)) {
+      if (!regex.digit.test(this.resetParams.target)
+      && !$Febs.string.isEmail(this.resetParams.target)) {
         (this.$refs.inputTarget as any).markError();
         return;
       }
-      if ($Febs.string.isEmpty(this.resetParams.code)) {
-        (this.$refs.inputVerifyCode as any).markError();
-        return;
-      }
 
-      let params = $Febs.utils.mergeMap(this.resetParams);
-      // TODO: 默认为中国.
-      params.target = '086' + params.target;
+      let target = this.resetParams.target;
 
-      api.user.getRequestCode(params).then((result: any) => {
+      let param = {
+        sendType: $Febs.string.isEmail(target) ? 'EMAIL' : 'PHONE',
+        sendScene: $Febs.string.isEmail(target)
+                ? ($UILibs.lang.indexOf('zh') >= 0 ? 'RESET_PWD_CN' : 'RESET_PWD_EN')
+                : (target.indexOf('0') == 0 ? ( target.indexOf('086') == 0 ? 'RESET_PWD_CN' : 'RESET_PWD_EN' ) : 'RESET_PWD_CN' ),
+        target,
+        code: this.resetParams.code,
+      };
+
+      api.user.getRequestCode(param as any).then((result: any) => {
         if (!result) {
-          $UIToast('发送失败');
+          $UIToast($i18n('resetPassWord.index.发送失败'));
           return;
         }
 
@@ -397,32 +398,40 @@ import _token from '@/api/_token';
         } */
         api.user
           .postVerifyCode({
+            username: "1",
             checkCode: this.resetParams.checkCode
           })
           .then((result: any) => {
-            if (result.data) {
+            if (result === true) {
               this.viewType = 2;
               this.errorTxt = ''
             } else {
-              this.errorTxt = "请输入正确的验证码"
+              this.errorTxt = $i18n('resetPassWord.index.请输入正确的验证码');
             }
           }).catch((err: any) => {
-            this.errorTxt = "请输入正确的验证码"
+            this.errorTxt = $i18n('resetPassWord.index.请输入正确的验证码');
           });
       } else if (str == "success") {
         if (this.resetParams.password != this.resetParams.password2) {
-          this.errorTxt = "两次输入的密码不一致。"
+          this.errorTxt = $i18n('resetPassWord.index.两次输入的密码不一致。');
+          return;
+        } else if (this.resetParams.password.length < 8) {
+          this.errorTxt = $i18n('resetPassWord.index.密码至少8位');
           return;
         } else {
           this.errorTxt = ''
+
           let param = {
             checkCode: this.resetParams.checkCode,
             password: $Febs.crypt.sha1(this.resetParams.password),
           }
+
           api.user.postResetPwd(param).then((result: any) => {
-            this.viewType = 3;
-            this.limitTime2 = 3;
-            this._getTime2(this.limitTime2);
+            api.login.postLogout().then(() => {
+              this.viewType = 3;
+              this.limitTime2 = 3;
+              this._getTime2(this.limitTime2);
+            });
           });
         }
       }

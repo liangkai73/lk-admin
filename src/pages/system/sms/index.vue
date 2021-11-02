@@ -22,8 +22,8 @@
     </div>
 
     <uiLayoutComment>
-      <ui-icon name="ui-warning"/>目前系统内置的tag: 
-      <span class="f-italic t-underline ml10">
+      <span style="white-space: nowrap;"><ui-icon name="ui-warning"/>目前系统内置的tag: </span>
+      <span class="f-italic t-underline ml10" style="white-space: nowrap;">
         SMS_忘记密码_CN
         <ui-popover trigger="hover">
           <span>
@@ -32,7 +32,7 @@
           </span>
         </ui-popover>
       </span>
-      <span class="f-italic t-underline ml10">
+      <span class="f-italic t-underline ml10" style="white-space: nowrap;">
         SMS_忘记密码_EN
         <ui-popover trigger="hover">
           <span>
@@ -41,7 +41,7 @@
           </span>
         </ui-popover>
       </span>
-      <span class="f-italic t-underline ml10">
+      <span class="f-italic t-underline ml10" style="white-space: nowrap;">
         SMS_注册账号_CN
         <ui-popover trigger="hover">
           <span>
@@ -50,7 +50,7 @@
           </span>
         </ui-popover>
       </span>
-      <span class="f-italic t-underline ml10">
+      <span class="f-italic t-underline ml10" style="white-space: nowrap;">
         SMS_注册账号_EN
         <ui-popover trigger="hover">
           <span>

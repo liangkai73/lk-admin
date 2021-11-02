@@ -20,8 +20,8 @@
     </div>
 
     <uiLayoutComment>
-      <ui-icon name="ui-warning"/>目前系统内置的tag: 
-      <span class="f-italic t-underline ml10">
+      <span style="white-space: nowrap;"><ui-icon name="ui-warning"/>目前系统内置的tag: </span>
+      <span class="f-italic t-underline ml10" style="white-space: nowrap;">
         EMAIL_忘记密码_CN
         <ui-popover trigger="hover">
           <span>
@@ -30,7 +30,7 @@
           </span>
         </ui-popover>
       </span>
-      <span class="f-italic t-underline ml10">
+      <span class="f-italic t-underline ml10" style="white-space: nowrap;">
         EMAIL_忘记密码_EN
         <ui-popover trigger="hover">
           <span>
@@ -39,7 +39,7 @@
           </span>
         </ui-popover>
       </span>
-      <span class="f-italic t-underline ml10">
+      <span class="f-italic t-underline ml10" style="white-space: nowrap;">
         EMAIL_注册账号_CN
         <ui-popover trigger="hover">
           <span>
@@ -48,7 +48,7 @@
           </span>
         </ui-popover>
       </span>
-      <span class="f-italic t-underline ml10">
+      <span class="f-italic t-underline ml10" style="white-space: nowrap;">
         EMAIL_注册账号_EN
         <ui-popover trigger="hover">
           <span>
@@ -57,21 +57,39 @@
           </span>
         </ui-popover>
       </span>
-      <span class="f-italic t-underline ml10">
+      <span class="f-italic t-underline ml10" style="white-space: nowrap;">
         EMAIL_拒绝注册申请_CN
         <ui-popover trigger="hover">
           <span>
-            <p>中文语言状态下用户对用户拒绝注册申请时发送的邮件</p>
+            <p>中文语言状态下对用户拒绝注册申请时发送的邮件</p>
             <p>邮件参数: <code>username</code>, <code>reason</code></p>
           </span>
         </ui-popover>
       </span>
-      <span class="f-italic t-underline ml10">
+      <span class="f-italic t-underline ml10" style="white-space: nowrap;">
         EMAIL_拒绝注册申请_EN
         <ui-popover trigger="hover">
           <span>
-            <p>英文语言状态下用户对用户拒绝注册申请时发送的邮件</p>
+            <p>英文语言状态下对用户拒绝注册申请时发送的邮件</p>
             <p>邮件参数: <code>username</code>, <code>reason</code></p>
+          </span>
+        </ui-popover>
+      </span>
+      <span class="f-italic t-underline ml10" style="white-space: nowrap;">
+        EMAIL_注册成功_CN
+        <ui-popover trigger="hover">
+          <span>
+            <p>中文语言状态下管理员审核通过用户注册时发送的邮件</p>
+            <p>邮件参数: <code>username</code>, <code>email</code>, <code>password</code></p>
+          </span>
+        </ui-popover>
+      </span>
+      <span class="f-italic t-underline ml10" style="white-space: nowrap;">
+        EMAIL_注册成功_EN
+        <ui-popover trigger="hover">
+          <span>
+            <p>英文语言状态下管理员审核通过用户注册时发送的邮件</p>
+            <p>邮件参数: <code>username</code>, <code>email</code>, <code>password</code></p>
           </span>
         </ui-popover>
       </span>

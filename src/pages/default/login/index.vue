@@ -310,58 +310,6 @@
     constructor() {
       super();
     }
-    // login
-    handleLogin(type: string) {
-      let params: any;
-      // 判断登录模式
-      if (type == "pre") {
-        if (this.noPass) {
-          this.noPassClass = true;
-          this.errorTxt = "用户名或密码不能为空";
-          return;
-        } else {
-          this.noPassClass = false;
-        }
-        // todo
-        params = Object.assign({}, this.loginParams);
-      } else if (type == "child") {
-        params = {};
-        params.username =
-          this.loginChildParams.username +
-          "@" +
-          this.loginChildParams.preUsername;
-        params.password = this.loginChildParams.password;
-        let {
-          password,
-          username
-        } = params;
-        if (!(username.length && password.length)) {
-          this.noPassClass = true;
-          this.errorTxt = "用户名或密码不能为空";
-          return;
-        } else {
-          this.noPassClass = false;
-        }
-      }
-      // Login result
-      api.login
-        .postLogin(params)
-        .then((res: any) => {
-          // 存储用户信息
-          api.user.getUserInfoNow().then((res) => {
-            userInfo_store._setUserInfo(res);
-          });
-          this.$timer.setTimeout(() => {
-            this.$navbar.push({
-              path: "/console/overview",
-            });
-          }, 500);
-        })
-        .catch((err: any) => {
-          this.noPassClass = true;
-          this.errorTxt = "用户名或密码错误";
-        });
-    }
 
     mounted() {
     }
@@ -441,6 +389,7 @@
         }, 1000);
       }
     }
+    
     // 验证注册策略
     checkParams(key ? : string) {
       if (key) {
@@ -465,6 +414,60 @@
         }
       }
     }
+
+    // login
+    handleLogin(type: string) {
+      let params: any;
+      // 判断登录模式
+      if (type == "pre") {
+        if (this.noPass) {
+          this.noPassClass = true;
+          this.errorTxt = "用户名或密码不能为空";
+          return;
+        } else {
+          this.noPassClass = false;
+        }
+        // todo
+        params = Object.assign({}, this.loginParams);
+      } else if (type == "child") {
+        params = {};
+        params.username =
+          this.loginChildParams.username +
+          "@" +
+          this.loginChildParams.preUsername;
+        params.password = this.loginChildParams.password;
+        let {
+          password,
+          username
+        } = params;
+        if (!(username.length && password.length)) {
+          this.noPassClass = true;
+          this.errorTxt = "用户名或密码不能为空";
+          return;
+        } else {
+          this.noPassClass = false;
+        }
+      }
+      // Login result
+      api.login
+        .postLogin(params)
+        .then((res: any) => {
+          // 存储用户信息
+          api.user.getUserInfoNow().then((res) => {
+            userInfo_store._setUserInfo(res);
+          });
+          this.$timer.setTimeout(() => {
+            this.$navbar.push({
+              path: "/console/overview",
+            });
+          }, 500);
+        })
+        .catch((err: any) => {
+          this.noPassClass = true;
+          this.errorTxt = "用户名或密码错误";
+        });
+    }
+
     // 注册
     handleRegister() {
       this.stepTo("regise");

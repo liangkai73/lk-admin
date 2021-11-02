@@ -14,6 +14,13 @@
     :title="$i18n('userCenter.info.index.账号设置')"
   >
     <ui-card style="margin: 0">
+
+      <div class="faas-text-row mt20">
+        <span class="form-label">{{ $i18n('userCenter.info.index.租户id') }}</span>
+        <div class="form-input flex_r_s">
+          <div class="flex_r_s">{{tenantId}}</div>
+        </div>
+      </div>
       <!-- <div class="faas-text-row mt20">
         <span class="form-label">{{ $i18n('userCenter.info.index.头像设置') }}</span>
         <div class="form-input">
@@ -171,6 +178,7 @@ export default class extends Vue {
   ];
   industry_val = "";
 
+  tenantId = "";
   userInfo = {
     imageId: "",
     industry: "",
@@ -190,6 +198,7 @@ export default class extends Vue {
   // @Watch('child')
   // onChildChanged(val: string, oldVal: string) { }
 
+
   //
   // lifecycle hook.
   constructor() {
@@ -200,11 +209,19 @@ export default class extends Vue {
   _getUserInfo() {
     api.user.getUserInfoNow().then((result: any) => {
       this.userInfo = Object.assign(this.userInfo, result);
+      if (this.userInfo && (this.userInfo as any).user) {
+        this.tenantId =  (this.userInfo as any).user.tenantId || (this.userInfo as any).user.userId;
+      }
+      else {
+        this.tenantId = "";
+      }
     });
   }
   // 修改用户信息（企业）
   _postUserInfo(): Promise<any> {
-    return api.user.PutUserInfoNow(this.userInfo).then((result: any) => {
+    let userInfo = $Febs.utils.mergeMap(this.userInfo);
+    userInfo.password = $Febs.crypt.sha1(userInfo.password)
+    return api.user.PutUserInfoNow(userInfo).then((result: any) => {
       return Promise.resolve(result);
     });
   }

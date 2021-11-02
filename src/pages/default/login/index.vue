@@ -108,11 +108,11 @@
               </div>
             </ui-col>
           </ui-row>
-          <ui-row>
+          <!-- <ui-row>
             <div class="pswd_forget cur_P" @click="linkTo('/resetPassWord')">
               忘记密码？
             </div>
-          </ui-row>
+          </ui-row> -->
 
           <ui-row class="inner-row mt20">
             <ui-col :span="24">
@@ -430,7 +430,9 @@
         // todo
         params = Object.assign({}, this.loginParams);
       } else if (type == "child") {
-        params = {};
+        params = {
+          password: this.loginChildParams.password,
+        };
         params.username =
           this.loginChildParams.username +
           "@" +

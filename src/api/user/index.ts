@@ -9,6 +9,7 @@
 import api from "@/api/config-api";
 import config from "@/api/config";
 import func from "../func";
+import login from "../login";
 
 export default {
   getRamUser,
@@ -85,6 +86,10 @@ async function getUserInfoNow() {
   return $UINetwork
     .get(api.user.getUserInfoNow, {}, { noLoading: true })
     .then((result: any) => {
+      if (result.user.userId != "1" && result.user.tenantId != "1") {
+        login.postLogout().then(() => {});
+      }
+
       return Promise.resolve(result);
     })
     .catch((err: any) => {

@@ -11,14 +11,12 @@
   <content-view
     :gutter="false"
     class="faas-content prdcenter-content flex1"
-    :title="$i18n('productCenter.index.Web服务管理')"
-  >
+    :title="$i18n('productCenter.index.Web服务管理')">
     <div class="flex_r_s prdcenter-head-tools">
       <button
         class="bp-btn faas-btn-primary"
         @click="handleOpen('app')"
-        style="width: 120px"
-      >
+        style="width: 120px">
         {{ $i18n("productCenter.index.新建") }}
       </button>
       <span class="flex1"></span>
@@ -30,18 +28,15 @@
         :placeholder="$i18n('productCenter.index.请选择')"
         v-model="applistParams.runtimeId"
         style="width: 140px"
-        @change="_getApplist"
-      >
+        @change="_getApplist">
         <ui-option
           :key="'key2' + index"
           :label="item.runtime"
           :value="item.id"
-          v-for="(item, index) in runTimeList"
-        ></ui-option>
+          v-for="(item, index) in runTimeList"></ui-option>
         <ui-option
           :label="$i18n('productCenter.index.全部')"
-          :value="''"
-        ></ui-option>
+          :value="''"></ui-option>
       </ui-select-el>
       <span style="padding: 0 15px 0 20px">{{
         $i18n("productCenter.index.所属分组")
@@ -51,18 +46,15 @@
         :placeholder="$i18n('productCenter.index.请选择')"
         v-model="applistParams.catalogId"
         style="width: 140px"
-        @change="_getApplist"
-      >
+        @change="_getApplist">
         <ui-option
           :key="'key1' + index"
           :label="item.name"
           :value="item.id"
-          v-for="(item, index) in siteGroups"
-        ></ui-option>
+          v-for="(item, index) in siteGroups"></ui-option>
         <ui-option
           :label="$i18n('productCenter.index.全部分组')"
-          :value="''"
-        ></ui-option>
+          :value="''"></ui-option>
       </ui-select-el>
       <!-- <span style="padding: 0 15px 0 20px">状态</span> -->
       <span style="padding: 0 15px 0 20px"></span>
@@ -70,8 +62,7 @@
         class="bp-input-search"
         :placeholder="$i18n('productCenter.index.支持关键词搜索')"
         v-model="filterStr"
-        suffix-icon="search"
-      ></bp-input>
+        suffix-icon="search"></bp-input>
       <div class="icon-box" style="margin: 0 10px">
         <bp-icon name="refresh" class="font20"></bp-icon>
       </div>
@@ -86,8 +77,7 @@
           () => {
             listType = 1;
           }
-        "
-      >
+        ">
         <bp-icon name="bulk"></bp-icon>
       </div>
       <div
@@ -101,8 +91,7 @@
           () => {
             listType = 2;
           }
-        "
-      >
+        ">
         <bp-icon name="list"></bp-icon>
       </div>
     </div>
@@ -136,8 +125,7 @@
             v-show="filterResource(item)"
             @click.native="showDetail(item)"
             :key="index"
-            :data="item"
-          ></appItem>
+            :data="item"></appItem>
         </div>
       </template>
       <!-- listView 2 -->
@@ -184,29 +172,24 @@
               :key="item.roleId"
               v-for="item in applist"
               v-show="filterResource(item)"
-              class="apps-ul-li"
-            >
+              class="apps-ul-li">
               <th class="status-th">
                 <div class="flex_r_s">
                   <div
                     class="status-th-left"
-                    :style="{ background: filterStatus(item.status).color }"
-                  ></div>
+                    :style="{ background: filterStatus(item.status).color }"></div>
                   <div class="flex_r_s">
                     <bp-icon
                       :name="filterStatus(item.status).icon"
                       style="font-size: 18px; margin-left: 20px"
-                      :style="{ color: filterStatus(item.status).color }"
-                    ></bp-icon>
+                      :style="{ color: filterStatus(item.status).color }"></bp-icon>
                     <span
                       class="pl10"
-                      :style="{ color: filterStatus(item.status).color }"
-                      >{{
+                      :style="{ color: filterStatus(item.status).color }">{{
                         $inEnglish
                           ? item.status
                           : filterStatus(item.status).name
-                      }}</span
-                    >
+                      }}</span>
                   </div>
                 </div>
               </th>
@@ -255,9 +238,8 @@
           :pageSize.sync="applistParams.pageSize"
           :total="applistParams.total"
           @current-change="querList"
-          style="padding: 15px 10px"
-          v-model="applistParams.pageNo"
-        ></uiPagination>
+          style="padding: 0 10px 15px"
+          v-model="applistParams.pageNo"></uiPagination>
       </template>
 
       <!-- 暂无数据 -->
@@ -267,8 +249,7 @@
     <ui-dialog
       class="dialog-box"
       v-model="dialogShow"
-      :title="$i18n('productCenter.index.添加域名')"
-    >
+      :title="$i18n('productCenter.index.添加域名')">
       <div class="dialog-inner flex_c_s">
         <div class="line1" style="margin: 0"></div>
         <ui-row class="inner-item mt10" style="margin-top: 80px">
@@ -276,8 +257,7 @@
             <p>{{ $i18n("productCenter.index.支持添加主域或子域") }}</p>
             <bp-input
               class="mt10 inner-input"
-              :placeholder="$i18n('productCenter.index.请输入域名')"
-            ></bp-input>
+              :placeholder="$i18n('productCenter.index.请输入域名')"></bp-input>
           </ui-col>
         </ui-row>
         <span class="flex1"></span>
@@ -286,8 +266,7 @@
           <button
             class="bp-btn faas-btn-black"
             style="margin-right: 10px"
-            @click="handleDlogClose"
-          >
+            @click="handleDlogClose">
             {{ $i18n("productCenter.index.取消") }}
           </button>
           <button class="bp-btn faas-btn-primary" @click="handleSure">
@@ -300,8 +279,7 @@
     <ui-dialog
       class="dialog-box"
       v-model="triggerObj.group"
-      :title="$i18n('productCenter.index.新建分组')"
-    >
+      :title="$i18n('productCenter.index.新建分组')">
       <div class="dialog-inner flex_c_s">
         <div class="line1" style="margin: 0"></div>
         <ui-row class="inner-item mt10" style="margin-top: 80px">
@@ -310,8 +288,7 @@
             <bp-input
               class="mt10 inner-input"
               :placeholder="$i18n('productCenter.index.请输入组名')"
-              v-model="groupParams.name"
-            ></bp-input>
+              v-model="groupParams.name"></bp-input>
           </ui-col>
         </ui-row>
         <span class="flex1"></span>
@@ -320,15 +297,13 @@
           <button
             class="bp-btn faas-btn-black"
             style="margin-right: 10px"
-            @click="handleDlogClose('group')"
-          >
+            @click="handleDlogClose('group')">
             {{ $i18n("productCenter.index.取消") }}
           </button>
           <button
             class="bp-btn faas-btn-primary"
             :disabled="!(groupParams.name.length > 0)"
-            @click="handleSure('group')"
-          >
+            @click="handleSure('group')">
             {{ $i18n("productCenter.index.确定") }}
           </button>
         </div>
@@ -339,14 +314,12 @@
       v-model="triggerObj.detail"
       v-if="triggerObj.detail"
       :data="activeItem"
-      @updateList="updateList"
-    ></sideViewDetail>
+      @updateList="updateList"></sideViewDetail>
     <!-- dialog 新增web服务 -->
     <addsitedialog
       v-model="triggerObj.addSite"
       @updateList="updateList"
-      v-if="triggerObj.addSite"
-    ></addsitedialog>
+      v-if="triggerObj.addSite"></addsitedialog>
   </content-view>
 </template>
 
@@ -445,7 +418,7 @@ export default class extends Vue {
   // onChildChanged(val: string, oldVal: string) { }
 
   // select 运行语言
-  chsoseRuntime() {}
+  chsoseRuntime() { }
 
   handleChoseCp() {
     // this.changeDialog(true);
@@ -479,7 +452,7 @@ export default class extends Vue {
     this.triggerObj[key] = bl;
   }
 
-  addNewSite() {}
+  addNewSite() { }
   // 新建app分组
   addAppgroup() {
     return api.app.postCatalog(this.groupParams).then((result: any) => {
@@ -511,9 +484,9 @@ export default class extends Vue {
             });
             this._getApplist();
           })
-          .catch(() => {});
+          .catch(() => { });
       })
-      .catch(() => {});
+      .catch(() => { });
   }
   // 过滤关键字
   // 过滤list
@@ -653,14 +626,19 @@ export default class extends Vue {
     this._getRuntimeList();
     this._getGroupList();
   }
-  mounted() {}
+  mounted() { }
 }
 </script>
 <style lang="scss">
 .prdcenter-content {
   min-width: 1112px;
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+  .content-body-noGutter{
+    padding-top: 0;
+  }
   .prdcenter-head-tools {
-    margin: 20px 0.8% 0 0.8%;
+    margin: 0 0.8% 0 0.8%;
   }
   .apps-ul-li {
     transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);

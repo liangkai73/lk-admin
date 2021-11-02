@@ -539,6 +539,7 @@
           height: 40px;
           width: 40px;
           margin-right: 10px;
+          flex-shrink: 0;
 
           img {
             width: 100%;

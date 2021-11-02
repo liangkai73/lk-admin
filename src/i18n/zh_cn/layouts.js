@@ -227,7 +227,7 @@ export default {
     },
     "productCenter": {
       "siderbar": {
-        "web服务管理": "web服务管理",
+        "Web服务管理": "Web服务管理",
         "内存": "内存",
         "并发量": "并发量",
         "应用性能": "应用性能",

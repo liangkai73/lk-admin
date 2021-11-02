@@ -435,7 +435,6 @@
           this.loginChildParams.username +
           "@" +
           this.loginChildParams.preUsername;
-        params.password = $Febs.crypt.sha1(this.loginChildParams.password);
         let {
           password,
           username
@@ -448,6 +447,8 @@
           this.noPassClass = false;
         }
       }
+
+      params.password = $Febs.crypt.sha1(params.password);
       // Login result
       api.login
         .postLogin(params)

@@ -9,7 +9,7 @@
 
 <template>
   <div class="siderbar-container">
-    <h2>{{ $i18n('layouts.notification.siderbar.消息中心') }}</h2>
+    <h2>容器服务</h2>
     <siderBar :moudleName="moudleName" :menuList="menuList"></siderBar>
   </div>
 </template>
@@ -42,25 +42,77 @@ export default class extends Mixins(siderBarMixin) {
   //
   // state.
   // @State(state=>state.demo) demo:DEMO_TYPE;
-  menuList = [
-    {
-      title: $i18n('layouts.notification.siderbar.消息通知'),
-      path: "/notification/message",
-      icon: "",
-    },
-             {
-      title: $i18n('layouts.notification.siderbar.系统事件'),
-      icon: '',
-      path: '/notification/system',
-    },
-    {
-      title: $i18n('layouts.notification.siderbar.任务事件'),
-      path: '/notification/task',
-      icon: '',
-    },
-  ];
-  moudleName = "notification";
-  
+   get inAccountPage() { return this.$route.path.includes('account') }
+  get isInDetail() {
+    return this.$route.path.includes('containerDetail')
+  }
+  get menuList() {
+    return this.isInDetail ? [
+      {
+        title: $i18n('layouts.cloudProvider.siderbar.集群信息'),
+        path: "/cloudProvider/containerDetail",
+        icon: "",
+      }, {
+        title: $i18n('layouts.cloudProvider.siderbar.节点管理'),
+        path: "/cloudProvider/containerDetail/nodeManage",
+        icon: "",
+      }, {
+        title: $i18n('layouts.cloudProvider.siderbar.存储'),
+        icon: "",
+        childMenu: [
+          {
+            title: $i18n('layouts.cloudProvider.siderbar.存储申明'),
+            path: "/cloudProvider/containerDetail/storagePVC",
+          },
+          {
+            title: $i18n('layouts.cloudProvider.siderbar.存储卷'),
+            path: "/cloudProvider/containerDetail/storageVolume",
+          },
+          {
+            title: $i18n('layouts.cloudProvider.siderbar.存储类'),
+            path: "/cloudProvider/containerDetail/storageClass",
+          },
+        ],
+      }
+    ] : this.inAccountPage ? [
+      {
+        title: $i18n('layouts.cloudProvider.siderbar.账号设置'),
+        path: "/cloudProvider/account",
+        icon: "",
+      }] : [
+      {
+        title: $i18n('layouts.cloudProvider.siderbar.容器服务管理'),
+        path: "/cloudProvider/container",
+        icon: "",
+        activePath: ["/cloudProvider/container/newContainer"]
+      },
+      {
+        title: $i18n('layouts.cloudProvider.siderbar.镜像服务管理'),
+        icon: "",
+        childMenu: [
+          {
+            title: $i18n('layouts.cloudProvider.siderbar.镜像仓库'),
+            path: "/cloudProvider/mirror/store",
+          },
+          // {
+          //   title: "命名空间",
+          //   path: "/cloudProvider/mirror/namespace",
+          // },
+          {
+            title: $i18n('layouts.cloudProvider.siderbar.访问凭证'),
+            path: "/cloudProvider/mirror/voucher",
+          },
+        ],
+      },
+      /* {
+        title: "DNS管理",
+        icon: "",
+        path: "/cloudProvider/DNS",
+      }, */
+    ]
+  }
+  moudleName = "cloudProvider";
+
   //
   // Prop
   // @Prop({ type: number }) demo: number;
@@ -85,7 +137,7 @@ export default class extends Mixins(siderBarMixin) {
   }
   created() {
   }
-  mounted() {}
+  mounted() { }
 }
 </script>
 <style lang="scss" scoped>

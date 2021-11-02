@@ -67,3 +67,45 @@ table {
     min-height: 30px;
   }
 }
+.bp-select,
+.el-date-editor {
+  .el-input__inner {
+    border-radius: 0;
+    height: 32px;
+    color: #000;
+    padding-left: 8px;
+    font-size: 12px;
+    background: #dcdcdc;
+    padding: 0 10px;
+  }
+
+  .el-input__inner::placeholder {
+    color: #000 !important;
+  }
+
+  .el-input__icon {
+    line-height: 26px !important;
+  }
+
+  .el-range-separator {
+    line-height: 24px !important;
+  }
+
+  .el-input.is-focus .el-input__inner {
+    border-color: #59a8d8 !important;
+    background: #fff;
+
+  }
+}
+.faas-btn-primary {
+
+  background: #1baaf5 !important;
+  color: #fff !important;
+  letter-spacing: 1px !important;
+
+  &:hover {
+    background: #179ADE !important;
+    color: #fff !important;
+  }
+
+}

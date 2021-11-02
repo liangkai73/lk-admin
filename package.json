@@ -14,6 +14,7 @@
     "core-js": "^3.6.4",
     "echarts": "^4.9.0",
     "element-resize-detector": "^1.2.3",
+    "element-ui": "^2.15.6",
     "febs-ui": "^0.13.39",
     "monaco-editor": "^0.29.1",
     "register-service-worker": "^1.7.2",

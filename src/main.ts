@@ -17,13 +17,16 @@ import '@/components/font-icons/registerFontIcon';
 import '@/api';
 import '@/libs/keyboard';
 import networkHandler from '@/libs/networkHandle';
+import elementUI from "@/components/ui/elementUI";
 
 // 拓展图标
 require("@/components/font-icons/fonts/iconfont.css");
 
 __debug = process.env.NODE_ENV === "development";
 Vue.config.productionTip = false;
-
+elementUI.forEach((item) => {
+  Vue.use(item);
+});
 // setup.
 // ui.forbidDebugger();
 ui.setNavbarDefaultCfg({

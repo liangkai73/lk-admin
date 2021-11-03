@@ -12,11 +12,10 @@
     :gutter="false"
     :showBack="true"
     class="flex1 cl-mail"
-    title="邮件模块"
-  >
+    title="邮件模块">
     <div class="bar flex_r_s" slot="titleRight">
       <ui-button primary @click="handleSave">保存</ui-button>
-      <ui-button primary @click="showOrigin=!showOrigin">显示源码</ui-button>
+      <ui-button primary @click="switchOrigin">显示源码/可视化</ui-button>
     </div>
 
     <div>
@@ -69,7 +68,7 @@ export default class extends Vue {
   tmp_content = "";
   tmp_subject = "";
   tmp_type = "";
-  showOrigin:boolean = false
+  showOrigin: boolean = false
   //
   // lifecycle hook.
   constructor() {
@@ -82,7 +81,7 @@ export default class extends Vue {
     let edit_placeholder = document.querySelector(".placeholder") as any;
 
     edit_placeholder.innerHTML = "变量格式示例: ${password}";
-     //"变量格式: ${password}<br/>示例: 您好，您的密码已经重置为${password}，请及时登录并修改密码";
+    //"变量格式: ${password}<br/>示例: 您好，您的密码已经重置为${password}，请及时登录并修改密码";
 
 
     if (this.tmp.id) {
@@ -121,9 +120,12 @@ export default class extends Vue {
           this.editor.txt.html(this.tmp_content);
         }
       })
-      .catch((err: any) => {});
+      .catch((err: any) => { });
   }
-
+  switchOrigin() {
+    this.editor.txt.html(this.tmp_content);
+    this.showOrigin = !this.showOrigin
+  }
   handleSave() {
     if (this.tmp_subject.length == 0) {
       $UIToast({

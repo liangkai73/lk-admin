@@ -8,9 +8,12 @@
  -->
 
 <template>
-  <content-view :gutter="false" class="flex1" :title="$i18n('layouts.tenant.新申请')">
-    
-    <div class="flex_r_s" slot="titleRight">
+  <content-view :gutter="false"
+                class="flex1"
+                :title="$i18n('layouts.tenant.新申请')">
+
+    <div class="flex_r_s"
+         slot="titleRight">
     </div>
 
     <div>
@@ -29,7 +32,8 @@
           </ui-tr>
         </ui-thead>
         <template v-if="list_templates.length > 0">
-          <ui-tr :key="item.userId" v-for="item in list_templates">
+          <ui-tr :key="item.userId"
+                 v-for="item in list_templates">
             <ui-td class="f12">
               {{ item.userId }}
             </ui-td>
@@ -55,26 +59,39 @@
               {{ item.createTime }}
             </ui-td>
             <ui-td>
-              <ui-button plain warning small @click.stop="handleRejectDialog(item)">{{$i18n('拒绝注册')}}</ui-button>
-              <ui-button small @click.stop="handleAcceptDialog(item)">{{$i18n('通过注册')}}</ui-button>
+              <ui-button plain
+                         warning
+                         small
+                         @click.stop="handleRejectDialog(item)">{{$i18n('拒绝注册')}}</ui-button>
+              <ui-button small
+                         @click.stop="handleAcceptDialog(item)">{{$i18n('通过注册')}}</ui-button>
               <!-- <ui-button small warning plain @click.stop="handleDel(item)">删除</ui-button> -->
             </ui-td>
           </ui-tr>
         </template>
       </ui-table>
       <template v-if="list_templates.length > 0">
-        <uiPagination :pageSize.sync="limit" :total="total" @current-change="getList"
-          style="padding: 15px 10px" v-model="page"></uiPagination>
+        <uiPagination :pageSize.sync="limit"
+                      :total="total"
+                      @current-change="getList"
+                      style="padding: 15px 10px"
+                      v-model="page"></uiPagination>
       </template>
       <ui-no-records v-show="list_templates.length == 0" />
     </div>
 
     <!-- 拒绝 -->
-    <ui-dialog title="拒绝用户申请" :visible.sync="visibleReject">
+    <ui-dialog title="拒绝用户申请"
+               :visible.sync="visibleReject">
       <p class="mb10 flex_r_s">拒绝通过 ({{rejectItem?rejectItem.companyName:''}}) 注册申请</p>
-      <ui-input type="textarea" maxlength="1000" rows="5" placeholder="拒绝理由将通过邮件发送给用户" v-model="rejectReason"></ui-input>
+      <ui-input type="textarea"
+                maxlength="1000"
+                rows="5"
+                placeholder="拒绝理由将通过邮件发送给用户"
+                v-model="rejectReason"></ui-input>
       <div slot="foot">
-        <ui-button primary @click="handleReject(rejectItem)">Ok</ui-button>
+        <ui-button primary
+                   @click="handleReject(rejectItem)">Ok</ui-button>
       </div>
     </ui-dialog>
 
@@ -82,110 +99,107 @@
 </template>
 
 <script lang="ts">
-  import api from "@/api";
+import api from '@/api';
 
-  import contentView from "@/components/layout/contentView.vue";
-  import uiPagination from "@/components/ui/uiPagination.vue";
+import contentView from '@/components/layout/contentView.vue';
+import uiPagination from '@/components/ui/uiPagination.vue';
 
-  import {
-    Component,
-    Vue
-  } from "vue-property-decorator";
+import { Component, Vue } from 'vue-property-decorator';
 
-  @Component({
-    components: {
-      contentView,
-      uiPagination,
-    },
-  })
-  export default class extends Vue {
-    visibleReject = false;
-    rejectReason = null;
-    rejectItem = null;
-    search = "";
-    page = 1;
-    limit = 10;
-    total = 0;
+@Component({
+  components: {
+    contentView,
+    uiPagination
+  }
+})
+export default class extends Vue {
+  visibleReject = false;
+  rejectReason = null;
+  rejectItem = null;
+  search = '';
+  page = 1;
+  limit = 10;
+  total = 0;
 
-    list_templates = [];
+  list_templates = [];
 
-    constructor() {
-      super();
+  constructor() {
+    super();
+  }
+
+  created() {
+    this.getList();
+  }
+
+  mounted() {}
+
+  getList() {
+    api.platformUser
+      .listTenant({
+        pageNum: this.page,
+        pageSize: this.limit,
+        userId: this.search,
+        userName: this.search,
+        email: this.search,
+        telephone: this.search,
+        status: [api.platformUser.TenantStatus.待审批]
+      })
+      .then((data: any) => {
+        this.total = data.total;
+        this.list_templates = data.list;
+      })
+      .catch((err: any) => {});
+  }
+
+  /**
+   * @desc 拒绝通过
+   */
+  handleReject(item: any) {
+    if ($Febs.string.isEmpty(this.rejectReason)) {
+      $UIToast('拒绝理由不能空');
+      return;
     }
 
-    created() {
-      this.getList();
-    }
-
-    mounted() {}
-
-    getList() {
+    $UIConfirm('确认发送拒绝通知给用户?').then(() => {
+      $UIConfirmHide();
       api.platformUser
-        .listTenant({
-          pageNum: this.page,
-          pageSize: this.limit,
-          userId: this.search,
-          userName: this.search,
-          email: this.search,
-          telephone: this.search,
-          status: [api.platformUser.TenantStatus.待审批],
-        })
-        .then((data: any) => {
-          this.total = data.total;
-          this.list_templates = data.list;
-        })
-        .catch((err: any) => {});
-    }
-
-    /**
-     * @desc 拒绝通过
-     */
-    handleReject(item: any) {
-      if ($Febs.string.isEmpty(this.rejectReason)) {
-        $UIToast("拒绝理由不能空");
-        return;
-      }
-
-      $UIConfirm("确认发送拒绝通知给用户?")
-      .then(()=>{
-        $UIConfirmHide();
-        api.platformUser.rejectRegister({
+        .rejectRegister({
           userId: item.userId,
-          reason: this.rejectReason,
+          reason: this.rejectReason
         })
-        .then(()=>{
+        .then(() => {
           $UIAlert('已发送拒绝邮件给用户');
           this.visibleReject = false;
           this.getList();
         });
-      });
-    }
+    });
+  }
 
-    /**
-     * @desc 拒绝通过
-     */
-    handleRejectDialog(item: any) {
-      this.rejectItem = item;
-      this.visibleReject = true;
-    }
+  /**
+   * @desc 拒绝通过
+   */
+  handleRejectDialog(item: any) {
+    this.rejectItem = item;
+    this.visibleReject = true;
+  }
 
-    /**
-    * @desc: 查看
-    */
-    handleAcceptDialog(item: any) {
-      $UIConfirm("确认通过用户注册? 将会发送注册激活邮件给用户")
-      .then(()=>{
-        $UIConfirmHide();
-        api.platformUser.acceptRegister({
-          userId: item.userId,
+  /**
+   * @desc: 查看
+   */
+  handleAcceptDialog(item: any) {
+    $UIConfirm('确认通过用户注册? 将会发送注册激活邮件给用户').then(() => {
+      $UIConfirmHide();
+      api.platformUser
+        .acceptRegister({
+          userId: item.userId
         })
-        .then(()=>{
+        .then(() => {
           $UIAlert('已发送激活邮件给用户');
           this.getList();
         });
-      });
-    }
+    });
   }
+}
 </script>
 
 <style scoped lang="scss">

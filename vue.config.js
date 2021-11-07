@@ -8,8 +8,8 @@
  */
 const path = require("path");
 const config = require("./config");
-const webpackSplitChunks = require('@bpui/build-cli/_scripts/webpack-splitChunks')
-const webpackConfig = require('@bpui/build-cli/_scripts/webpack-config')
+const webpackSplitChunks = require("@bpui/build-cli/_scripts/webpack-splitChunks");
+const webpackConfig = require("@bpui/build-cli/_scripts/webpack-config");
 
 function resolve(dir) {
   return path.join(__dirname, dir);
@@ -19,7 +19,7 @@ module.exports = {
   outputDir: "dist",
   publicPath: "/",
   filenameHashing: true,
-  productionSourceMap: process.env.NODE_ENV == 'development',
+  productionSourceMap: false, //process.env.NODE_ENV == 'development',
   devServer: {
     host: config.Host,
     port: config.Port,
@@ -42,14 +42,12 @@ module.exports = {
       }
     }
   },
-  transpileDependencies: [
-  ],
+  transpileDependencies: [],
   // configureWebpack: {},
   chainWebpack: config => {
-
-    if (process.env.NODE_ENV == 'development') {
-      config.devtool('#cheap-module-eval-source-map');
-    }
+    // if (process.env.NODE_ENV == 'development') {
+    //   config.devtool('#cheap-module-eval-source-map');
+    // }
 
     webpackConfig.initResolveAlias(config);
     webpackConfig.initBundleAnalyzer(config);
@@ -66,13 +64,15 @@ module.exports = {
     //
     // splitChunks.
     //
-    if (process.env.NODE_ENV === 'production') {
-      config.optimization.runtimeChunk = { name: 'manifest' };
+    if (process.env.NODE_ENV === "production") {
+      config.optimization.runtimeChunk = { name: "manifest" };
       config.optimization.minimize = true;
-      config.optimization.splitChunks(webpackSplitChunks({
-        maxSize: 512 * 1024,
-        minSize: 30 * 1024,
-      }))
+      config.optimization.splitChunks(
+        webpackSplitChunks({
+          maxSize: 512 * 1024,
+          minSize: 30 * 1024
+        })
+      );
     } // fi.
   }
 };

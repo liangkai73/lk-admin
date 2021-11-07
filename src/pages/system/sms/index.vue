@@ -8,54 +8,80 @@
  -->
 
 <template>
-  <content-view
-    :gutter="false"
-    class="flex1 cl-sms-tmp"
-    :title="$i18n('layouts.system.siderbar.短信模板管理')"
-  >
+  <content-view :gutter="false"
+                class="flex1 cl-sms-tmp"
+                :title="$i18n('layouts.system.siderbar.短信模板管理')">
     <!-- <button @click="handleAdd">新增模版</button> -->
 
-    <div class="flex_r_s" slot="titleRight">
-      <ui-button primary @click="handleAdd">
+    <div class="flex_r_s"
+         slot="titleRight">
+      <ui-button primary
+                 @click="handleAdd">
         {{$i18n('新增')}}
       </ui-button>
     </div>
 
     <uiLayoutComment>
-      <span style="white-space: nowrap;"><ui-icon name="ui-warning"/>目前系统内置的tag: </span>
-      <span class="f-italic t-underline ml10" style="white-space: nowrap;">
+      <span style="white-space: nowrap;">
+        <ui-icon name="ui-warning" />目前系统内置的tag:
+      </span>
+      <span class="f-italic t-underline ml10"
+            style="white-space: nowrap;">
         SMS_忘记密码_CN
         <ui-popover trigger="hover">
           <span>
             <p>中文语言状态下用户忘记密码时发送的短信</p>
-            <p>邮件参数: <code>code</code></p>
+            <p>参数: <code>code</code></p>
           </span>
         </ui-popover>
       </span>
-      <span class="f-italic t-underline ml10" style="white-space: nowrap;">
+      <span class="f-italic t-underline ml10"
+            style="white-space: nowrap;">
         SMS_忘记密码_EN
         <ui-popover trigger="hover">
           <span>
             <p>英文语言状态下用户忘记密码时发送的短信</p>
-            <p>邮件参数: <code>code</code></p>
+            <p>参数: <code>code</code></p>
           </span>
         </ui-popover>
       </span>
-      <span class="f-italic t-underline ml10" style="white-space: nowrap;">
+      <span class="f-italic t-underline ml10"
+            style="white-space: nowrap;">
         SMS_注册账号_CN
         <ui-popover trigger="hover">
           <span>
             <p>中文语言状态下用户注册账号时发送的短信</p>
-            <p>邮件参数: <code>code</code></p>
+            <p>参数: <code>code</code></p>
           </span>
         </ui-popover>
       </span>
-      <span class="f-italic t-underline ml10" style="white-space: nowrap;">
+      <span class="f-italic t-underline ml10"
+            style="white-space: nowrap;">
         SMS_注册账号_EN
         <ui-popover trigger="hover">
           <span>
             <p>英文语言状态下用户注册账号时发送的短信</p>
-            <p>邮件参数: <code>code</code></p>
+            <p>参数: <code>code</code></p>
+          </span>
+        </ui-popover>
+      </span>
+      <span class="f-italic t-underline ml10"
+            style="white-space: nowrap;">
+        SMS_设置手机号_CN
+        <ui-popover trigger="hover">
+          <span>
+            <p>中文语言状态下用户重设手机号时发送的短信</p>
+            <p>参数: <code>code</code></p>
+          </span>
+        </ui-popover>
+      </span>
+      <span class="f-italic t-underline ml10"
+            style="white-space: nowrap;">
+        SMS_设置手机号_EN
+        <ui-popover trigger="hover">
+          <span>
+            <p>英文语言状态下用户重设手机号时发送的短信</p>
+            <p>参数: <code>code</code></p>
           </span>
         </ui-popover>
       </span>
@@ -69,8 +95,9 @@
               <span>Code</span>
             </ui-th>
             <ui-th width="100px">
-              Tag 
-              <ui-icon name="ui-warning" width="16px">
+              Tag
+              <ui-icon name="ui-warning"
+                       width="16px">
                 <ui-popover trigger="hover">
                   <span>系统使用tag标识发送对应的场景通知</span>
                 </ui-popover>
@@ -95,7 +122,8 @@
         </ui-thead>
         <ui-tbody>
           <template v-if="list_templates.length > 0">
-            <ui-tr :key="item.id" v-for="item in list_templates">
+            <ui-tr :key="item.id"
+                   v-for="(item, index) in list_templates">
               <ui-td>
                 <span>{{ item.templateCode }}</span>
               </ui-td>
@@ -115,36 +143,43 @@
                 <span>{{ getStatus(item.templateStatus) }}</span>
               </ui-td>
               <ui-td>
-                <ui-button small @click.stop="handleEditTag(item)">
+                <ui-button small
+                           @click.stop="handleEditTag(item)">
                   {{$i18n('编辑')}} Tag
                 </ui-button>
-                <ui-button small @click.stop="handleEdit(item)">
+                <ui-button small
+                           @click.stop="handleEdit(item)">
                   {{$i18n('编辑')}}
                 </ui-button>
-                <ui-button small warning plain @click.stop="handleDel(item)">{{$i18n('删除')}}</ui-button>
+                <ui-button v-if="index > 0"
+                           small
+                           warning
+                           plain
+                           @click.stop="handleDel(item)">{{$i18n('删除')}}</ui-button>
               </ui-td>
             </ui-tr>
           </template>
         </ui-tbody>
       </ui-table>
       <template v-if="list_templates.length > 0">
-        <uiPagination
-          :pageSize.sync="limit"
-          :total="total"
-          @current-change="getList"
-          style="padding: 15px 10px"
-          v-model="page"
-        ></uiPagination>
+        <uiPagination :pageSize.sync="limit"
+                      :total="total"
+                      @current-change="getList"
+                      style="padding: 15px 10px"
+                      v-model="page"></uiPagination>
       </template>
       <ui-no-records v-show="list_templates.length == 0" />
     </div>
 
-    <ui-dialog title="修改Tag" :visible.sync="visibleTagDialog">
-      <ui-input maxlength="30" v-model="editTag"></ui-input>
+    <ui-dialog title="修改Tag"
+               :visible.sync="visibleTagDialog">
+      <ui-input maxlength="30"
+                v-model="editTag"></ui-input>
       <!-- 底部按钮, 最多支持3个按钮 -->
       <div slot="foot">
         <ui-button @click="visibleTagDialog=false">取消</ui-button>
-        <ui-button primary @click="handleSaveTag">修改</ui-button>
+        <ui-button primary
+                   @click="handleSaveTag">修改</ui-button>
       </div>
     </ui-dialog>
 
@@ -152,20 +187,20 @@
 </template>
 
 <script lang="ts">
-import api from "@/api";
+import api from '@/api';
 
-import contentView from "@/components/layout/contentView.vue";
-import uiPagination from "@/components/ui/uiPagination.vue";
+import contentView from '@/components/layout/contentView.vue';
+import uiPagination from '@/components/ui/uiPagination.vue';
 
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue } from 'vue-property-decorator';
 
-import ali from "./ali";
+import ali from './ali';
 
 @Component({
-  components: { contentView, uiPagination },
+  components: { contentView, uiPagination }
 })
 export default class extends Vue {
-  search = "";
+  search = '';
   page = 1;
   limit = 10;
   total = 0;
@@ -204,9 +239,9 @@ export default class extends Vue {
   }
 
   handleAdd() {
-    let url = "./template";
+    let url = './template';
     this.$navbar.push({
-      path: url,
+      path: url
     });
   }
 
@@ -218,43 +253,43 @@ export default class extends Vue {
 
   handleSaveTag() {
     api.notification.sms_tmp
-      .updateTag({id: this.editTagItem.id, type: this.editTag})
-      .then((res)=>{
+      .updateTag({ id: this.editTagItem.id, type: this.editTag })
+      .then(res => {
         this.editTagItem.type = this.editTag;
         this.visibleTagDialog = false;
       })
-      .catch(e=>{
+      .catch(e => {
         $UIAlert('修改失败');
       });
   }
 
   handleEdit(item: any) {
-    let url = "./template?id=" + item.id;
+    let url = './template?id=' + item.id;
     this.$navbar.push({
-      path: url,
+      path: url
     });
   }
 
   handleDel(item: any) {
     $UIConfirm({
-      content: "确认要删除?", 
-      title: "邮件模版管理"
+      content: '确认要删除?',
+      title: '邮件模版管理'
     })
-      .then((e) => {
+      .then(e => {
         api.notification.sms_tmp
           .del(item.id, item.templateCode)
           .then((data: any) => {
             this.getList();
 
             $UIToast({
-              type: "success",
-              content: "删除成功",
+              type: 'success',
+              content: '删除成功'
             });
           })
           .catch((err: any) => {
             $UIToast({
-              type: "error",
-              content: "删除失败，请重试",
+              type: 'error',
+              content: '删除失败，请重试'
             });
           });
         this.$UIConfirmHide();
@@ -265,6 +300,5 @@ export default class extends Vue {
 </script>
 
 <style lang="scss" scoped>
-
 @import '~@/pages/system/commonStyle';
 </style>>

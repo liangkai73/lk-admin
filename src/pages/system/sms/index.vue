@@ -255,7 +255,7 @@ export default class extends Vue {
     api.notification.sms_tmp
       .updateTag({ id: this.editTagItem.id, type: this.editTag })
       .then(res => {
-        this.editTagItem.type = this.editTag;
+        this.$set(this.editTagItem, 'type', this.editTag);
         this.visibleTagDialog = false;
       })
       .catch(e => {

@@ -10,7 +10,7 @@
     "dev": "bpui-build router2 && vue-cli-service serve"
   },
   "dependencies": {
-    "@bpui/ui": "0.0.66",
+    "@bpui/ui": "0.0.67",
     "core-js": "^3.6.4",
     "echarts": "^4.9.0",
     "element-resize-detector": "^1.2.3",

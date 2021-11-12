@@ -48,6 +48,7 @@ module.exports = {
     "space-infix-ops": [2, { int32Hint: false }], // 操作符前后加空格
     "spaced-comment": 2,
     "standard/object-curly-even-spacing": 0,
+    "standard/no-callback-literal": 0,
     yoda: 0,
     "vue/no-parsing-error": ["off"],
     "vue/no-unused-components": process.env.NODE_ENV === "production" ? 1 : 2,

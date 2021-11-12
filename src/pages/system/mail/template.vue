@@ -8,28 +8,40 @@
  -->
 
 <template>
-  <content-view
-    :gutter="false"
-    :showBack="true"
-    class="flex1 cl-mail"
-    title="邮件模块">
-    <div class="bar flex_r_s" slot="titleRight">
-      <ui-button primary @click="handleSave">保存</ui-button>
-      <ui-button primary @click="switchOrigin">显示源码/可视化</ui-button>
+  <content-view :gutter="false"
+                :showBack="true"
+                class="flex1 cl-mail"
+                title="邮件模块">
+    <div class="bar flex_r_s"
+         slot="titleRight">
+      <ui-button primary
+                 @click="handleSave">保存</ui-button>
+      <ui-button primary
+                 @click="switchOrigin">显示源码/可视化</ui-button>
     </div>
 
     <div>
-      <ui-input prefix-label="Title" placeholder="模版标题" v-model="tmp_subject"></ui-input>
+      <ui-input prefix-label="Title"
+                placeholder="模版标题"
+                v-model="tmp_subject"></ui-input>
     </div>
     <div>
-      <ui-input prefix-label="Tag" placeholder="tag" v-model="tmp_type"></ui-input>
+      <ui-input prefix-label="Tag"
+                placeholder="tag"
+                v-model="tmp_type"></ui-input>
     </div>
 
-    <div class="flex_l_t region" style="width: 100%">
-      <uiEditor v-model="tmp_content" v-if="showOrigin" language="html"></uiEditor>
-      <div style="width: 100%" class="card" v-show="!showOrigin">
+    <div class="flex_l_t region"
+         style="width: 100%">
+      <uiEditor v-model="tmp_content"
+                v-if="showOrigin"
+                language="html"></uiEditor>
+      <div style="width: 100%"
+           class="card"
+           v-show="!showOrigin">
         <div id="editor_menu"></div>
-        <div id="editor" class="edit"></div>
+        <div id="editor"
+             class="edit"></div>
       </div>
       <div class="flex1"></div>
       <!-- <div class="card" style="width: 45%; height: 100%">
@@ -42,22 +54,22 @@
 </template>
 
 <script lang="ts">
-import api from "@/api";
-import contentView from "@/components/layout/contentView.vue";
+import api from '@/api';
+import contentView from '@/components/layout/contentView.vue';
 
 import {
   Component,
-  Vue,
+  Vue
   // Prop,
   // Watch,
   // Provide,
   // Emit,
-} from "vue-property-decorator";
-import uiEditor from "@/components/ui/uiEditor.vue";
+} from 'vue-property-decorator';
+import uiEditor from '@/components/ui/uiEditor.vue';
 
-import Editor from "wangeditor";
+import Editor from 'wangeditor';
 @Component({
-  components: { contentView, uiEditor },
+  components: { contentView, uiEditor }
 })
 export default class extends Vue {
   //
@@ -65,24 +77,23 @@ export default class extends Vue {
   // @Provide() demo:number = 1;
   tmp = {} as any;
   editor: any = null;
-  tmp_content = "";
-  tmp_subject = "";
-  tmp_type = "";
-  showOrigin: boolean = false
+  tmp_content = '';
+  tmp_subject = '';
+  tmp_type = '';
+  showOrigin: boolean = false;
   //
   // lifecycle hook.
   constructor() {
     super();
   }
   mounted() {
-    this.editor = new Editor("#editor_menu", "#editor");
+    this.editor = new Editor('#editor_menu', '#editor');
     this.editor.create();
 
-    let edit_placeholder = document.querySelector(".placeholder") as any;
+    let edit_placeholder = document.querySelector('.placeholder') as any;
 
-    edit_placeholder.innerHTML = "变量格式示例: ${password}";
-    //"变量格式: ${password}<br/>示例: 您好，您的密码已经重置为${password}，请及时登录并修改密码";
-
+    edit_placeholder.innerHTML = '变量格式示例: ${password}';
+    // "变量格式: ${password}<br/>示例: 您好，您的密码已经重置为${password}，请及时登录并修改密码";
 
     if (this.tmp.id) {
       this.editor.txt.html(this.tmp.template);
@@ -90,7 +101,7 @@ export default class extends Vue {
 
     let self = this;
 
-    this.editor.config.onchange = function (newHtml: any) {
+    this.editor.config.onchange = function(newHtml: any) {
       self.tmp_content = newHtml;
     };
   }
@@ -120,17 +131,17 @@ export default class extends Vue {
           this.editor.txt.html(this.tmp_content);
         }
       })
-      .catch((err: any) => { });
+      .catch((err: any) => {});
   }
   switchOrigin() {
     this.editor.txt.html(this.tmp_content);
-    this.showOrigin = !this.showOrigin
+    this.showOrigin = !this.showOrigin;
   }
   handleSave() {
     if (this.tmp_subject.length == 0) {
       $UIToast({
-        type: "error",
-        content: "请填写模版标题",
+        type: 'error',
+        content: '请填写模版标题'
       });
       return;
     }
@@ -140,14 +151,14 @@ export default class extends Vue {
         .update(this.tmp.id, this.tmp_subject, this.tmp_content, this.tmp_type)
         .then((data: any) => {
           $UIToast({
-            type: "success",
-            content: "修改成功",
+            type: 'success',
+            content: '修改成功'
           });
         })
         .catch((err: any) => {
           $UIToast({
-            type: "error",
-            content: "修改失败",
+            type: 'error',
+            content: '修改失败'
           });
         });
     } else {
@@ -155,14 +166,14 @@ export default class extends Vue {
         .add(this.tmp_subject, this.tmp_content, this.tmp_type)
         .then((data: any) => {
           $UIToast({
-            type: "success",
-            content: "添加成功",
+            type: 'success',
+            content: '添加成功'
           });
         })
         .catch((err: any) => {
           $UIToast({
-            type: "error",
-            content: "添加失败",
+            type: 'error',
+            content: '添加失败'
           });
         });
     }

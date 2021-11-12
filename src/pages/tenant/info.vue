@@ -8,10 +8,14 @@
  -->
 
 <template>
-  <content-view :gutter="false" :showBack="true" class="flex1 content-view-tenant-info"
-    :title="$i18n('layouts.tenant.租户信息')">
-    <div class="flex_r_s" slot="titleRight">
-      <ui-button primary @click="handleSave">{{isEdit?$i18n('保存'):$i18n('编辑')}}</ui-button>
+  <content-view :gutter="false"
+                :showBack="true"
+                class="flex1 content-view-tenant-info"
+                :title="$i18n('layouts.tenant.租户信息')">
+    <div class="flex_r_s"
+         slot="titleRight">
+      <ui-button primary
+                 @click="handleSave">{{isEdit?$i18n('保存'):$i18n('编辑')}}</ui-button>
     </div>
 
     <div class="flex_r_s">
@@ -30,8 +34,12 @@
       <div style="width: 20%"></div>
       <div style="width: 15%">状态</div>
       <div style="width: 50%">
-        <ui-radio-group :disabled="!isEdit || id=='1'" v-model="item.status" @change="handleStatusChange">
-          <ui-radio :value="v.value" v-for="(v, key) in list_status" :key="key">{{v.label}}
+        <ui-radio-group :disabled="!isEdit || id=='1'"
+                        v-model="item.status"
+                        @change="handleStatusChange">
+          <ui-radio :value="v.value"
+                    v-for="(v, key) in list_status"
+                    :key="key">{{v.label}}
           </ui-radio>
         </ui-radio-group>
       </div>
@@ -67,52 +75,59 @@
       <div style="width: 20%"></div>
       <div style="width: 15%">国家/地区</div>
       <div style="width: 50%">
-        <ui-select
-          v-model="item.countryId"
-          style="width:100%;margin:0"
-          :datasource="contriesArr"></ui-select>
+        <ui-select v-model="item.countryId"
+                   style="width:100%;margin:0"
+                   :datasource="contriesArr"></ui-select>
       </div>
     </div>
     <div class="flex_r_s mt10">
       <div style="width: 20%"></div>
       <div style="width: 15%">公司名称</div>
       <div style="width: 50%">
-        <ui-input :readonly="!isEdit" v-model="item.companyName"></ui-input>
+        <ui-input :readonly="!isEdit"
+                  v-model="item.companyName"></ui-input>
       </div>
     </div>
     <div class="flex_r_s mt10">
       <div style="width: 20%"></div>
       <div style="width: 15%">公司邮箱</div>
       <div style="width: 50%">
-        <ui-input type="email" :readonly="!isEdit" v-model="item.companyEmail"></ui-input>
+        <ui-input type="email"
+                  :readonly="!isEdit"
+                  v-model="item.companyEmail"></ui-input>
       </div>
     </div>
     <div class="flex_r_s mt10">
       <div style="width: 20%"></div>
       <div style="width: 15%">联系人</div>
       <div style="width: 50%">
-        <ui-input :readonly="!isEdit" v-model="item.contactName"></ui-input>
+        <ui-input :readonly="!isEdit"
+                  v-model="item.contactName"></ui-input>
       </div>
     </div>
     <div class="flex_r_s mt10">
       <div style="width: 20%"></div>
       <div style="width: 15%">联系方式</div>
       <div style="width: 50%">
-        <ui-input :readonly="!isEdit" v-model="item.contactPhone"></ui-input>
+        <ui-input :readonly="!isEdit"
+                  v-model="item.contactPhone"></ui-input>
       </div>
     </div>
     <div class="flex_r_s mt10">
       <div style="width: 20%"></div>
       <div style="width: 15%">行业</div>
       <div style="width: 50%">
-        <ui-input :readonly="!isEdit" v-model="item.industry"></ui-input>
+        <ui-input :readonly="!isEdit"
+                  v-model="item.industry"></ui-input>
       </div>
     </div>
     <div class="flex_r_s mt10">
       <div style="width: 20%"></div>
       <div style="width: 15%">主营业务</div>
       <div style="width: 50%">
-        <ui-input type="textarea" :readonly="!isEdit" v-model="item.business"></ui-input>
+        <ui-input type="textarea"
+                  :readonly="!isEdit"
+                  v-model="item.business"></ui-input>
       </div>
     </div>
 
@@ -120,25 +135,25 @@
 </template>
 
 <script lang="ts">
-import api from "@/api";
-import contentView from "@/components/layout/contentView.vue";
-import contries from "@/filters/contries.js"
+import api from '@/api';
+import contentView from '@/components/layout/contentView.vue';
+import contries from '@/filters/contries.js';
 import {
   Component,
-  Vue,
+  Vue
   // Prop,
   // Watch,
   // Provide,
   // Emit,
-} from "vue-property-decorator";
+} from 'vue-property-decorator';
 
 @Component({
   components: {
-    contentView,
-  },
+    contentView
+  }
 })
 export default class extends Vue {
-  //#region 数据
+  // #region 数据
   api = api;
   isEdit: boolean = false;
   id: string;
@@ -165,22 +180,22 @@ export default class extends Vue {
     {
       label: '删除',
       value: api.platformUser.TenantStatus.删除
-    },
+    }
   ];
-  //#endregion
+  // #endregion
   get contriesArr() {
-    let lang = $UILibs.lang.includes('en') ? 'en' : 'zhcn'
+    let lang = $UILibs.lang.includes('en') ? 'en' : 'zhcn';
     return contries.map((item: any) => {
-      item.label = item[lang]
-      return item
-    })
+      item.label = item[lang];
+      return item;
+    });
   }
   //
   // lifecycle hook.
   constructor() {
     super();
   }
-  mounted() { }
+  mounted() {}
 
   created() {
     let query = this.$route.query;
@@ -189,40 +204,43 @@ export default class extends Vue {
     if (query.id && query.id.length > 0) this.getInfo(query.id);
   }
 
-  beforeDestroy() { }
+  beforeDestroy() {}
 
   /**
-  * @desc: 获取信息
-  */
+   * @desc: 获取信息
+   */
   getInfo(id: string) {
     api.platformUser
       .listTenant({
         pageSize: 1,
-        userId: id,
+        userId: id
       })
-      .then((data) => {
+      .then(data => {
         this.item = data.list[0];
         if (this.item) {
           this.item.status = api.platformUser.TenantStatus[this.item.status];
           this.oldStatus = this.item.status;
         }
       })
-      .catch((err: any) => { });
+      .catch((err: any) => {});
   }
 
   /**
-  * @desc: 保存编辑按钮.
-  */
+   * @desc: 保存编辑按钮.
+   */
   handleSave() {
     if (!this.isEdit) {
       this.isEdit = true;
     } else {
-      api.platformUser.updateTenant(this.id, this.item).then(() => {
-        $UIAlert('修改成功');
-        this.isEdit = false;
-      }).catch(e => {
-        $UIAlert('修改失败');
-      });
+      api.platformUser
+        .updateTenant(this.id, this.item)
+        .then(() => {
+          $UIAlert('修改成功');
+          this.isEdit = false;
+        })
+        .catch(e => {
+          $UIAlert('修改失败');
+        });
     }
   }
 

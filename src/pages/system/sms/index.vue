@@ -128,7 +128,9 @@
                 <span>{{ item.templateCode }}</span>
               </ui-td>
               <ui-td class="f12">
-                <code v-if="item.type">{{ item.type }}</code>
+                <code v-for="(type,index) in item.typeList"
+                      style="margin-right:2px"
+                      :key="index">{{ type }}</code>
               </ui-td>
               <ui-td>
                 <span>{{ getType(item.templateType) }}</span>
@@ -195,6 +197,7 @@ import uiPagination from '@/components/ui/uiPagination.vue';
 import { Component, Vue } from 'vue-property-decorator';
 
 import ali from './ali';
+import _tmpConfig from '@/router/_tmpConfig';
 
 @Component({
   components: { contentView, uiPagination }
@@ -234,6 +237,16 @@ export default class extends Vue {
       .then((data: any) => {
         this.total = data.total;
         this.list_templates = data.list;
+        for (let i = 0; i < this.list_templates.length; i++) {
+          let temp = this.list_templates[i];
+          if ($Febs.string.isEmpty(temp.type)) {
+            temp.typeList = [];
+          } else {
+            temp.typeList =
+              '[' + temp.type.substr(0, temp.type.length - 1) + ']';
+            temp.typeList = JSON.parse(temp.typeList);
+          }
+        }
       })
       .catch((err: any) => {});
   }
@@ -252,6 +265,7 @@ export default class extends Vue {
   }
 
   handleSaveTag() {
+    this.editTag = $Febs.string.replace(this.editTag, ' ', '');
     api.notification.sms_tmp
       .updateTag({ id: this.editTagItem.id, type: this.editTag })
       .then(res => {

@@ -242,9 +242,9 @@ export default class extends Vue {
           if ($Febs.string.isEmpty(temp.type)) {
             temp.typeList = [];
           } else {
-            temp.typeList =
-              '[' + temp.type.substr(0, temp.type.length - 1) + ']';
-            temp.typeList = JSON.parse(temp.typeList);
+            temp.typeList = temp.type
+              .substr(0, temp.type.length - 1)
+              .split(',');
           }
         }
       })

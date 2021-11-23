@@ -58,11 +58,11 @@ export default class extends Mixins(siderBarMixin) {
         },
       ],
     },
-    // {
-    //   title: "权限策略管理",
-    //   path: "/ram/permission",
-    //   icon: "",
-    // },
+    {
+      title: "权限策略管理",
+      path: "/ram/permission",
+      icon: "",
+    },
     // {
     //   title: "RAM角色管理",
     //   path: "/ram/role",

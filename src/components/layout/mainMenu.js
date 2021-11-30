@@ -36,4 +36,9 @@ export default [
     path: "/productCenter",
     icon: "faas",
   },
+  {
+    title: $i18n('layouts.console.siderbar.数据统计'),
+    path: "/stats/list",
+    icon: "rongqifuwu",
+  },
 ];

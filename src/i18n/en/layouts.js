@@ -160,6 +160,9 @@ export default {
       "租户列表": "Tenant List",
       "租户信息": "Tenant Information",
     },
+    "stats": {
+      "用户登录统计": "User login statistics",
+    },
     "config": {
       "siderbar": {
         "服务配置": "Service configuration",
@@ -180,6 +183,8 @@ export default {
         "首页": "Home",
         "租户管理": "Tenant",
         "系统设置": "System",
+        "数据统计": "Stats",
+
       }
     },
     "costOptimization": {

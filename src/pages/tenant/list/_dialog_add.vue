@@ -11,7 +11,7 @@
   <ui-dialog title="创建新租户"
              pageStyle="width:600px;max-width:90vw;">
 
-    <div class="flex_r_s">
+    <!-- <div class="flex_r_s">
       <div style="width: 20%"></div>
       <div style="width: 15%">用户名</div>
       <ui-input maxlength="32"
@@ -19,7 +19,7 @@
                 placeholder="必填; 仅支持数字和英文组合"
                 v-model="valueUsername"
                 :pattern="regex.alphaOrDigit" />
-    </div>
+    </div> -->
     <div class="flex_r_s">
       <div style="width: 20%"></div>
       <div style="width: 15%">电话</div>
@@ -30,7 +30,8 @@
     <div class="flex_r_s">
       <div style="width: 20%"></div>
       <div style="width: 15%">电子邮件</div>
-      <ui-input maxlength="50"
+      <ui-input required
+                maxlength="50"
                 type="email"
                 v-model="valueEmail" />
     </div>
@@ -78,7 +79,7 @@ export default class extends Mixins(ui.UIDialogMixin) {
   regex = regex;
 
   // #region
-  valueUsername: string = null;
+  // valueUsername: string = null;
   valueTelephone: string = null;
   valueEmail: string = null;
   valuePassword: string = null;
@@ -101,7 +102,7 @@ export default class extends Mixins(ui.UIDialogMixin) {
    */
   handleSave() {
     if (
-      $Febs.string.isEmpty(this.valueUsername) ||
+      $Febs.string.isEmpty(this.valueEmail) ||
       $Febs.string.isEmpty(this.valuePassword) ||
       $Febs.string.isEmpty(this.valuePassword2) ||
       this.valuePassword != this.valuePassword2
@@ -110,14 +111,19 @@ export default class extends Mixins(ui.UIDialogMixin) {
       return;
     }
 
-    if (this.valueUsername.length < 5) {
-      $UIAlert('用户名的长度必须为 5~32 之间');
+    if ($Febs.string.isEmail(this.valueEmail)) {
+      $UIAlert('邮箱填写错误');
       return;
     }
 
+    // if (this.valueUsername.length < 5) {
+    //   $UIAlert('用户名的长度必须为 5~32 之间');
+    //   return;
+    // }
+
     api.login
       .register({
-        username: this.valueUsername,
+        username: null, // this.valueUsername,
         telephone: this.valueTelephone,
         email: this.valueEmail,
         password: this.valuePassword,

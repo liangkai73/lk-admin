@@ -50,31 +50,41 @@
   }
 }
 
-.events-card:hover{
-  border: solid 1px #0077FF;
+.events-card:hover {
+  border: solid 1px #0077ff;
   // background-color: #000000 !important;
 }
 </style>
 
 <template>
   <ui-card class="enpenses-item distribute">
-    <p class="enpenses-item-title">{{ $i18n('console.overview.components.events.事件') }}</p>
-    <div id="distributeChart1" class="mt10">
+    <p class="enpenses-item-title">
+      {{ $i18n("console.overview.components.events.事件") }}
+    </p>
+    <div class="mt10">
       <div class="events-card flex_r_s" @click="goSys">
         <div style="width: 20%">
           <ui-icon name="taskEvent" style="font-size: 32px"></ui-icon>
         </div>
-        <div style="width: 40%" class="title">{{ $i18n('console.overview.components.events.系统事件') }}</div>
+        <div style="width: 40%" class="title">
+          {{ $i18n("console.overview.components.events.系统事件") }}
+        </div>
         <div class="flex1"></div>
-        <div class="count">{{ total_sys }} {{ $i18n('console.overview.components.events.次') }}</div>
+        <div class="count">
+          {{ total_sys }} {{ $i18n("console.overview.components.events.次") }}
+        </div>
       </div>
       <div class="events-card flex_r_s" @click="goJob">
         <div style="width: 20%">
           <ui-icon name="doEvent" style="font-size: 32px"></ui-icon>
         </div>
-        <div style="width: 40%" class="title">{{ $i18n('console.overview.components.events.任务事件') }}</div>
+        <div style="width: 40%" class="title">
+          {{ $i18n("console.overview.components.events.任务事件") }}
+        </div>
         <div class="flex1"></div>
-        <div class="count">{{ total_job }} {{ $i18n('console.overview.components.events.次') }}</div>
+        <div class="count">
+          {{ total_job }} {{ $i18n("console.overview.components.events.次") }}
+        </div>
       </div>
     </div>
   </ui-card>

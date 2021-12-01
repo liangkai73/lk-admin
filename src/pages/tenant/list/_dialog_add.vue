@@ -111,7 +111,7 @@ export default class extends Mixins(ui.UIDialogMixin) {
       return;
     }
 
-    if ($Febs.string.isEmail(this.valueEmail)) {
+    if (!$Febs.string.isEmail(this.valueEmail)) {
       $UIAlert('邮箱填写错误');
       return;
     }

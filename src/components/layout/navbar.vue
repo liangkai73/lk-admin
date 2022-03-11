@@ -26,12 +26,13 @@
         alt
         src="../../assets/logo@3x.png"
         style="width: 140px; margin-left: 20px;cursor:pointer;"
-        
+
       />
     </div> -->
-    <ui-icon name="logoNew" @click="window.location.href = '/console/overview'"
-      style="margin-left: 10px; cursor: pointer; color: #fff"></ui-icon>
-    <span class="logoText">|</span><span class="logoText">Manager</span>
+    <!-- <ui-icon name="logoNew" @click="window.location.href = '/console/overview'"
+      style="margin-left: 10px; cursor: pointer; color: #fff"></ui-icon> -->
+    <!-- <span class="logoText">|</span> -->
+    <span class="logoText">Manager</span>
     <div @mouseenter="addHoverClass" @mouseleave="removeHoverClass" class="navbar-menu"
       v-if="false">
       <span class="cur_P"
@@ -253,7 +254,7 @@
       this.$root.$on("changeMenu", (e) => {
         this.siderStatus = e;
       });
-      
+
       (window as any).$sys_navbar = this;
     }
   }

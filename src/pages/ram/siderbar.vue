@@ -9,7 +9,7 @@
 
 <template>
   <div class="siderbar-container">
-    <h2>{{ $i18n('layouts.ram.siderbar.RAM访问控制') }}</h2>
+    <h2>用户中心</h2>
     <siderBar :moudleName="moudleName" :menuList="menuList"></siderBar>
   </div>
 </template>

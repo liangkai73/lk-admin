@@ -11,12 +11,12 @@
   height: 50px;
   width: 100%;
   // margin-left: 1px;
-  margin-bottom: 16px;
+  // margin-bottom: 16px;
   // align-items: flex-end;
   // @include background_color('bg_color2');
   background: #fff;
   padding: 0 20px;
-  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
+  // box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
 
   .content-back-icon {
     width: 36px;
@@ -54,12 +54,17 @@
   margin: 0px 20px 0 20px;
   padding: 20px 10px 20px 20px;
   // padding-top: 0px;
+  background: #fff;
   height: auto;
   transition: all 0.2s ease-in-out !important;
   -moz-transition: all 0.2s ease-in-out !important;
   -webkit-transition: all 0.2s ease-in-out !important;
   -o-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
+  &:after {
+    content: "";
+    clear: both;
+  }
 }
 
 .content-body-noGutter {
@@ -67,6 +72,7 @@
   // padding-top: 0px;
   height: auto;
   // max-width: 1500px;
+  background: #fff;
   margin-left: auto;
   margin-right: auto;
   transition: all 0.2s ease-in-out !important;
@@ -74,6 +80,10 @@
   -webkit-transition: all 0.2s ease-in-out !important;
   -o-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
+  &:after {
+    content: "";
+    clear: both;
+  }
 }
 
 .fadeInAnimate {

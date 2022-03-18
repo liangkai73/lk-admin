@@ -14,7 +14,7 @@
       color: getThemeValue(text);
       background: #fff;
       // box-shadow: 0px 2px 40px 0px rgba(16, 27, 79, 0.2);
-      box-shadow: 0px 0px 1px 1px #f1f1f1;
+      box-shadow: 0px 0px 1px 1px #E6E8EB;
       padding: 10px 20px;
       margin-left: auto;
       margin-right: auto;

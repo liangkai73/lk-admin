@@ -18,10 +18,10 @@
         <user></user>
         <!-- <balance></balance> -->
       </ui-col>
-      <ui-col :span="6" class="item-row-node">
+      <!-- <ui-col :span="6" class="item-row-node">
         <events></events>
-        <!-- <consume></consume> -->
-      </ui-col>
+        <consume></consume>
+      </ui-col> -->
       <ui-col :span="12" class="item-row-node">
         <pv></pv>
       </ui-col>

@@ -32,6 +32,12 @@
 
     <div class="flex_r_s mt10">
       <div style="width: 20%"></div>
+      <div style="width: 15%">最后登录时间</div>
+      <span>{{item.createTime}}</span>
+    </div>
+
+    <div class="flex_r_s mt10">
+      <div style="width: 20%"></div>
       <div style="width: 15%">状态</div>
       <div style="width: 50%">
         <ui-radio-group :disabled="!isEdit || id=='1'"

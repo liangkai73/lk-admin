@@ -16,37 +16,32 @@ export default [
     account: "overview"
   },
   {
+    title: $i18n('个人中心'),
+    path: "/userCenter/info",
+    icon: "yunanquan",
+  },
+  {
     title: $i18n('用户中心'),
     path: "/ram/user",
     icon: "rongqifuwu",
   },
 
   {
-    title: $i18n("layouts.components.drawer.租户管理"),
-    path: "/tenant/apply",
-    icon: "feiyong",
+    title: $i18n("租户中心"),
+    path: "/tenant/list",
+    icon: "costOptimization",
     account: "expenses"
+  },
+  {
+    title: $i18n("站内信/通知"),
+    path: "/notification/message",
+    icon: "feiyong",
   },
 
   {
     title: $i18n("layouts.components.drawer.系统设置"),
     path: "/system/mail",
     icon: "faas"
-  },
-  {
-    title: $i18n('订单管理'),
-    path: "/order/list",
-    icon: "faas",
-  },
-  {
-    title: $i18n('优惠券管理'),
-    path: "/coupon/list",
-    icon: "faas",
-  },
-  {
-    title: $i18n('独立站模板管理'),
-    path: "/template/list",
-    icon: "rongqifuwu",
   },
   {
     title: $i18n('数据分析管理'),

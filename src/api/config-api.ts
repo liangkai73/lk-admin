@@ -3,7 +3,7 @@
  * @Author: lanck.xie
  * @Date: 2020-09-14 14:03:32
  * @Last Modified by: lanck.xie
- * @Last Modified time: 2021-10-09 14:56:12
+ * @Last Modified time: 2022-03-30 14:12:25
  */
 export default {
   token: "/api/v1/services/ephemeralSessionId",
@@ -12,6 +12,16 @@ export default {
     postLogin: "/user-service/api/v1/users/login", // 登录主账号
     postRegister: "/user-service/api/v1/users/register", // 注册
     postLogout: "/user-service/api/v1/users/logout" // 登出
+  },
+  // 效验模块
+  act: {
+    getTrace: (code: string | number) => `/quantum-service/api/act/trace/${code}`, // 溯源防伪编码信息
+    getBatchList: "/quantum-service/api/act/batch", // 获取批次列表
+    PostBatchList: "/quantum-service/api/act/batch", // 添加批次信息
+    getBatchById: (id: string | number) => `/quantum-service/api/act/batch/${id}`, // 获取批次信息
+    getBatchCode: "/quantum-service/api/act/batch/code", // 获取批次中编码列表
+    postBatchStage: "/quantum-service/api/act/batch/stage", // 添加批次阶段信息
+    deleteBatchStage: (id: string | number) => `/quantum-service/api/act/batch/stage/${id}` // 删除批次阶段信息
   },
   // user模块
   user: {

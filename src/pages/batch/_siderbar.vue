@@ -36,12 +36,17 @@ import mainMenu from "@/components/layout/mainMenu";
 export default class extends Mixins(siderBarMixin) {
   menuList = [
     {
-      title: "订单列表",
-      path: "/order/list",
-      icon: "home",
+      title: $i18n("防伪编码查询"),
+      path: "/query",
+      icon: "feiyong",
+    },
+    {
+      title: $i18n("防伪批次管理"),
+      path: "/batch/list",
+      icon: "rongqifuwu",
     },
   ];
-  moudleName = "template";
+  moudleName = "coupon";
 
   //
   // lifecycle hook.

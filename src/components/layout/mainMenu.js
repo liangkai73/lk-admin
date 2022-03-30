@@ -16,26 +16,16 @@ export default [
     account: "overview"
   },
   {
-    title: $i18n('个人中心'),
-    path: "/userCenter/info",
-    icon: "yunanquan",
-  },
-  {
     title: $i18n('用户中心'),
     path: "/ram/user",
     icon: "rongqifuwu",
   },
 
   {
-    title: $i18n("租户中心"),
-    path: "/tenant/list",
-    icon: "costOptimization",
-    account: "expenses"
-  },
-  {
-    title: $i18n("站内信/通知"),
-    path: "/notification/message",
+    title: $i18n("layouts.components.drawer.租户管理"),
+    path: "/tenant/apply",
     icon: "feiyong",
+    account: "expenses"
   },
 
   {
@@ -43,9 +33,27 @@ export default [
     path: "/system/mail",
     icon: "faas"
   },
+
+  // {
+  //   title: $i18n("租户中心"),
+  //   path: "/tenant/list",
+  //   icon: "costOptimization",
+  //   account: "expenses"
+  // },
+  // {
+  //   title: $i18n("站内信/通知"),
+  //   path: "/notification/message",
+  //   icon: "feiyong",
+  // },
+
   {
-    title: $i18n('数据分析管理'),
-    path: "/stats/list",
+    title: $i18n("防伪编码查询"),
+    path: "/query",
+    icon: "feiyong"
+  },
+  {
+    title: $i18n('防伪批次管理'),
+    path: "/batch/list",
     icon: "rongqifuwu",
   },
 ];

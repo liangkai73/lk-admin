@@ -1,11 +1,11 @@
 /*
  * @Author: lanck.xie
  * @Date: 2020-08-26 14:43:10
- * @Last Modified by: mikey.zhaopeng
- * @Last Modified time: 2021-05-31 10:28:52
+ * @Last Modified by: lanck.xie
+ * @Last Modified time: 2022-03-28 15:12:09
  */
 
-import layout from './layout';
+import layout from "./layout";
 import login from "./login";
 import user from "./user";
 import role from "./role";
@@ -16,6 +16,7 @@ import cmp from "./cmp";
 import ars from "./ars";
 import policy from "./policy";
 import platformUser from "./platformUser";
+import act from "./act";
 
 export default {
   layout, // APP layout相关
@@ -29,4 +30,5 @@ export default {
   cmp,
   policy,
   platformUser, // 租户相关
+  act // 效验模块
 };

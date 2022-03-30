@@ -1,12 +1,12 @@
 <!--
 /**
-* Copyright (c) 2020 Copyright Originforest All Rights Reserved.
+* Copyright (c) 2020 Copyright bp All Rights Reserved.
 * Author: lanck
 * Date: 2020-09-08 11:33
-* Desc: 分页 
+* Desc: 分页
 * 属性： page-size 每页显示条目 默认10 ；total 总条目数 默认200
 * 属性： current-page 当前页数 默认1  ; pagerCount 页码按钮的数量，当总页数超过该值时会折叠 默认5:
-* event current-change currentPage 改变时会触发 
+* event current-change currentPage 改变时会触发
 */
  -->
  <style lang="scss" scoped>
@@ -136,14 +136,14 @@
     </button>
     <select
       class="pageSize-select"
-      v-if="showSelect"
       @change="changePageSize"
-      v-model="relPageSize">
-      <option :value="10">{{ $i18n('ui.uiPagination.10条/页') }}</option>
-      <option :value="20">{{ $i18n('ui.uiPagination.20条/页') }}</option>
-      <option :value="30">{{ $i18n('ui.uiPagination.30条/页') }}</option>
-      <option :value="40">{{ $i18n('ui.uiPagination.40条/页') }}</option>
-      <option :value="50">{{ $i18n('ui.uiPagination.50条/页') }}</option>
+      v-model="relPageSize"
+    >
+      <option :value="10">10条/页</option>
+      <option :value="20">20条/页</option>
+      <option :value="30">30条/页</option>
+      <option :value="40">40条/页</option>
+      <option :value="50">50条/页</option>
     </select>
   </div>
 </template>
@@ -158,6 +158,7 @@ import {
   // Provide,
   // Emit,
 } from "vue-property-decorator";
+// import { State, Mutation } from "vuex-class";
 
 @Component({
   components: {},
@@ -186,7 +187,6 @@ export default class extends Vue {
   @Prop({ type: Number, default: 200 }) total!: number;
   @Prop({ type: Number, default: 1 }) value!: number;
   @Prop({ type: Number, default: 5 }) pagerCount!: number;
-  @Prop({ type: Boolean, default: true }) showSelect: boolean;
   @PropSync("pageSize", { type: Number, default: 10 }) relPageSize!: number;
 
   //
@@ -211,7 +211,7 @@ export default class extends Vue {
     if (this.value > 0 && Math.ceil(this.value) == this.value) {
       return this.value;
     } else {
-      console.error($i18n('ui.uiPagination.value_应为不小于0的整数'));
+      console.error("value 应为不小于0的整数");
       return 1;
     }
   }

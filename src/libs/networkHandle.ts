@@ -19,7 +19,7 @@ export default class NetworkHandler implements ui.network.INetworkHandler {
    * 如果请求的url不是http/https开头, 将使用此站点地址作为前缀.
    */
   get requestHost(): string {
-    return process.env.VUE_APP_URL;
+    return "http://localhost:8083/";
   }
 
   /**

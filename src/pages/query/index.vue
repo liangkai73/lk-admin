@@ -69,6 +69,25 @@
           <span>{{ item.val }}</span>
         </p></template
       >
+      <template v-if="queryData.prdStageArr.length > 0">
+        <p class="mt20">批次阶段信息:</p>
+        <div
+          class="stage-item mt10"
+          v-for="(item, index) in queryData.prdStageArr"
+          :key="item.stageId"
+        >
+          <div class="flex_r_s">
+            <h3>{{ index + 1 }}:</h3>
+            <h3 style="padding: 0 20px">{{ item.stageName }}</h3>
+            <span>({{ item.stageDate }}) </span>
+            <span class="flex1"></span>
+          </div>
+          <p class="stage-item-content mt10">{{ item.stageContent }}</p>
+        </div>
+      </template>
+    </div>
+    <div v-show="queryData.batchName === null">
+      <p class="mt20">- 暂无编码信息</p>
     </div>
   </contentView>
 </template>

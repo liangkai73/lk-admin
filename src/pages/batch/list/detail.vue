@@ -112,6 +112,20 @@
         </div>
       </div>
     </template>
+    <!-- page3 -->
+    <template v-if="tabsValue == 3">
+      <ui-row class="mt20">
+        <p>产品拓展信息:</p>
+        <p
+          class="mt10 flex_r_s"
+          v-for="(item, index) in batchData.prdExtraArr"
+          :key="index"
+        >
+          <span style="width: 200px">{{ item.name }}</span>
+          <span>{{ item.val }}</span>
+        </p>
+      </ui-row>
+    </template>
     <!-- dialog 创建用户组 -->
     <ui-dialog
       class="dialog-box"
@@ -135,7 +149,7 @@
             <p class="input_require">阶段时间:</p>
             <ui-input
               class="mt10 inner-input"
-              type="date"
+              placeholder="请输入阶段时间"
               v-model="stageParams.stageDate"
             ></ui-input>
           </ui-col>
@@ -215,6 +229,7 @@ export default class extends Vue {
   tabsData = [
     { title: "批次编码列表", value: 1 },
     { title: "批次阶段信息", value: 2 },
+    { title: "产品拓展信息", value: 3 },
   ];
 
   batchCodelist = []; // 批次中编码列表

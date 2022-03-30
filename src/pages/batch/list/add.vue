@@ -66,8 +66,7 @@
           <p class="mt10"></p>
           <bp-input
             class="inner-input"
-            placeholder="请输入批次名称"
-            type="date"
+            placeholder="请输入产品生产日期"
             v-model="batchParams.prdDate"
           ></bp-input>
         </ui-col>
@@ -104,6 +103,31 @@
             "
             placeholder="请输入防伪编码"
           ></bp-input>
+        </ui-col>
+      </ui-row>
+      <ui-row class="inner-item mt10">
+        <ui-col :span="24">
+          <p class="flex_r_s">
+            <span>产品拓展信息:</span>
+            <span class="flex1"></span>
+            <bp-icon
+              name="add"
+              @click="addPrdExtraArr"
+              class="add-icon"
+            ></bp-icon>
+          </p>
+          <p class="mt10"></p>
+          <div
+            v-for="(item, index) in batchParams.prdExtra"
+            :key="index"
+            class="inner-input mt10"
+            style="padding-left: 20px"
+          >
+            <p>拓展名称：</p>
+            <bp-input v-model="item.name"></bp-input>
+            <p>拓展内容：</p>
+            <bp-input v-model="item.val"></bp-input>
+          </div>
         </ui-col>
       </ui-row>
 
@@ -170,6 +194,7 @@ export default class extends Vue {
     prdDate: "", // 产品生产日期
     prdFactory: "", //  产品生产商
     prdName: "", // 产品名称
+    prdExtra: [],
   };
 
   //
@@ -194,6 +219,13 @@ export default class extends Vue {
   }
   addCodeArr() {
     this.batchParams.codeArr.push("");
+  }
+  addPrdExtraArr() {
+    let obj = {
+      name: "",
+      val: "",
+    };
+    this.batchParams.prdExtra.push(obj);
   }
   setCode(e, index) {
     this.$set(this.batchParams.codeArr, index, e.target.value);

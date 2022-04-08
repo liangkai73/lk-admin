@@ -18,15 +18,15 @@
         <user></user>
         <!-- <balance></balance> -->
       </ui-col>
-      <!-- <ui-col :span="6" class="item-row-node">
-        <events></events>
-        <consume></consume>
-      </ui-col> -->
+      <!-- <ui-col :span="6" class="item-row-node"> -->
+      <!-- <events></events> -->
+      <!-- <consume></consume> -->
+      <!-- </ui-col> -->
       <ui-col :span="12" class="item-row-node">
-        <!-- <pv></pv> -->
+        <pv></pv>
       </ui-col>
       <ui-col :span="6" class="item-row-node">
-        <!-- <distribute></distribute> -->
+        <distribute></distribute>
       </ui-col>
       <!-- <ui-col :span="6" class="item-row-node">
         <distribute></distribute>

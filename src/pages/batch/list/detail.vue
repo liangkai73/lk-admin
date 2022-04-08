@@ -12,22 +12,19 @@
     <ui-row>
       <ui-col span="8">
         <div class="flex_r_s mt10">
-          <div style="width: 25%"></div>
-          <div style="width: 25%">批次名称:</div>
+          <div style="width: 150px; color: #666">批次名称:</div>
           <span>{{ batchData.batchName }}</span>
         </div>
       </ui-col>
       <ui-col span="8">
         <div class="flex_r_s mt10">
-          <div style="width: 25%"></div>
-          <div style="width: 25%">产品名称:</div>
+          <div style="width: 150px; color: #666">产品名称:</div>
           <span>{{ batchData.prdName }}</span>
         </div>
       </ui-col>
       <ui-col span="8">
         <div class="flex_r_s mt10">
-          <div style="width: 25%"></div>
-          <div style="width: 25%">创建时间:</div>
+          <div style="width: 150px; color: #666">创建时间:</div>
           <span>{{ batchData.createTime }}</span>
         </div>
       </ui-col>
@@ -35,22 +32,19 @@
     <ui-row class="mt20">
       <ui-col span="8">
         <div class="flex_r_s mt10">
-          <div style="width: 25%"></div>
-          <div style="width: 25%">产品品牌:</div>
+          <div style="width: 150px; color: #666">产品品牌:</div>
           <span>{{ batchData.prdBrand }}</span>
         </div>
       </ui-col>
       <ui-col span="8">
         <div class="flex_r_s mt10">
-          <div style="width: 25%"></div>
-          <div style="width: 25%">生产日期:</div>
+          <div style="width: 150px; color: #666">生产日期:</div>
           <span>{{ batchData.prdDate }}</span>
         </div>
       </ui-col>
       <ui-col span="8">
         <div class="flex_r_s mt10">
-          <div style="width: 25%"></div>
-          <div style="width: 25%">批次id:</div>
+          <div style="width: 150px; color: #666">批次id:</div>
           <span>{{ batchData.id }}</span>
         </div>
       </ui-col>
@@ -58,7 +52,7 @@
     <!-- tabs -->
 
     <uiTabs
-      style="margin-top: 100px"
+      style="margin-top: 40px"
       :data="tabsData"
       v-model="tabsValue"
       @handleClick="changeView"
@@ -89,7 +83,7 @@
       <p class="mt20">
         <button
           class="bp-btn faas-btn-primary"
-          style="width: 130px"
+          style="width: 150px"
           @click="showStageDialog"
         >
           添加批次阶段信息
@@ -102,26 +96,28 @@
           :key="item.stageId"
         >
           <div class="flex_r_s">
-            <h3>{{ index + 1 }}:</h3>
-            <h3 style="padding: 0 20px">{{ item.stageName }}</h3>
-            <span>({{ item.stageDate }}) </span>
-            <span class="flex1"></span>
-            <button @click="removeStage(item.stageId)">删除</button>
+            <div style="width: 300px" class="flex_r_s">
+              <h3 style="font-size: 14px">{{ index + 1 }}:</h3>
+              <h3 style="padding: 0 20px; font-size: 14px">
+                {{ item.stageName }}
+              </h3>
+              <span>({{ item.stageDate }}) </span>
+              <span class="flex1"></span>
+            </div>
+            <p class="stage-item-content flex1">{{ item.stageContent }}</p>
           </div>
-          <p class="stage-item-content mt10">{{ item.stageContent }}</p>
         </div>
       </div>
     </template>
     <!-- page3 -->
     <template v-if="tabsValue == 3">
       <ui-row class="mt20">
-        <p>产品拓展信息:</p>
         <p
           class="mt10 flex_r_s"
           v-for="(item, index) in batchData.prdExtraArr"
           :key="index"
         >
-          <span style="width: 200px">{{ item.name }}</span>
+          <span style="width: 200px; color: #666">{{ item.name }}</span>
           <span>{{ item.val }}</span>
         </p>
       </ui-row>
@@ -400,5 +396,9 @@ export default class extends Vue {
     padding-right: 5px;
     color: #1baaf5;
   }
+}
+.stage-item {
+  border: 1px solid #dadce0;
+  padding: 15px 30px;
 }
 </style>

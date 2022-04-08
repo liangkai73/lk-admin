@@ -24,12 +24,13 @@
       </div>
     </div>
 
-    <div @click="window.location.href = '/'">
+    <div @click="window.location.href = '/console/overview'" class="flex_r_s">
       <img
         alt
-        src="../../assets/logo@2x.png"
-        style="width: 140px; margin-left: 20px; cursor: pointer"
+        src="../../assets/logo_gang.jpg"
+        style="width: 30px; margin-left: 20px; cursor: pointer"
       />
+      <span style="padding: 10px">量子防伪溯源系统</span>
     </div>
     <!-- <ui-icon name="logoNew" @click="window.location.href = '/console/overview'"
       style="margin-left: 10px; cursor: pointer; color: #fff"></ui-icon> -->
@@ -308,7 +309,7 @@ export default class extends Vue {
   width: 100%;
   height: 50px;
   // @include background_color("bg_color1");
-  background:#fff;
+  background: #fff;
   // background: #222222;
   position: fixed;
   top: 0;

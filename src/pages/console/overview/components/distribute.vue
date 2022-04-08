@@ -85,7 +85,11 @@ export default class extends Vue {
     billingPeriodEnd: "",
     groupTypes: ["PRODUCT"],
   };
-  chartData = [{ value: 0, name: "暂无数据" }];
+  chartData = [
+    { value: 588, name: "福建" },
+    { value: 159, name: "上海" },
+    { value: 59, name: "北京" },
+  ];
   totalAmount: number = 0;
   colorList = [
     "#4ccfe0",

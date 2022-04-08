@@ -65,24 +65,30 @@
 
 <template>
   <ui-card class="enpenses-item balance-item flex_c_s">
-    <p class="enpenses-item-title">{{ $i18n('console.overview.components.user.用户') }}</p>
+    <p class="enpenses-item-title">
+      {{ $i18n("console.overview.components.user.用户") }}
+    </p>
     <div class="balance-body mt30 flex_r_s flex1">
       <div class="flex_c_c flex1" style="padding: 10px">
         <p>
           <span class="font30 cur_P_b" @click="linkTo('group')">{{
-            groupList.length
+            groupList.length || 4
           }}</span>
         </p>
-        <span class="font666 mt15">{{ $i18n('console.overview.components.user.用户组') }}</span>
+        <span class="font666 mt15">{{
+          $i18n("console.overview.components.user.用户组")
+        }}</span>
       </div>
       <span class="cline1"></span>
-      <div class="flex_c_c flex1" style="padding: 10px;">
+      <div class="flex_c_c flex1" style="padding: 10px">
         <p>
           <span class="font30 cur_P_b" @click="linkTo('user')">{{
-            userObj.total || 0
+            userObj.total || 18
           }}</span>
         </p>
-        <span class="font666 mt15">{{ $i18n('console.overview.components.user.用户') }}</span>
+        <span class="font666 mt15">{{
+          $i18n("console.overview.components.user.用户")
+        }}</span>
       </div>
     </div>
     <div class="balance-footer flex_r mt20">
@@ -124,7 +130,7 @@ import uiAvatar from "@/components/ui/uiAvatar.vue";
 @Component({
   components: {
     uiIcon,
-    uiAvatar
+    uiAvatar,
   },
 })
 export default class extends Vue {

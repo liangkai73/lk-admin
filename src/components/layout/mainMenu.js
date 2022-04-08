@@ -21,12 +21,12 @@ export default [
     icon: "rongqifuwu",
   },
 
-  {
-    title: $i18n("layouts.components.drawer.租户管理"),
-    path: "/tenant/apply",
-    icon: "feiyong",
-    account: "expenses"
-  },
+  // {
+  //   title: $i18n("layouts.components.drawer.租户管理"),
+  //   path: "/tenant/apply",
+  //   icon: "feiyong",
+  //   account: "expenses"
+  // },
 
   {
     title: $i18n("layouts.components.drawer.系统设置"),

@@ -3,7 +3,7 @@
 * Copyright (c) 2022 Copyright bp All Rights Reserved.
 * Author: lanck
 * Date: 2022-03-28 11:07
-* Desc:
+* Desc:  HWM202203001
 */
  -->
 
@@ -27,67 +27,80 @@
       </button>
     </p>
 
-    <div
-      class="mt20 query-result"
-      style="width: 600px"
-      v-if="queryData.batchName"
-    >
-      <p class="mt10">查询结果：</p>
-      <p class="mt10 flex_r_s">
-        <span>批次名称</span>
-        <span class="flex1"></span>
+    <div class="mt20 query-result" v-if="queryData.batchName">
+      <p style="font-size: 16px; font-weight: 600">基础信息:</p>
+      <p class="mt20 flex_r_s">
+        <span class="result-item-title">批次名称</span>
+
         <span>{{ queryData.batchName }}</span>
-      </p>
-      <p class="mt10 flex_r_s">
-        <span>产品品牌</span>
         <span class="flex1"></span>
+      </p>
+      <p class="mt5 flex_r_s">
+        <span class="result-item-title">产品品牌</span>
+
         <span>{{ queryData.prdBrand }}</span>
-      </p>
-      <p class="mt10 flex_r_s">
-        <span>生产日期</span>
         <span class="flex1"></span>
+      </p>
+      <p class="mt5 flex_r_s">
+        <span class="result-item-title">生产日期</span>
+
         <span>{{ queryData.prdDate }}</span>
-      </p>
-      <p class="mt10 flex_r_s">
-        <span>生产厂商</span>
         <span class="flex1"></span>
+      </p>
+      <p class="mt5 flex_r_s">
+        <span class="result-item-title">生产厂商</span>
+
         <span>{{ queryData.prdFactory }}</span>
-      </p>
-      <p class="mt10 flex_r_s">
-        <span>产品名称</span>
         <span class="flex1"></span>
+      </p>
+      <p class="mt5 flex_r_s">
+        <span class="result-item-title">产品名称</span>
+
         <span>{{ queryData.prdName }}</span>
+        <span class="flex1"></span>
       </p>
       <template v-if="queryData.prdExtraArr.length > 0">
         <p
-          class="mt10 flex_r_s"
+          class="mt5 flex_r_s"
           v-for="(item, index) in queryData.prdExtraArr"
           :key="index"
         >
-          <span>{{ item.name }}</span>
-          <span class="flex1"></span>
+          <span class="result-item-title">{{ item.name }}</span>
+
           <span>{{ item.val }}</span>
-        </p></template
-      >
+          <span class="flex1"></span></p
+      ></template>
+      <p class="mt10"></p>
+      <p class="line1"></p>
       <template v-if="queryData.prdStageArr.length > 0">
-        <p class="mt20">批次阶段信息:</p>
+        <p class="mt20" style="font-size: 16px; font-weight: 600">
+          批次阶段信息:
+        </p>
+        <p class="mt20"></p>
         <div
           class="stage-item mt10"
           v-for="(item, index) in queryData.prdStageArr"
           :key="item.stageId"
         >
           <div class="flex_r_s">
-            <h3>{{ index + 1 }}:</h3>
-            <h3 style="padding: 0 20px">{{ item.stageName }}</h3>
-            <span>({{ item.stageDate }}) </span>
-            <span class="flex1"></span>
+            <div style="width: 300px" class="flex_r_s">
+              <h3 style="font-size: 14px">{{ index + 1 }}:</h3>
+              <h3 style="padding: 0 20px; font-size: 14px">
+                {{ item.stageName }}
+              </h3>
+              <span>({{ item.stageDate }}) </span>
+              <span class="flex1"></span>
+            </div>
+            <p class="stage-item-content flex1">{{ item.stageContent }}</p>
           </div>
-          <p class="stage-item-content mt10">{{ item.stageContent }}</p>
         </div>
+        <p class="mt20"></p>
       </template>
     </div>
     <div v-show="queryData.batchName === null">
-      <p class="mt20">- 暂无编码信息</p>
+      <div class="query-result-null mt20 flex_r_c">
+        <span style="color: #999">暂无查询内容</span>
+      </div>
     </div>
   </contentView>
 </template>
@@ -156,7 +169,21 @@ export default class extends Vue {
 </script>
 <style lang="scss" >
 .query-result {
-  // background: #ccc;
-  padding: 10px;
+  width: 100%;
+  border: 1px solid #dadce0;
+  padding: 20px 30px;
+  .result-item-title {
+    color: #666;
+    width: 300px;
+  }
+  .stage-item {
+    border: 1px solid #dadce0;
+    padding: 15px 30px;
+  }
+}
+.query-result-null {
+  width: 100%;
+  height: 550px;
+  border: 1px solid #dadce0;
 }
 </style>

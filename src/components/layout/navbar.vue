@@ -70,7 +70,7 @@
     </div> -->
 
     <!-- 消息中心 -->
-    <messagetips style="margin-left: 24px"></messagetips>
+    <!-- <messagetips style="margin-left: 24px"></messagetips> -->
     <span style="padding-left: 10px"></span>
 
     <ul class="navbar-account flex_r_c">

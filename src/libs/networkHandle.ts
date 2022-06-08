@@ -19,7 +19,7 @@ export default class NetworkHandler implements ui.network.INetworkHandler {
    * 如果请求的url不是http/https开头, 将使用此站点地址作为前缀.
    */
   get requestHost(): string {
-    return "http://localhost:8083/";
+    return "http://39.103.181.81:13303/";
   }
 
   /**
@@ -81,7 +81,7 @@ export default class NetworkHandler implements ui.network.INetworkHandler {
   onRawHandler(serverData: Response, url: string): void {
     switch (serverData.status) {
       case 404:
-        $UIToast({ type: "error", content: $i18n("服务暂时不可用") });
+        // $UIToast({ type: "error", content: $i18n("服务暂时不可用") });
         throw new Error("status: " + serverData.status + "; url: " + url);
         break;
     }
@@ -118,7 +118,7 @@ export default class NetworkHandler implements ui.network.INetworkHandler {
         if (data.err_msg) {
           for (const key in prefixs) {
             if (data.err_msg.indexOf(prefixs[key]) >= 0) {
-              $UIToast({ type: "error", content: $i18n("服务暂时不可用") });
+              // $UIToast({ type: "error", content: $i18n("服务暂时不可用") });
               throw data;
             }
           }

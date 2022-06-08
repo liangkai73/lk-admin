@@ -35,11 +35,14 @@
         <events></events>
       </ui-col> -->
     </ui-row>
-    <!-- <ui-row :gutter="15" class="item-row mt10"> -->
-    <!-- <ui-col :span="6" class="item-row-node">
-        <user></user>
-      </ui-col> -->
-    <!-- </ui-row> -->
+    <ui-row :gutter="15" class="item-row mt10">
+      <ui-col :span="6" class="item-row-node">
+        <distribute1></distribute1>
+      </ui-col>
+      <ui-col :span="12" class="item-row-node">
+        <pv1></pv1>
+      </ui-col>
+    </ui-row>
   </content-view>
 </template>
 
@@ -54,14 +57,16 @@ import {
 } from "vue-property-decorator";
 import contentView from "@/components/layout/contentView.vue";
 import api from "@/api";
-import { events, user, pv, distribute } from "./components";
+import { events, user, pv, pv1, distribute, distribute1 } from "./components";
 @Component({
   components: {
     contentView,
     events,
     user,
     pv,
+    pv1,
     distribute,
+    distribute1,
   },
   name: "overviewIndex",
 })

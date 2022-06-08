@@ -2,7 +2,7 @@
  * @Author: lanck.xie
  * @Date: 2021-09-15 17:56:19
  * @Last Modified by: lanck.xie
- * @Last Modified time: 2021-09-18 17:00:42
+ * @Last Modified time: 2022-04-09 14:32:55
  * @Desc 服务器store存取
  */
 import api from "@/api/config-api";
@@ -21,6 +21,7 @@ const allObj = {
 
 function getNetStore(key) {
   // postNetStore('guideStatus',allObj.guideStatus)
+  return
   if (KEYARR.includes(key)) {
     return $UINetwork
       .get(api.user.getNetStore, { module_key: key })

@@ -45,7 +45,7 @@
           <ui-th width="200px">生产厂商</ui-th>
           <ui-th width="200px">产品名称</ui-th>
           <ui-th width="200px">创建时间</ui-th>
-          <ui-th>操作</ui-th>
+          <ui-th width="200px">操作</ui-th>
         </ui-tr>
       </ui-thead>
       <template v-if="batchList.length > 0">
@@ -70,7 +70,12 @@
             <ui-button small @click.stop="linkTo('detail', { id: item.id })">{{
               $i18n("查看")
             }}</ui-button>
-            <ui-button small warning plain @click.stop="handleDel(item)"
+            <ui-button
+              small
+              @click.stop="linkTo('edit', { id: item.id, type: 'edit' })"
+              >编辑</ui-button
+            >
+            <ui-button small warning plain @click.stop="handleDel(item.id)"
               >删除</ui-button
             >
           </ui-td>
@@ -86,7 +91,6 @@
         v-model="pageData.page"
       ></uiPagination>
     </template>
-
   </contentView>
 </template>
 
@@ -177,6 +181,12 @@ export default class extends Vue {
         path: "/batch/list/add",
       });
     }
+    if (url == "edit") {
+      this.$navbar.push({
+        path: "/batch/list/add",
+        query: params,
+      });
+    }
   }
   mounted() {}
   created() {
@@ -205,7 +215,25 @@ export default class extends Vue {
       .catch((err) => {});
   }
   handleView() {}
-  handleDel() {}
+  handleDel(id) {
+    $UIConfirm({
+      content: "确认删除这条阶段信息？",
+    })
+      .then((res) => {
+        api.act
+          .deleteBatchById(id)
+          .then((result) => {
+            this._getBatchList();
+            $UIConfirmHide();
+          })
+          .catch((err) => {
+            $UIConfirmHide();
+          });
+      })
+      .catch((err) => {
+        $UIConfirmHide();
+      });
+  }
   handleDlogClose() {}
   handleSure() {}
 }

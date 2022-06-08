@@ -3,7 +3,7 @@
  * @Author: lanck.xie
  * @Date: 2020-09-14 14:03:32
  * @Last Modified by: lanck.xie
- * @Last Modified time: 2022-03-30 14:12:25
+ * @Last Modified time: 2022-04-11 15:32:19
  */
 export default {
   token: "/api/v1/services/ephemeralSessionId",
@@ -15,13 +15,15 @@ export default {
   },
   // 效验模块
   act: {
-    getTrace: (code: string | number) => `/quantum-service/api/act/trace/${code}`, // 溯源防伪编码信息
-    getBatchList: "/quantum-service/api/act/batch", // 获取批次列表
-    PostBatchList: "/quantum-service/api/act/batch", // 添加批次信息
-    getBatchById: (id: string | number) => `/quantum-service/api/act/batch/${id}`, // 获取批次信息
-    getBatchCode: "/quantum-service/api/act/batch/code", // 获取批次中编码列表
-    postBatchStage: "/quantum-service/api/act/batch/stage", // 添加批次阶段信息
-    deleteBatchStage: (id: string | number) => `/quantum-service/api/act/batch/stage/${id}` // 删除批次阶段信息
+    getTrace: (code: string | number) => `/api/act/trace/${code}`, // 溯源防伪编码信息
+    getBatchList: "/api/act/batch", // 获取批次列表
+    PostBatchList: "/api/act/batch", // 添加批次信息
+    getBatchById: (id: string | number) => `/api/act/batch/${id}`, // 获取批次信息
+    putBatchById: (id: string | number) => `/api/act/batch/${id}`, // 修改批次信息
+    deleteBatchById: (id: string | number) => `/api/act/batch/${id}`, // 删除批次信息
+    getBatchCode: "/api/act/batch/code", // 获取批次中编码列表
+    postBatchStage: "/api/act/batch/stage", // 添加批次阶段信息
+    deleteBatchStage: (id: string | number) => `/api/act/batch/stage/${id}` // 删除批次阶段信息
   },
   // user模块
   user: {

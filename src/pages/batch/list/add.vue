@@ -92,17 +92,28 @@
             <span class="flex1"></span>
             <bp-icon name="add" @click="addCodeArr" class="add-icon"></bp-icon>
           </p>
-          <bp-input
+          <div
+            class="flex_r_s"
             v-for="(item, index) in batchParams.codeArr"
             :key="index"
-            class="inner-input mt10"
-            @blur="
-              (e) => {
-                setCode(e, index);
-              }
-            "
-            placeholder="请输入防伪编码"
-          ></bp-input>
+          >
+            <bp-input
+              class="inner-input mt10 flex1"
+              :value="item"
+              @blur="
+                (e) => {
+                  setCode(e, index);
+                }
+              "
+              placeholder="请输入防伪编码"
+            ></bp-input>
+            <bp-icon
+              name="remove"
+              style="color: red"
+              class="pl5 cur_P"
+              @click="removeCode(index)"
+            ></bp-icon>
+          </div>
         </ui-col>
       </ui-row>
       <ui-row class="inner-item mt10">
@@ -120,13 +131,21 @@
           <div
             v-for="(item, index) in batchParams.prdExtra"
             :key="index"
-            class="inner-input mt10"
+            class="inner-input mt10 flex_r_s"
             style="padding-left: 20px"
           >
-            <p>拓展名称：</p>
-            <bp-input v-model="item.name"></bp-input>
-            <p>拓展内容：</p>
-            <bp-input v-model="item.val"></bp-input>
+            <div class="flex1">
+              <p>拓展名称：</p>
+              <bp-input v-model="item.name"></bp-input>
+              <p>拓展内容：</p>
+              <bp-input v-model="item.val"></bp-input>
+            </div>
+            <bp-icon
+              name="remove"
+              style="color: red"
+              class="pl5 cur_P"
+              @click="removeExtra(index)"
+            ></bp-icon>
           </div>
         </ui-col>
       </ui-row>
@@ -136,14 +155,23 @@
         <span class="flex1"></span>
         <button
           class="bp-btn faas-btn-primary"
+          v-show="type == 'add'"
           @click="handleSure"
           style="width: 100px"
           :disabled="addIsdisabled"
         >
           确定
         </button>
+        <button
+          v-show="type == 'edit'"
+          class="bp-btn faas-btn-primary"
+          @click="handleSureEdit"
+          style="width: 100px"
+        >
+          确定修改
+        </button>
       </div>
-      <p class="mt20"></p>
+      <p style="margin-bottom: 30px"></p>
     </div>
   </contentView>
 </template>
@@ -179,6 +207,7 @@ export default class extends Vue {
   //
   // state.
   // @State(state=>state.demo) demo:DEMO_TYPE;
+  type = "add";
 
   //
   // Prop
@@ -187,6 +216,7 @@ export default class extends Vue {
   //
   // data.
   // @Provide() demo:number = 1;
+  batchId = "";
   batchParams = {
     batchName: "", // 批次名称
     codeArr: [""], //
@@ -200,6 +230,7 @@ export default class extends Vue {
   //
   // computed.
   get addIsdisabled() {
+    // return true;
     return (
       this.batchParams.batchName.length == 0 ||
       this.batchParams.prdName.length == 0 ||
@@ -231,13 +262,47 @@ export default class extends Vue {
     this.$set(this.batchParams.codeArr, index, e.target.value);
     // this.batchParams.codeArr[index] = e.target.value;
   }
+  created() {
+    const { type, id } = this.$route.query;
+    this.batchId = id;
+    this.type = type || "add";
+    type == "edit" && id && this._initEdit(id);
+  }
+  removeCode(index: number) {
+    console.log(index);
+    this.batchParams.codeArr.splice(index, 1);
+  }
+  removeExtra(index: number) {
+    console.log(index);
+    this.batchParams.prdExtra.splice(index, 1);
+  }
   mounted() {}
+  _initEdit(id: string) {
+    api.act.getBatchById(id).then((res) => {
+      console.log(res);
+      this.batchParams.batchName = res.batchName;
+      this.batchParams.codeArr = res.codeArr;
+      this.batchParams.prdBrand = res.prdBrand;
+      this.batchParams.prdDate = res.prdDate;
+      this.batchParams.prdExtra = res.prdExtraArr;
+      this.batchParams.prdFactory = res.prdFactory;
+      this.batchParams.prdName = res.prdName;
+      console.log(this.batchParams);
+    });
+  }
   handleSure() {
-    console.log(this.batchParams);
     api.act.PostBatchList(this.batchParams).then((res) => {
       $UIToast({
         type: "success",
         content: "添加批次成功！",
+      });
+    });
+  }
+  handleSureEdit() {
+    api.act.putBatchById(this.batchId, this.batchParams).then((res) => {
+      $UIToast({
+        type: "success",
+        content: "修改批次成功！",
       });
     });
   }
@@ -277,7 +342,6 @@ export default class extends Vue {
   }
   .add-icon {
     cursor: pointer;
-    padding-right: 5px;
     color: #1baaf5;
   }
 }

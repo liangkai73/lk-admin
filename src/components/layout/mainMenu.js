@@ -56,4 +56,64 @@ export default [
     path: "/batch/list",
     icon: "rongqifuwu",
   },
+  {
+    title: $i18n('物料管理系统'),
+    path: "/matter/list",
+    icon: "rongqifuwu",
+  },
+  {
+    title: $i18n('生产赋码系统'),
+    path: "/coding/list1",
+    icon: "rongqifuwu",
+  },
+  {
+    title: $i18n('生产智联管理系统'),
+    path: "/console/list1",
+    icon: "rongqifuwu",
+  },
+  {
+    title: $i18n('智能仓储管理系统'),
+    path: "/storage/list1",
+    icon: "rongqifuwu",
+  },
+  {
+    title: $i18n('物流防窜货管理系统'),
+    path: "/prdSearch",
+    icon: "rongqifuwu",
+  },
+  {
+    title: $i18n('多级经销商管理系统'),
+    path: "/console/list3",
+    icon: "rongqifuwu",
+  },
+  {
+    title: $i18n('防伪追踪管理系统'),
+    path: "/console/list4",
+    icon: "rongqifuwu",
+  },
+  {
+    title: $i18n('企业门店管理系统'),
+    path: "/console/list5",
+    icon: "rongqifuwu",
+  },
+  {
+    title: $i18n('会员积分管理系统'),
+    path: "/console/list6",
+    icon: "rongqifuwu",
+  },
+  {
+    title: $i18n('移动营销管理系统'),
+    path: "/console/list7",
+    icon: "rongqifuwu",
+  },
+  {
+    title: $i18n('政府监管合作平台'),
+    path: "/console/list8",
+    icon: "rongqifuwu",
+  },
+  {
+    title: $i18n('数据分析决策系统'),
+    path: "/console/list9",
+    icon: "rongqifuwu",
+  },
 ];

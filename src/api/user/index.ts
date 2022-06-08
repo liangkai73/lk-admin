@@ -2,7 +2,7 @@
  * @Author: lanck.xie
  * @Date: 2020-09-14 14:50:18
  * @Last Modified by: lanck.xie
- * @Last Modified time: 2021-10-25 02:14:28
+ * @Last Modified time: 2022-04-09 14:31:05
  * desc:api for cam/user & cam/userGroup
  */
 
@@ -83,6 +83,7 @@ function addToGroup(params: any) {
 
 // 获取当前用户信息
 async function getUserInfoNow() {
+  return
   return $UINetwork
     .get(api.user.getUserInfoNow, {}, { noLoading: true })
     .then((result: any) => {

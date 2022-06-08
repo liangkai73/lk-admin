@@ -2,7 +2,7 @@
  * @Author: lanck.xie
  * @Date: 2022-03-28 15:07:56
  * @Last Modified by: lanck.xie
- * @Last Modified time: 2022-03-30 10:53:29
+ * @Last Modified time: 2022-04-11 15:45:01
  */
 
 import api from "@/api/config-api";
@@ -24,6 +24,14 @@ function PostBatchList(params) {
 function getBatchById(id: any) {
   return $UINetwork.get(api.act.getBatchById(id), {});
 }
+// 修改批次信息
+function putBatchById(id: any, params) {
+  return $UINetwork.put(api.act.putBatchById(id), params);
+}
+// 删除批次信息
+function deleteBatchById(id: any) {
+  return $UINetwork.delete(api.act.deleteBatchById(id), {});
+}
 // 获取批次中编码列表
 function getBatchCode(params: any) {
   return $UINetwork.get(api.act.getBatchCode, params);
@@ -44,5 +52,7 @@ export default {
   getBatchById,
   getBatchCode,
   postBatchStage,
-  deleteBatchStage
+  deleteBatchStage,
+  putBatchById,
+  deleteBatchById
 };
